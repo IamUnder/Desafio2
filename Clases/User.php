@@ -27,16 +27,6 @@ class User {
         $this->rol = $rol;
     }
     
-    function __construct($dni, $mail, $pass, $nombre, $apellido, $activado) {
-        $this->dni = $dni;
-        $this->mail = $mail;
-        $this->pass = $pass;
-        $this->nombre = $nombre;
-        $this->apellido = $apellido;
-        $this->activado = $activado;
-        $this->rol = 0;
-    }
-    
     //**************************************************************************
     //--------------------------Getters & Setters-------------------------------
     //**************************************************************************
@@ -96,4 +86,10 @@ class User {
         $this->rol = $rol;
     }
     
+    //**************************************************************************
+    //-----------------------------TO STRING------------------------------------
+    //**************************************************************************
+    public function __toString() {
+        return '[USUARIO] Nombre: ' . $this->nombre . ' - Correo: ' . $this->mail;
+    }
 }
