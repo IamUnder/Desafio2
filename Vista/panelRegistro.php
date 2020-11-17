@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!<!-- reCaptcha V3 -->
+        <script src='https://www.google.com/recaptcha/api.js?render=6Led9OMZAAAAAAD5MHNb6t1n5v3npSkSKpjbVxSc'>
+        </script>
+        <script>
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6Led9OMZAAAAAAD5MHNb6t1n5v3npSkSKpjbVxSc', {action: 'formulario'})
+                        .then(function (token) {
+                            var recaptchaResponse = document.getElementById('recaptchaResponse');
+                            recaptchaResponse.value = token;
+                        });
+            });
+        </script>
+
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,16 +30,14 @@
         <title>Registro de Usuario</title>
     </head>
     <body class="rosemary">
-        <?php
-        ?>
         <div class="container-fluid">
             <header class="row text-white background-green align-items-center vh-10">
                 <h1 class="ml-5">Registro de usuario</h1>
             </header>
 
             <main class="row vh-80 d-flex align-items-center justify-content-center">
-                <form class="text-center border border-light mt-2 jus" action="../controlador.php">
-
+                <form class="text-center border border-light mt-2 jus" action="../controlador.php" method="POST">
+                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                     <div class="form-row mb-4">
                         <div class="col">
                             <!-- Primer nombre -->
@@ -60,7 +71,7 @@
                         </div>
                     </div>
 
-
+                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                 </form>
             </main>
 
