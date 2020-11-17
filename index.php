@@ -21,6 +21,18 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/mdb.min.css">
         <!-- Your custom styles (optional) -->
         <link rel="stylesheet" href="css/style.css">
+        <!-- Codigo recaptcha v3 -->
+        <script src='https://www.google.com/recaptcha/api.js?render=6Lft9OMZAAAAAFV8-iefk3fFBnHLeb6VYp_LWaAF'>
+        </script>
+        <script>
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6Lft9OMZAAAAAFV8-iefk3fFBnHLeb6VYp_LWaAF', {action: 'formulario'})
+                        .then(function (token) {
+                            var recaptchaResponse = document.getElementById('recaptchaResponse');
+                            recaptchaResponse.value = token;
+                        });
+            });
+        </script>
     </head>
     <body>
         <div class="container-fluid justify-content-center">
@@ -33,7 +45,7 @@ and open the template in the editor.
         <!--Section: Content-->
         <section class="text-center">
 
-            <form class="mx-md-5" action="controlador.php" method="POST">
+            <form class="mx-md-5" action="controlador.php" method="POST" name="formulario">
 
                 <div class="row">
                     <div class="col-md-6 mx-auto">
@@ -44,10 +56,17 @@ and open the template in the editor.
                             <div class="card-body">
 
                                 <!-- Form -->
-                                <form class="text-center" style="color: #757575;" action="controlador.php" method="POST">
+                                <form class="text-center" style="color: #757575;" action="controlador.php" method="POST" name="formulario">
 
                                     <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Accede al entorno educativo</h3>
-
+                                    <?php
+                                        session_start();
+                                        if (isset($_SESSION['mensaje'])) {
+                                           echo $_SESSION['mensaje'];
+                                           $_SESSION['mensaje'] = null;
+                                        }
+                                    
+                                    ?>
                                     <!-- Name -->
                                     <input type="email" name="mail" id="defaultSubscriptionFormPassword" class="form-control mb-4" placeholder="Email">
 
@@ -60,7 +79,9 @@ and open the template in the editor.
                                     <small id="passwordHelpBlock" class="form-text text-right blue-text">
                                         Sin cuenta? <a href="Vista/panelRegistro.php">Registrate</a>
                                     </small>
-
+                                    
+                                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                                    
                                     <div class="text-center">
                                         <button type="submit" name="LogIn" class="btn btn-outline-green btn-rounded my-4 waves-effect">LogIn</button>
                                     </div>
@@ -78,15 +99,15 @@ and open the template in the editor.
             </form>
 
 
-        <!-- jQuery -->
-        <script type="text/javascript" src="js/jquery.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="js/mdb.min.js"></script>
-        <!-- Your custom scripts (optional) -->
-        <script type="text/javascript"></script>
+            <!-- jQuery -->
+            <script type="text/javascript" src="js/jquery.min.js"></script>
+            <!-- Bootstrap tooltips -->
+            <script type="text/javascript" src="js/popper.min.js"></script>
+            <!-- Bootstrap core JavaScript -->
+            <script type="text/javascript" src="js/bootstrap.min.js"></script>
+            <!-- MDB core JavaScript -->
+            <script type="text/javascript" src="js/mdb.min.js"></script>
+            <!-- Your custom scripts (optional) -->
+            <script type="text/javascript"></script>
     </body>
 </html>
