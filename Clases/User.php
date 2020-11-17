@@ -23,7 +23,9 @@ class User {
         $this->pass = $pass;
         $this->nombre = $nombre;
         $this->apellido = $apellido;
+        //1 activado, 0 desactivado
         $this->activado = $activado;
+        //0 alumno, 1 profesor, 2 admin
         $this->rol = $rol;
     }
     

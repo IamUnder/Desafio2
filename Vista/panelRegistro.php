@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!<!-- reCaptcha V3 -->
+        <!-- reCaptcha V3 -->
         <script src='https://www.google.com/recaptcha/api.js?render=6Led9OMZAAAAAAD5MHNb6t1n5v3npSkSKpjbVxSc'>
         </script>
         <script>
@@ -36,48 +36,59 @@
             </header>
 
             <main class="row vh-80 d-flex align-items-center justify-content-center">
-                <form class="text-center border border-light mt-2 jus" action="../controlador.php" method="POST">
-                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                <form novalidate class="text-center border border-light mt-2 jus" action="../controlador.php" method="POST" name="formulario">
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['mensaje'])) {
+                        echo $_SESSION['mensaje'];
+                        $_SESSION['mensaje'] = null;
+                    }
+                    ?>
                     <div class="form-row mb-4">
                         <div class="col">
                             <!-- Primer nombre -->
-                            <input type="text" name="nombre" class="form-control" placeholder="Introduce el nombre" required>
+                            <input type="text" id="nombre" name="registro_nombre" aria-describedby="nombreError" class="form-control" placeholder="Introduce el nombre" required>
+                            <small id="nombreError" class="form-text bg-danger" aria-live="polite"></small>
                         </div>
                         <div class="col">
                             <!--<!-- Apellidos -->
-                            <input type="text" name="apellido" class="form-control" placeholder="Introduce tus apellidos" required>
+                            <input type="text" id="apellido" name="registro_apellido" aria-describedby="apellidoError" class="form-control" placeholder="Introduce tus apellidos" required>
+                            <small id="apellidoError" class="form-text bg-danger" aria-live="polite"></small>
                         </div>
                     </div>
 
                     <!-- DNI -->
-                    <input type="text" name="dni" class="form-control mb-4" placeholder="Introduce tu DNI" required>
+                    <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{9}[A-Z]">
+                    <small id="dniError" class="form-text bg-danger" aria-live="polite"></small>
 
                     <!-- E-mail -->
-                    <input type="email" name="mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
+                    <input type="email"  id="mail" name="registro_mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
+                    <small id="mailError" class="form-text bg-danger" aria-live="polite"></small>
 
                     <!-- Contraseña -->
-                    <input type="password" name="pass" id="password" class="form-control" placeholder="Introduce tu contraseña" aria-describedby="password" required>
-                    <small id="password" class="form-text text-muted mb-4">
-                        Al menos 8 carácteres y 1 dígito
-                    </small>
+                    <input type="password" name="registro_pass" id="password" class="form-control" placeholder="Introduce tu contraseña" aria-describedby="pass" required minlength="8" 
+                           maxlength="8" pattern="^(?=.*\d)(?=.*[a-zA-Z]).{8,10}">
+                    <small id="passwordError" class="form-text bg-danger" aria-live="polite"></small>
 
                     <!-- Botones registrar y volver -->
                     <div class="form-row mb-4">
                         <div class="col">
-                            <button name="registrar" class="btn btn-outline-success my-4 btn-block" type="submit">Registrar</button>
+                            <button name="form_registrar" class="btn btn-outline-success my-4 btn-block" type="submit">Registrar</button>
                         </div>
                         <div class="col">
-                            <a href="../index-php" class="btn btn-outline-danger my-4 btn-block" type="submit">Volver</a>
+                            <a href="../index.php" class="btn btn-outline-danger my-4 btn-block" type="submit">Volver</a>
                         </div>
                     </div>
 
                     <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+
                 </form>
             </main>
 
-            <footer class="row background-green text-white d-flex align-items-center vh-10">
-                <h3 class="ml-5">Aplicación creada por Jorge y Alejandro</h3>
+            <footer class="row background-green text-white d-flex align-items-center justify-content-center vh-10">
+                <h3>Aplicación creada por Jorge y Alejandro</h3>
             </footer>
         </div>
+        <script src="../js/registroValidacion.js"></script>
     </body>
 </html>
