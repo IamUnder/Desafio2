@@ -45,12 +45,32 @@ class Gestion {
         
         if ($resultado = $stmt->get_result()) {
             while ($row = $resultado->fetch_assoc()) {
-                $r = new User($row['dni'], $row['mail'], $row['pass'], $row['nombre'], $row['apellido'], $row['activado'], 1);
+                $rol = self::getRol($row['dni']);
+                $r = new User($row['dni'], $row['mail'], $row['pass'], $row['nombre'], $row['apellido'], $row['activado'], $rol);
             }
             mysqli_free_result($resultado);
         }
         
         self::cerrarConex();
         return $r;
+    }
+    
+    public static function getRol($dni) {
+        self::abrirConex();
+        
+        $consulta = 'SELECT id FROM asignacion WHERE dni=?';
+        
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('s',$val1);
+        $val1 = $dni;
+        $stmt->execute();
+        
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $res = $row['id'];
+            }
+        }
+        
+        return $res;
     }
 }

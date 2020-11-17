@@ -67,7 +67,7 @@
                             <button name="registrar" class="btn btn-outline-success my-4 btn-block" type="submit">Registrar</button>
                         </div>
                         <div class="col">
-                            <a href="../index-php" class="btn btn-outline-danger my-4 btn-block" type="submit">Volver</a>
+                            <a href="../index.php" class="btn btn-outline-danger my-4 btn-block" type="submit">Volver</a>
                         </div>
                     </div>
 

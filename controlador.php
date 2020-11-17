@@ -25,7 +25,22 @@ if (isset($_REQUEST['LogIn'])) {
         echo $login;
         if ($login != null) {
             $_SESSION['user'] = $login;
-            header('Location: Vista/usuario.php');
+            $rol = $login->getRol();
+            switch ($rol) {
+                case 0:
+                    header('Location: Vista/usuario.php');
+                    break;
+                case 1:
+                    header('Location: Vista/profesor.php');
+                    break;
+                case 2:
+                    header('Location: Vista/admin.php');
+                    break;
+                default:
+                    $_SESSION['mensaje'] = 'Error de rol';
+                    header('Location: index.php');
+                    break;
+            }
         } else {
             $_SESSION['mensaje'] = 'Usuario incorrecto';
             header('Location: index.php');
