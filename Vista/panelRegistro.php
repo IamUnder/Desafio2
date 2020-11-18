@@ -31,57 +31,64 @@
     </head>
     <body class="rosemary" onload="validacion()">
         <div class="container-fluid">
-            <header class="row text-white background-green align-items-center vh-10">
-                <h1 class="ml-5">Registro de usuario</h1>
+            <header class="row text-white background-green align-items-center">
+                <div class="col-md-12 vh-10">
+                    <img src="../img/logo.png" alt="Logo_mamas2.0" class="img-fluid vh-10" />
+                </div>
             </header>
 
             <main class="row vh-80 d-flex align-items-center justify-content-center">
-                <form novalidate class="text-center border border-light mt-2 jus" action="../controlador.php" method="POST" name="formulario">
-                    <?php
-                    session_start();
-                    if (isset($_SESSION['mensaje'])) {
-                        echo $_SESSION['mensaje'];
-                        $_SESSION['mensaje'] = null;
-                    }
-                    ?>
-                    <div class="form-row mb-4">
-                        <div class="col">
-                            <!-- Primer nombre -->
-                            <input type="text" id="nombre" name="registro_nombre" aria-describedby="nombreError" class="form-control" placeholder="Introduce el nombre" required>
-                            <small id="nombreError" class="form-text bg-danger" aria-live="polite"></small>
-                        </div>
-                        <div class="col">
-                            <!--<!-- Apellidos -->
-                            <input type="text" id="apellido" name="registro_apellido" aria-describedby="apellidoError" class="form-control" placeholder="Introduce tus apellidos" required>
-                            <small id="apellidoError" class="form-text bg-danger" aria-live="polite"></small>
-                        </div>
+                <div class="col-md-4 col-sm-4">
+                    <div class="text-center">
+                        <h1>Registro de usuario</h1>
                     </div>
-
-                    <!-- DNI -->
-                    <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{9}[A-Z]">
-                    <small id="dniError" class="form-text bg-danger" aria-live="polite"></small>
-
-                    <!-- E-mail -->
-                    <input type="email"  id="mail" name="registro_mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
-                    <small id="mailError" class="form-text bg-danger" aria-live="polite"></small>
-
-                    <!-- Contraseña -->
-                    <input type="password" name="registro_pass" id="pass" class="form-control" placeholder="Introduce tu contraseña" aria-describedby="pass" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
-                    <small id="passError" class="form-text bg-danger" aria-live="polite"></small>
-
-                    <!-- Botones registrar y volver -->
-                    <div class="form-row mb-4">
-                        <div class="col">
-                            <button name="form_registrar" class="btn btn-outline-success my-4 btn-block" type="submit">Registrar</button>
+                    <form novalidate class="text-center border border-light mt-2 jus" action="../controlador.php" method="POST" name="formulario">
+                        <?php
+                        session_start();
+                        if (isset($_SESSION['mensaje'])) {
+                            echo $_SESSION['mensaje'];
+                            $_SESSION['mensaje'] = null;
+                        }
+                        ?>
+                        <div class="form-row mb-4">
+                            <div class="col">
+                                <!-- Primer nombre -->
+                                <input type="text" id="nombre" name="registro_nombre" aria-describedby="nombreError" class="form-control" placeholder="Introduce el nombre" required>
+                                <small id="nombreError" class="form-text bg-danger" aria-live="polite"></small>
+                            </div>
+                            <div class="col">
+                                <!--<!-- Apellidos -->
+                                <input type="text" id="apellido" name="registro_apellido" aria-describedby="apellidoError" class="form-control" placeholder="Introduce tus apellidos" required>
+                                <small id="apellidoError" class="form-text bg-danger" aria-live="polite"></small>
+                            </div>
                         </div>
-                        <div class="col">
-                            <a href="../index.php" class="btn btn-outline-danger my-4 btn-block" type="submit">Volver</a>
+
+                        <!-- DNI -->
+                        <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{9}[A-Z]">
+                        <small id="dniError" class="form-text bg-danger" aria-live="polite"></small>
+
+                        <!-- E-mail -->
+                        <input type="email"  id="mail" name="registro_mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
+                        <small id="mailError" class="form-text bg-danger" aria-live="polite"></small>
+
+                        <!-- Contraseña -->
+                        <input type="password" name="registro_pass" id="pass" class="form-control" placeholder="Introduce tu contraseña" aria-describedby="pass" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                        <small id="passError" class="form-text bg-danger" aria-live="polite"></small>
+
+                        <!-- Botones registrar y volver -->
+                        <div class="form-row mb-4">
+                            <div class="col">
+                                <button name="form_registrar" class="btn btn-outline-success my-4 btn-block" type="submit">Registrar</button>
+                            </div>
+                            <div class="col">
+                                <a href="../index.php" class="btn btn-outline-danger my-4 btn-block" type="submit">Volver</a>
+                            </div>
                         </div>
-                    </div>
 
-                    <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 
-                </form>
+                    </form>
+                </div>
             </main>
 
             <footer class="row background-green text-white d-flex align-items-center justify-content-center vh-10">
