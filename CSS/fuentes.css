@@ -1,0 +1,17 @@
+@font-face{
+    font-family: "Cool Jazz";
+    src: url(../Fuentes/Cooljazz.ttf);
+}
+
+.cooljazz{
+    font-family: "Cool Jazz";
+}
+
+@font-face{
+    font-family: "Rosemary";
+    src: url(../Fuentes/DroidSans.ttf);
+}
+
+.rosemary{
+    font-family: "Rosemary";
+}
