@@ -34,7 +34,7 @@ and open the template in the editor.
             });
         </script>
     </head>
-    <body>
+    <body onload="vLogin()">
         <div class="container-fluid justify-content-center">
             <div class="row">
                 <div class="mx-auto">
@@ -45,7 +45,7 @@ and open the template in the editor.
         <!--Section: Content-->
         <section class="text-center">
 
-            <form class="mx-md-5" action="controlador.php" method="POST" name="formulario">
+            <form class="mx-md-5" action="controlador.php" method="POST" name="formulario" novalidate>
 
                 <div class="row">
                     <div class="col-md-6 mx-auto">
@@ -56,7 +56,7 @@ and open the template in the editor.
                             <div class="card-body">
 
                                 <!-- Form -->
-                                <form class="text-center" style="color: #757575;" action="controlador.php" method="POST" name="formulario">
+                                <form class="text-center" style="color: #757575;" action="controlador.php" method="POST" name="formulario" novalidate>
 
                                     <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Accede al entorno educativo</h3>
                                     <?php
@@ -67,12 +67,15 @@ and open the template in the editor.
                                         }
                                     
                                     ?>
-                                    <!-- Name -->
-                                    <input type="email" name="mail" id="defaultSubscriptionFormPassword" class="form-control mb-4" placeholder="Email">
-
-                                    <!-- Email -->
-                                    <input type="password" name="pass" id="defaultSubscriptionFormEmail" class="form-control" placeholder="Password">
-
+                                    <!-- Mail -->
+                                    <input type="email" name="mail" id="defaultSubscriptionFormEmail" class="form-control" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$">
+                                    <small id="emailError" class="form-text mb-4" aria-live="polite"></small>
+                                    
+                                    <!-- Pass -->
+                                    <input type="password" name="pass" id="defaultSubscriptionFormPassword" class="form-control" placeholder="Password" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                                    <small id="passError" class="form-text" aria-live="polite"></small>
+                                    
+                                    <!-- Redireciones -->
                                     <small id="passwordHelpBlock" class="form-text text-right blue-text">
                                         <a href="Vista/panelRecuperar.php">Recuperar contraseña</a>
                                     </small>
@@ -80,8 +83,11 @@ and open the template in the editor.
                                         Sin cuenta? <a href="Vista/panelRegistro.php">Registrate</a>
                                     </small>
                                     
+                                    <!-- Captcha -->
                                     <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                                     
+                                    
+                                    <!-- Boton de envio -->
                                     <div class="text-center">
                                         <button type="submit" name="LogIn" class="btn btn-outline-green btn-rounded my-4 waves-effect">LogIn</button>
                                     </div>
@@ -108,6 +114,6 @@ and open the template in the editor.
             <!-- MDB core JavaScript -->
             <script type="text/javascript" src="js/mdb.min.js"></script>
             <!-- Your custom scripts (optional) -->
-            <script type="text/javascript"></script>
+            <script type="text/javascript" src="js/vFormulario.js"></script>
     </body>
 </html>
