@@ -94,3 +94,7 @@ if (isset($_REQUEST['form_registrar'])) {
 } else {
     echo 'Soy otra mierda! :D';
 }
+
+if (isset($_REQUEST['Back'])) {
+    echo 'Quiero cerrar sesion';
+}

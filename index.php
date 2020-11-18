@@ -34,7 +34,7 @@ and open the template in the editor.
             });
         </script>
     </head>
-    <body onload="vLogin()">
+    <body onload="vLogin()" class="verde">
         <div class="container-fluid justify-content-center">
             <div class="row">
                 <div class="mx-auto">
