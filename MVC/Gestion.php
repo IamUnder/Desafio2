@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of Gestion
  *
@@ -11,10 +12,9 @@ class Gestion {
     public static function abrirConex() {
         //Jorge
         //self::$conexion = new mysqli('localhost:7007', 'root', 'secret', 'Desafio2');
-        
         //Alejandro
         self::$conexion = new mysqli('localhost', 'alejandro', 'Chubaca2020', 'Desafio2');
-        
+
         if (self::$conexion->connect_errno) {
             print "Fallo al conectar a MySQL: " . mysqli_connect_error();
         }
@@ -109,23 +109,39 @@ class Gestion {
         return $add;
     }
 
-    
     public static function getRol($dni) {
         self::abrirConex();
-        
+
         $consulta = 'SELECT id FROM asignacion WHERE dni=?';
-        
+
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('s',$val1);
+        $stmt->bind_param('s', $val1);
         $val1 = $dni;
         $stmt->execute();
-        
+
         if ($resultado = $stmt->get_result()) {
             while ($row = $resultado->fetch_assoc()) {
                 $res = $row['id'];
             }
         }
-        
+
         return $res;
     }
+
+    public static function alterPassword($dni, $pass) {
+        self::abrirConex();
+
+        $modified = false;
+
+        $consulta = "UPDATE usuarios SET pass = '" . $pass . "' WHERE dni = '" . $dni . "'";
+
+        if (mysqli_query(self::$conexion, $consulta)) {
+            //Ponemos modified a true =  usuario modificado.
+            $modified = true;
+        }
+
+        self::cerrarConex();
+        return $modified;
+    }
+
 }

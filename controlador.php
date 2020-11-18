@@ -6,8 +6,15 @@
  * and open the template in the editor.
  */
 session_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+
 require_once './MVC/Gestion.php';
 require_once './Clases/User.php';
+require_once './phpmailer/src/Exception.php';
+require_once './phpmailer/src/PHPMailer.php';
+require_once './phpmailer/src/SMTP.php';
 
 //******************************************************************************
 //*********************** Ventana Login ****************************************
@@ -93,4 +100,61 @@ if (isset($_REQUEST['form_registrar'])) {
     }
 } else {
     echo 'Soy otra mierda! :D';
+}
+
+//******************************************************************************
+//*********************** Ventana Recuperar password ***************************
+//******************************************************************************
+if (isset($_REQUEST['form_recuperar_next'])) {
+    $cambios = [];
+    $dni = $_REQUEST['recuperar_dni'];
+    $mail = $_REQUEST['recuperar_mail'];
+    $cambios[] = $dni;
+    $cambios[] = $mail;
+    $_SESSION['cambioPassword'] = $cambios;
+    $paso = $_SESSION['recuperarPass'];
+    if ($paso == 1) {
+        $paso = 2;
+        $_SESSION['recuperarPass'] = $paso;
+    }
+    header('Location: Vista/panelRecuperar.php');
+}
+
+if (isset($_REQUEST['form_recuperar_end'])) {
+    $pass1 = $_REQUEST['recuperar_pass1'];
+    $pass2 = $_REQUEST['recuperar_pass2'];
+    $cambios = $_SESSION['cambioPassword'];
+    $dni = $cambios[0];
+    //En mail siempre pongo el mio, para que minetras haga pruebas, los correos me lleguen a mi
+    $mail = 'alejandro.martin.perez.99@gmail.com';
+    if (Gestion::alterPassword($dni, $pass2)) {
+        //Enviar el correo
+
+        $emailDestino = $mail;
+
+        $mail = new PHPMailer();
+        try {
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';  // Host de conexión SMTP
+            $mail->SMTPAuth = true;
+            $mail->Username = 'AuxiliarDAW2@gmail.com';                 // Usuario SMTP
+            $mail->Password = 'Chubaca20';                           // Password SMTP
+            $mail->SMTPSecure = 'ssl';                            // Activar seguridad TLS
+            $mail->Port = 465;                                    // Puerto SMTP
+
+            $mail->setFrom('AuxiliarDAW2@gmail.com');  // Mail del remitente
+            $mail->addAddress($emailDestino);     // Mail del destinatario
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Cambio de contraseña';  // Asunto del mensaje
+            $mail->Body = 'Se ha actualizado tu contraseña';    // Contenido del mensaje (acepta HTML)
+
+            $mail->send();
+        } catch (Exception $e) {
+            echo 'El mensaje no se ha podido enviar, error: ', $mail->ErrorInfo;
+        }
+        //Quito la variable de sesión para que se reinicie el paso por el cual vamos
+        unset($_SESSION['recuperarPass']);
+        header('Location: index.php');
+    }
 }
