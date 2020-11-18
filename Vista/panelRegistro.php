@@ -29,7 +29,7 @@
 
         <title>Registro de Usuario</title>
     </head>
-    <body class="rosemary">
+    <body class="rosemary" onload="validacion()">
         <div class="container-fluid">
             <header class="row text-white background-green align-items-center vh-10">
                 <h1 class="ml-5">Registro de usuario</h1>
@@ -66,9 +66,8 @@
                     <small id="mailError" class="form-text bg-danger" aria-live="polite"></small>
 
                     <!-- Contraseña -->
-                    <input type="password" name="registro_pass" id="password" class="form-control" placeholder="Introduce tu contraseña" aria-describedby="pass" required minlength="8" 
-                           maxlength="8" pattern="^(?=.*\d)(?=.*[a-zA-Z]).{8,10}">
-                    <small id="passwordError" class="form-text bg-danger" aria-live="polite"></small>
+                    <input type="password" name="registro_pass" id="pass" class="form-control" placeholder="Introduce tu contraseña" aria-describedby="pass" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                    <small id="passError" class="form-text bg-danger" aria-live="polite"></small>
 
                     <!-- Botones registrar y volver -->
                     <div class="form-row mb-4">

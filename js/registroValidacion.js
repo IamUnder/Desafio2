@@ -27,8 +27,7 @@ function validacion() {
     dni.addEventListener('input', function (e) {
         // Si es valido eliminamos el error
         if (dni.validity.valid) {
-            dniError.innerHTML = 'Ok';
-            dniError.className = 'bg-success';
+            dniError.textContent = '';
         } else { // Si tiene un error lo mostramos
             mostrarDniError();
         }
@@ -38,8 +37,7 @@ function validacion() {
     nombre.addEventListener('input', function (e) {
         // Si es valido eliminamos el error
         if (nombre.validity.valid) {
-            nombreError.innerHTML = "Ok";
-            nombreError.className = "bg-success";
+            nombreError.textContent = ' ';
         } else {
             mostrarNombreError();
         }
@@ -49,8 +47,7 @@ function validacion() {
     apellido.addEventListener('input', function (e) {
         // Si es valido eliminamos el error
         if (apellido.validity.valid) {
-            apellidoError.innerHTML = "Ok";
-            apellidoError.className = "bg-success";
+            apellidoError.textContent = ' ';
         } else {
             mostrarApellidoError();
         }
@@ -60,8 +57,7 @@ function validacion() {
     mail.addEventListener('input', function (e) {
         // Si es valido eliminamos el error
         if (mail.validity.valid) {
-            mailError.innerHTML = 'Ok';
-            mailError.className = 'bg-success';
+            mailError.textContent = ' ';
         } else { // Si tiene un error lo mostramos
             mostrarMailError();
         }
@@ -71,8 +67,7 @@ function validacion() {
     pass.addEventListener('input', function (e) {
         // Si es valido eliminamos el error
         if (pass.validity.valid) {
-            passError.innerHTML = 'Ok';
-            passError.className = 'bg-success';
+            passError.textContent = ' ';
         } else { // Si tiene un error lo mostramos
             mostrarPassError();
         }
@@ -115,7 +110,7 @@ function mostrarDniError() {
         dniError.textContent = 'El DNI no coincide con lo esperado 00000000X';
     }
     // Establece el estilo apropiado
-    dniError.className = 'bg-danger';
+    dniError.className = 'bg-danger text-light';
 }
 
 // Función para mostrar los errores del nombre
@@ -128,7 +123,7 @@ function mostrarNombreError() {
         nombreError.textContent = 'Debe intoducir un nombre obligatoriamente';
     }
     // Establece el estilo apropiado
-    nombreError.className = 'bg-danger';
+    nombreError.className = 'bg-danger text-light';
 }
 
 // Función para mostrar los errores del apellido
@@ -141,7 +136,7 @@ function mostrarApellidoError() {
         apellidoError.textContent = 'Debe intoducir los apellidos obligatoriamente';
     }
     // Establece el estilo apropiado
-    apellidoError.className = 'bg-danger';
+    apellidoError.className = 'bg-danger text-light';
 }
 
 // Función para mostrar los errores del email
@@ -152,7 +147,7 @@ function mostrarMailError() {
     }
 
     // Establece el estilo apropiado
-    mailError.className = 'bg-danger';
+    mailError.className = 'bg-danger text-light';
 }
 
 // Función para mostrar los errores del email
@@ -162,8 +157,8 @@ function mostrarPassError() {
         pass.textContent = 'Debe introducir una contraseña.';
     } else if (pass.validity.tooShort) {
         // Si los datos son demasiado cortos
-        passError.textContent = 'La contraseña debe contener almenos 8 carácteres y 1 dígito';
+        passError.textContent = 'La contraseña debe contener entre 8 -10 crácteres, una mayúscula y un dígito';
     }
     // Establece el estilo apropiado
-    passError.className = 'bg-danger';
+    passError.className = 'bg-danger text-light';
 }
