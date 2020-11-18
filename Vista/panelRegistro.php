@@ -64,7 +64,7 @@
                         </div>
 
                         <!-- DNI -->
-                        <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{9}[A-Z]">
+                        <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{8}[A-Z]">
                         <small id="dniError" class="form-text bg-danger" aria-live="polite"></small>
 
                         <!-- E-mail -->
