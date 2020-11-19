@@ -144,6 +144,53 @@ class Gestion {
             }
         }
         
+        self::cerrarConex();
         return $res;
+    }
+    
+    public static function getActivado($dni) {
+        self::abrirConex();
+        
+        $consulta = 'SELECT activado FROM usuarios WHERE dni=?';
+        
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('s',$val1);
+        $val1 = $dni;
+        $stmt->execute();
+        
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $res = $row['activado'];
+            }
+        }
+        
+        self::cerrarConex();
+        return $res;
+    }
+    
+    
+    public static function setRol($dni, $rol) {
+        self::abrirConex();
+        
+        $consulta = 'UPDATE usuarios set activado=? where dni=?';
+        
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('is',$val1,$val2);
+        $val1 = $rol;
+        $val2 = $dni;
+        $stmt->execute();
+        self::cerrarConex();
+    }
+    
+    public static function delUser($dni) {
+        self::abrirConex();
+        
+        $consulta = 'DELETE FROM usuarios WHERE dni=?';
+        
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('s',$val1);
+        $val1 = $dni;
+        $stmt->execute();
+        self::cerrarConex();
     }
 }

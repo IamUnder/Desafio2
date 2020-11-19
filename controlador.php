@@ -57,8 +57,6 @@ if (isset($_REQUEST['LogIn'])) {
         $_SESSION['mensaje'] = 'Captcha incorrecto';
         header('Location: index.php');
     }
-} else {
-    echo 'Soy una mierda';
 }
 
 //******************************************************************************
@@ -97,16 +95,48 @@ if (isset($_REQUEST['form_registrar'])) {
         $_SESSION['mensaje'] = 'Captcha incorrecto';
         header('Location: Vista/panelRegistro.php');
     }
-} else {
-    echo 'Soy otra mierda! :D';
 }
 
 if (isset($_REQUEST['Back'])) {
-    echo 'Quiero cerrar sesion';
+    session_unset();
+    session_start();
+    $_SESSION['mensaje'] = 'Sesion cerrada con exito';
+    header('Location: index.php');
 }
+//******************************************************************************
+//*********************** Ventana CRUD *************************************
+//******************************************************************************
+    
+    //BORRAR
+    if (isset($_REQUEST['borrar'])) {
+        $dni = $_REQUEST['dni'];
+        echo $dni;
+        Gestion::delUser($dni);
+        
+        funcAdmin();
+        header('Location: Vista/admin.php');
+    }
+
+    if (isset($_REQUEST['cambiar'])) {
+        $dni = $_REQUEST['dni'];
+        echo $dni;
+        if (Gestion::getActivado($dni) == 0) {
+            Gestion::setRol($dni, 1);
+        }else{
+            Gestion::setRol($dni, 0);
+        }
+        funcAdmin();
+        header('Location: Vista/admin.php');
+    }
+    
+    if (isset($_REQUEST['editar'])) {
+        echo 'Recupero editar';
+    }
+
+
 
 //******************************************************************************
-//*********************** Ventana Registro *************************************
+//****************************** Funciones *************************************
 //******************************************************************************
 
 function funcAdmin() {
