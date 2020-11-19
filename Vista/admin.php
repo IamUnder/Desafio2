@@ -109,7 +109,7 @@ and open the template in the editor.
         <!--/.Navbar2-->
 
         <!-- Contenido -->
-        <div class="container-fluid">
+        <div class="container-fluid my-3">
             <div class="row">
 
                 <div class="col-lg-5 col-md-6 col-sm-12 offset-lg-1 borde">
@@ -324,6 +324,20 @@ and open the template in the editor.
                     </form>
                 </div>
             </div>
+        </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="container-fluid my-3">
+
+            <!--Section: Content-->
+            <section class="py-5 text-center white-text verde z-depth-1 rounded">
+
+                <h3 class="">Made with <i class="fas fa-heart orange-text mx-1"></i> by Jorge y Alejandro</h3>
+
+            </section>
+            <!--Section: Content-->
+
         </div>
         <!-- ./Contenido -->
 
