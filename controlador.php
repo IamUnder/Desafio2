@@ -42,7 +42,7 @@ if (isset($_REQUEST['LogIn'])) {
 //                    foreach ($allUser as $v) {
 //                        echo $v;
 //                    }
-                    header('Location: Vista/admin.php');
+                    header('Location: Vista/admin.php?rol=0');
                     break;
                 default:
                     $_SESSION['mensaje'] = 'Error de rol';
@@ -114,7 +114,7 @@ if (isset($_REQUEST['Back'])) {
         Gestion::delUser($dni);
         
         funcAdmin();
-        header('Location: Vista/admin.php');
+        header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
     }
 
     if (isset($_REQUEST['cambiar'])) {
@@ -126,7 +126,7 @@ if (isset($_REQUEST['Back'])) {
             Gestion::setRol($dni, 0);
         }
         funcAdmin();
-        header('Location: Vista/admin.php');
+        header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
     }
     
     if (isset($_REQUEST['editar'])) {

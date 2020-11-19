@@ -30,6 +30,10 @@ and open the template in the editor.
         $allUser = $_SESSION['allUser'];
         foreach ($allUser as $value) {
     echo $value . '<br>';
+    
+    if (isset($_REQUEST['rol'])) {
+        echo $_REQUEST['rol'];
+    }
 }
         ?>
         <!--Navbar-->
@@ -85,13 +89,13 @@ and open the template in the editor.
 
 
                         <li class="nav-item">
-                            <button class="btn white btn-sm" type="button">Ver Alumnos</button>
+                            <a href="admin.php?rol=0"><button class="btn white btn-sm" type="button">Ver Alumnos</button></a>
                         </li>
                         <li class="nav-item">
-                            <button class="btn white btn-sm" type="button">Ver Profesores</button>
+                            <a href="admin.php?rol=1"><button class="btn white btn-sm" type="button">Ver Profesores</button></a>
                         </li>
                         <li class="nav-item">
-                            <button class="btn white btn-sm" type="button">Ver Administradores</button>
+                            <a href="admin.php?rol=2"><button class="btn white btn-sm" type="button">Ver Administradores</button></a>
                         </li>
 
                     </ul>
@@ -113,7 +117,7 @@ and open the template in the editor.
                     <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Desactivados</h3>
                     <?php
                             foreach ($allUser as $u) {
-                                if ($u->getActivado() == 0) {
+                                if ($u->getActivado() == 0 && $_REQUEST['rol'] == $u->getRol()) {
                     ?>
                     <!-- Formulario CRUD -->
                     <form action="../controlador.php" method="POST">
@@ -189,7 +193,7 @@ and open the template in the editor.
                     <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Activados</h3>
                     <?php
                             foreach ($allUser as $u) {
-                                if ($u->getActivado() == 1) {
+                                if ($u->getActivado() == 1 && $_REQUEST['rol'] == $u->getRol()) {
                     ?>
                     <!-- Formulario CRUD -->
                     <form action="../controlador.php" method="POST">
