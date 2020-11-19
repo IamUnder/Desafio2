@@ -106,94 +106,111 @@ and open the template in the editor.
         <!-- Contenido -->
         <div class="container-fluid">
             <div class="row">
+                <?php
+                
+                ?>
                 <div class="col-lg-5 col-md-6 col-sm-12 offset-lg-1 borde">
-                    <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Usuarios Desactivados</h3>
+                    <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Desactivados</h3>
+                    
+                    <!-- Formulario CRUD -->
                     <form>
                         <hr>
-                        <h2 class="font-weight-bold my-2 pb-2 text-center">User</h2>
-                        <div class="form-group"> <!-- Full Name -->
-                            <label for="full_name_id" class="control-label">Full Name</label>
-                            <input type="text" class="form-control" id="full_name_id" name="full_name" placeholder="John Deer">
+                        <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
+                        <div class="form-group"> <!-- DNI -->
+                            <label for="dni" class="control-label">DNI</label>
+                            <input type="text" class="form-control" id="DNI" name="dni" value="" readonly>
                         </div>    
 
-                        <div class="form-group"> <!-- Street 1 -->
-                            <label for="street1_id" class="control-label">Street Address 1</label>
-                            <input type="text" class="form-control" id="street1_id" name="street1" placeholder="Street address, P.O. box, company name, c/o">
-                        </div>                    
-
-                        <div class="form-group"> <!-- Street 2 -->
-                            <label for="street2_id" class="control-label">Street Address 2</label>
-                            <input type="text" class="form-control" id="street2_id" name="street2" placeholder="Apartment, suite, unit, building, floor, etc.">
-                        </div>    
-
-                        <div class="form-group"> <!-- City-->
-                            <label for="city_id" class="control-label">City</label>
-                            <input type="text" class="form-control" id="city_id" name="city" placeholder="Smallville">
+                        <div class="form-group"> <!-- Mail-->
+                            <label for="mail" class="control-label">Mail</label>
+                            <input type="text" class="form-control" id="mail" name="mail" value="">
                         </div>                                    
 
-                        <div class="form-group"> <!-- State Button -->
-                            <label for="state_id" class="control-label">State</label>
-                            <select class="form-control" id="state_id">
-                            
+                        <div class="form-group"> <!-- Pass -->
+                            <label for="pass" class="control-label">Password</label>
+                            <input type="text" class="form-control" id="pass" name="pas" value="">
+                        </div>
+                        
+                        <div class="form-group"> <!-- Nombre -->
+                            <label for="nombre" class="control-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="">
+                        </div>                    
+
+                        <div class="form-group"> <!-- Apellido -->
+                            <label for="apellido" class="control-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido" value="">
+                        </div>    
+                        
+                        <div class="form-group"> <!-- Rol -->
+                            <label for="rol" class="control-label">Rol</label>
+                            <select class="form-control" id="rol" name="rol">
+                                <option value="1">Alumno</option>
+                                <option value="2">Profesor</option>
+                                <option value="3">Administrador</option>
                             </select>                    
                         </div>
 
-                        <div class="form-group"> <!-- Zip Code-->
-                            <label for="zip_id" class="control-label">Zip Code</label>
-                            <input type="text" class="form-control" id="zip_id" name="zip" placeholder="#####">
-                        </div>        
+                                
 
-                        <div class="form-group"> <!-- Submit Button -->
-                            <button type="submit" class="btn btn-primary">Buy!</button>
-                        </div>     
+                        <div class="form-group"> <!-- Boton de editar -->
+                            <button type="submit" class="btn verde white-text" name="editar">Editar</button>
+                            <button type="submit" class="btn verde white-text" name="borrar">Borrar</button>
+                            <button type="submit" class="btn verde white-text" name="cambiar">Activar/Desactivar</button>
+                        </div> 
 
                     </form>
-                   
+                    <!-- Formulario CRUD -->
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12 borde">
-                    <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Usuarios Activados</h3>
+                    <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Activados</h3>
+                   <!-- Formulario CRUD -->
                     <form>
-                        
                         <hr>
-                        <h2 class="font-weight-bold my-2 pb-2 text-center">User</h2>
-                        
-                        <div class="form-group"> <!-- Full Name -->
-                            <label for="full_name_id" class="control-label">Full Name</label>
-                            <input type="text" class="form-control" id="full_name_id" name="full_name" placeholder="John Deer">
+                        <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
+                        <div class="form-group"> <!-- DNI -->
+                            <label for="dni" class="control-label">DNI</label>
+                            <input type="text" class="form-control" id="DNI" name="dni" value="" readonly>
                         </div>    
 
-                        <div class="form-group"> <!-- Street 1 -->
-                            <label for="street1_id" class="control-label">Street Address 1</label>
-                            <input type="text" class="form-control" id="street1_id" name="street1" placeholder="Street address, P.O. box, company name, c/o">
-                        </div>                    
-
-                        <div class="form-group"> <!-- Street 2 -->
-                            <label for="street2_id" class="control-label">Street Address 2</label>
-                            <input type="text" class="form-control" id="street2_id" name="street2" placeholder="Apartment, suite, unit, building, floor, etc.">
-                        </div>    
-
-                        <div class="form-group"> <!-- City-->
-                            <label for="city_id" class="control-label">City</label>
-                            <input type="text" class="form-control" id="city_id" name="city" placeholder="Smallville">
+                        <div class="form-group"> <!-- Mail-->
+                            <label for="mail" class="control-label">Mail</label>
+                            <input type="text" class="form-control" id="mail" name="mail" value="">
                         </div>                                    
 
-                        <div class="form-group"> <!-- State Button -->
-                            <label for="state_id" class="control-label">State</label>
-                            <select class="form-control" id="state_id">
-                                
+                        <div class="form-group"> <!-- Pass -->
+                            <label for="pass" class="control-label">Password</label>
+                            <input type="text" class="form-control" id="pass" name="pas" value="">
+                        </div>
+                        
+                        <div class="form-group"> <!-- Nombre -->
+                            <label for="nombre" class="control-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="">
+                        </div>                    
+
+                        <div class="form-group"> <!-- Apellido -->
+                            <label for="apellido" class="control-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido" value="">
+                        </div>    
+                        
+                        <div class="form-group"> <!-- Rol -->
+                            <label for="rol" class="control-label">Rol</label>
+                            <select class="form-control" id="rol" name="rol">
+                                <option value="1">Alumno</option>
+                                <option value="2">Profesor</option>
+                                <option value="3">Administrador</option>
                             </select>                    
                         </div>
 
-                        <div class="form-group"> <!-- Zip Code-->
-                            <label for="zip_id" class="control-label">Zip Code</label>
-                            <input type="text" class="form-control" id="zip_id" name="zip" placeholder="#####">
-                        </div>        
+                                
 
-                        <div class="form-group"> <!-- Submit Button -->
-                            <button type="submit" class="btn btn-primary">Buy!</button>
-                        </div>     
+                        <div class="form-group"> <!-- Boton de editar -->
+                            <button type="submit" class="btn verde white-text" name="editar">Editar</button>
+                            <button type="submit" class="btn verde white-text" name="borrar">Borrar</button>
+                            <button type="submit" class="btn verde white-text" name="cambiar">Activar/Desactivar</button>
+                        </div> 
 
                     </form>
+                    <!-- Formulario CRUD -->
                 </div>
             </div>
         </div>
