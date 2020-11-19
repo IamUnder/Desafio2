@@ -7,9 +7,9 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title></title>
+        <title>Panel de profesorado</title>
     </head>
     <body>
-        <h1>profesor</h1>
+        
     </body>
 </html>
