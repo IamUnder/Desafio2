@@ -23,6 +23,13 @@ and open the template in the editor.
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body class="white">
+        <?php
+        
+        require_once '../Clases/User.php';
+        session_start();
+        $allUser = $_SESSION['allUser'];
+     
+        ?>
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light verde">
 

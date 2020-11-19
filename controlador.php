@@ -24,7 +24,7 @@ if (isset($_REQUEST['LogIn'])) {
 
     if ($recaptcha->score >= 0.7) {
         $login = Gestion::getUser($mail, $pass);
-        echo $login;
+//        echo $login;
         if ($login != null) {
             $_SESSION['user'] = $login;
             $rol = $login->getRol();
@@ -36,6 +36,12 @@ if (isset($_REQUEST['LogIn'])) {
                     header('Location: Vista/profesor.php');
                     break;
                 case 2:
+                    funcAdmin();
+//                    $allUser = $_SESSION['allUser'];
+//
+//                    foreach ($allUser as $v) {
+//                        echo $v;
+//                    }
                     header('Location: Vista/admin.php');
                     break;
                 default:
@@ -97,4 +103,13 @@ if (isset($_REQUEST['form_registrar'])) {
 
 if (isset($_REQUEST['Back'])) {
     echo 'Quiero cerrar sesion';
+}
+
+//******************************************************************************
+//*********************** Ventana Registro *************************************
+//******************************************************************************
+
+function funcAdmin() {
+    $allUser = Gestion::getAllUser();
+    $_SESSION['allUser'] = $allUser;
 }

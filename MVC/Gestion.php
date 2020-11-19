@@ -47,6 +47,24 @@ class Gestion {
         self::cerrarConex();
         return $r;
     }
+    
+    public static function getAllUser() {
+        
+        self::abrirConex();
+        
+        $consulta = 'SELECT * FROM usuarios';
+        $res = array();
+        
+        if ($resultado = self::$conexion->query($consulta)) {
+            while ($row = $resultado->fetch_assoc()) {
+                $rol = self::getRol($row['dni']);
+                $r = new User($row['dni'], $row['mail'], $row['pass'], $row['nombre'], $row['apellido'], $row['activado'], $rol);
+                $res[] = $r;
+            }
+        }
+        self::cerrarConex();
+        return $res;
+    }
 
     public static function existeUsuario($dni) {
         //Abrimos conexion
