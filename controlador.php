@@ -142,13 +142,36 @@ if (isset($_REQUEST['Back'])) {
         $rol = $_REQUEST['rol'];
         
         Gestion::editUser($dni, $mail, $pass, $nombre, $apellido, $rol);
-//        
+       
         funcAdmin();
         header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
         
         echo $dni . $mail . $pass . $nombre . $apellido . $rol;
     }
 
+    // Añadir usuario
+    if (isset($_REQUEST['crud_registrar'])) {
+
+        $dni = $_REQUEST['registro_dni'];
+        $nombre = $_REQUEST['registro_nombre'];
+        $apellido = $_REQUEST['registro_apellido'];
+        $mail = $_REQUEST['registro_mail'];
+        $pass = $_REQUEST['registro_pass'];
+        $activado = 1;
+        $rol = $_REQUEST['registro_rol'];
+        
+        if (!Gestion::existeUsuario($dni)) {
+            $nuevo = new User($dni, $mail, $pass, $nombre, $apellido, $activado, $rol);
+            if (Gestion::addUser($nuevo)) {
+                funcAdmin();
+                header('Location: Vista/admin.php?rol='.$rol);
+            }
+        } else {
+            $_SESSION['mensaje'] = 'Ya existe el usuario.';
+            header('Location: Vista/admin.php?rol='.$rol);
+        }
+            
+    }
 
 
 //******************************************************************************

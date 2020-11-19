@@ -24,17 +24,16 @@ and open the template in the editor.
     </head>
     <body class="white">
         <?php
-        
         require_once '../Clases/User.php';
         session_start();
         $allUser = $_SESSION['allUser'];
-        foreach ($allUser as $value) {
-    echo $value . '<br>';
-    
-    if (isset($_REQUEST['rol'])) {
-        echo $_REQUEST['rol'];
-    }
-}
+//        foreach ($allUser as $value) {
+//    echo $value . '<br>';
+//    
+//    if (isset($_REQUEST['rol'])) {
+//        echo $_REQUEST['rol'];
+//    }
+//        }
         ?>
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light verde">
@@ -112,158 +111,217 @@ and open the template in the editor.
         <!-- Contenido -->
         <div class="container-fluid">
             <div class="row">
-                
+
                 <div class="col-lg-5 col-md-6 col-sm-12 offset-lg-1 borde">
                     <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Desactivados</h3>
                     <?php
-                            foreach ($allUser as $u) {
-                                if ($u->getActivado() == 0 && $_REQUEST['rol'] == $u->getRol()) {
-                    ?>
-                    <!-- Formulario CRUD -->
-                    <form action="../controlador.php" method="POST">
-                        <hr>
-                        <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
-                        <div class="form-group"> <!-- DNI -->
-                            <label for="dni" class="control-label">DNI</label>
-                            <input type="text" class="form-control" id="DNI" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
-                        </div>    
+                    foreach ($allUser as $u) {
+                        if ($u->getActivado() == 0 && $_REQUEST['rol'] == $u->getRol()) {
+                            ?>
+                            <!-- Formulario CRUD -->
+                            <form action="../controlador.php" method="POST">
+                                <hr>
+                                <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
+                                <div class="form-group"> <!-- DNI -->
+                                    <label for="dni" class="control-label">DNI</label>
+                                    <input type="text" class="form-control" id="DNI" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
+                                </div>    
 
-                        <div class="form-group"> <!-- Mail-->
-                            <label for="mail" class="control-label">Mail</label>
-                            <input type="text" class="form-control" id="mail" name="mail" value="<?php echo $u->getMail(); ?>">
-                        </div>                                    
+                                <div class="form-group"> <!-- Mail-->
+                                    <label for="mail" class="control-label">Mail</label>
+                                    <input type="text" class="form-control" id="mail" name="mail" value="<?php echo $u->getMail(); ?>">
+                                </div>                                    
 
-                        <div class="form-group"> <!-- Pass -->
-                            <label for="pass" class="control-label">Password</label>
-                            <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $u->getPass(); ?>">
-                        </div>
-                        
-                        <div class="form-group"> <!-- Nombre -->
-                            <label for="nombre" class="control-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $u->getNombre(); ?>">
-                        </div>                    
+                                <div class="form-group"> <!-- Pass -->
+                                    <label for="pass" class="control-label">Password</label>
+                                    <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $u->getPass(); ?>">
+                                </div>
 
-                        <div class="form-group"> <!-- Apellido -->
-                            <label for="apellido" class="control-label">Apellido</label>
-                            <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $u->getApellido(); ?>">
-                        </div>    
-                        
-                        <div class="form-group"> <!-- Rol -->
-                            <label for="rol" class="control-label">Rol</label>
-                            <select class="form-control" id="rol" name="rol">
-                                <option value="0" 
+                                <div class="form-group"> <!-- Nombre -->
+                                    <label for="nombre" class="control-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $u->getNombre(); ?>">
+                                </div>                    
+
+                                <div class="form-group"> <!-- Apellido -->
+                                    <label for="apellido" class="control-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $u->getApellido(); ?>">
+                                </div>    
+
+                                <div class="form-group"> <!-- Rol -->
+                                    <label for="rol" class="control-label">Rol</label>
+                                    <select class="form-control" id="rol" name="rol">
+                                        <option value="0" 
                                         <?php
-                                            if ($u->getRol() == 0) {
-                                                echo 'selected="true"';
-                                            }
+                                        if ($u->getRol() == 0) {
+                                            echo 'selected="true"';
+                                        }
                                         ?>
-                                        >Alumno</option>
-                                <option value="1"  
+                                                >Alumno</option>
+                                        <option value="1"  
                                         <?php
-                                            if ($u->getRol() == 1) {
-                                                echo 'selected="true"';
-                                            }
+                                        if ($u->getRol() == 1) {
+                                            echo 'selected="true"';
+                                        }
                                         ?>
-                                        >Profesor</option>
-                                <option value="2"  
+                                                >Profesor</option>
+                                        <option value="2"  
                                         <?php
-                                            if ($u->getRol() == 2) {
-                                                echo 'selected="true"';
-                                            }
+                                        if ($u->getRol() == 2) {
+                                            echo 'selected="true"';
+                                        }
                                         ?>
-                                        >Administrador</option>
-                            </select>                    
-                        </div>
+                                                >Administrador</option>
+                                    </select>                    
+                                </div>
 
-                                
 
-                        <div class="form-group"> <!-- Boton de editar -->
-                            <button type="submit" class="btn verde white-text" name="editar">Editar</button>
-                            <button type="submit" class="btn verde white-text" name="borrar">Borrar</button>
-                            <button type="submit" class="btn verde white-text" name="cambiar">Activar/Desactivar</button>
-                        </div> 
 
-                    </form>
-                    <!-- Formulario CRUD -->
-                    <?php
-                    }}
+                                <div class="form-group"> <!-- Boton de editar -->
+                                    <button type="submit" class="btn verde white-text" name="editar">Editar</button>
+                                    <button type="submit" class="btn verde white-text" name="borrar">Borrar</button>
+                                    <button type="submit" class="btn verde white-text" name="cambiar">Activar/Desactivar</button>
+                                </div> 
+
+                            </form>
+                            <!-- Formulario CRUD -->
+                            <?php
+                        }
+                    }
                     ?>
                 </div>
                 <div class="col-lg-5 col-md-6 col-sm-12 borde">
                     <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Activados</h3>
                     <?php
-                            foreach ($allUser as $u) {
-                                if ($u->getActivado() == 1 && $_REQUEST['rol'] == $u->getRol()) {
+                    foreach ($allUser as $u) {
+                        if ($u->getActivado() == 1 && $_REQUEST['rol'] == $u->getRol()) {
+                            ?>
+                            <!-- Formulario CRUD -->
+                            <form action="../controlador.php" method="POST">
+                                <hr>
+                                <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
+                                <div class="form-group"> <!-- DNI -->
+                                    <label for="dni" class="control-label">DNI</label>
+                                    <input type="text" class="form-control" id="DNI" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
+                                </div>    
+
+                                <div class="form-group"> <!-- Mail-->
+                                    <label for="mail" class="control-label">Mail</label>
+                                    <input type="text" class="form-control" id="mail" name="mail" value="<?php echo $u->getMail(); ?>">
+                                </div>                                    
+
+                                <div class="form-group"> <!-- Pass -->
+                                    <label for="pass" class="control-label">Password</label>
+                                    <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $u->getPass(); ?>">
+                                </div>
+
+                                <div class="form-group"> <!-- Nombre -->
+                                    <label for="nombre" class="control-label">Nombre</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $u->getNombre(); ?>">
+                                </div>                    
+
+                                <div class="form-group"> <!-- Apellido -->
+                                    <label for="apellido" class="control-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $u->getApellido(); ?>">
+                                </div>    
+
+                                <div class="form-group"> <!-- Rol -->
+                                    <label for="rol" class="control-label">Rol</label>
+                                    <select class="form-control" id="rol" name="rol">
+                                        <option value="0" 
+                                        <?php
+                                        if ($u->getRol() == 0) {
+                                            echo 'selected="true"';
+                                        }
+                                        ?>
+                                                >Alumno</option>
+                                        <option value="1"  
+                                        <?php
+                                        if ($u->getRol() == 1) {
+                                            echo 'selected="true"';
+                                        }
+                                        ?>
+                                                >Profesor</option>
+                                        <option value="2"  
+                                        <?php
+                                        if ($u->getRol() == 2) {
+                                            echo 'selected="true"';
+                                        }
+                                        ?>
+                                                >Administrador</option>
+                                    </select>                    
+                                </div>
+
+
+
+                                <div class="form-group"> <!-- Boton de editar -->
+                                    <button type="submit" class="btn verde white-text" name="editar">Editar</button>
+                                    <button type="submit" class="btn verde white-text" name="borrar">Borrar</button>
+                                    <button type="submit" class="btn verde white-text" name="cambiar">Activar/Desactivar</button>
+                                </div> 
+
+                            </form>
+                            <!-- Formulario CRUD -->
+                            <?php
+                        }
+                    }
                     ?>
-                    <!-- Formulario CRUD -->
-                    <form action="../controlador.php" method="POST">
-                        <hr>
-                        <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
-                        <div class="form-group"> <!-- DNI -->
-                            <label for="dni" class="control-label">DNI</label>
-                            <input type="text" class="form-control" id="DNI" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
-                        </div>    
-
-                        <div class="form-group"> <!-- Mail-->
-                            <label for="mail" class="control-label">Mail</label>
-                            <input type="text" class="form-control" id="mail" name="mail" value="<?php echo $u->getMail(); ?>">
-                        </div>                                    
-
-                        <div class="form-group"> <!-- Pass -->
-                            <label for="pass" class="control-label">Password</label>
-                            <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $u->getPass(); ?>">
-                        </div>
-                        
-                        <div class="form-group"> <!-- Nombre -->
-                            <label for="nombre" class="control-label">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $u->getNombre(); ?>">
-                        </div>                    
-
-                        <div class="form-group"> <!-- Apellido -->
-                            <label for="apellido" class="control-label">Apellido</label>
-                            <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $u->getApellido(); ?>">
-                        </div>    
-                        
-                        <div class="form-group"> <!-- Rol -->
-                            <label for="rol" class="control-label">Rol</label>
-                            <select class="form-control" id="rol" name="rol">
-                                <option value="0" 
-                                        <?php
-                                            if ($u->getRol() == 0) {
-                                                echo 'selected="true"';
-                                            }
-                                        ?>
-                                        >Alumno</option>
-                                <option value="1"  
-                                        <?php
-                                            if ($u->getRol() == 1) {
-                                                echo 'selected="true"';
-                                            }
-                                        ?>
-                                        >Profesor</option>
-                                <option value="2"  
-                                        <?php
-                                            if ($u->getRol() == 2) {
-                                                echo 'selected="true"';
-                                            }
-                                        ?>
-                                        >Administrador</option>
-                            </select>                    
+                </div>
+            </div>
+            
+            <!-- Formulario de registro -->
+            
+            <div class="row">
+                <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1 borde">
+                    <form novalidate class="text-center mt-2 jus" action="../controlador.php" method="POST" name="formulario">
+                        <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Desactivados</h3>
+                        <?php
+                        if (isset($_SESSION['mensaje'])) {
+                            echo $_SESSION['mensaje'];
+                            $_SESSION['mensaje'] = null;
+                        }
+                        ?>
+                        <div class="form-row mb-4">
+                            <div class="col">
+                                <!-- Primer nombre -->
+                                <input type="text" id="nombre" name="registro_nombre" aria-describedby="nombreError" class="form-control" placeholder="Introduce el nombre" required>
+                                <small id="nombreError" class="form-text bg-danger" aria-live="polite"></small>
+                            </div>
+                            <div class="col">
+                                <!--<!-- Apellidos -->
+                                <input type="text" id="apellido" name="registro_apellido" aria-describedby="apellidoError" class="form-control" placeholder="Introduce tus apellidos" required>
+                                <small id="apellidoError" class="form-text bg-danger" aria-live="polite"></small>
+                            </div>
                         </div>
 
-                                
+                        <!-- DNI -->
+                        <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{9}[A-Z]">
+                        <small id="dniError" class="form-text bg-danger" aria-live="polite"></small>
 
-                        <div class="form-group"> <!-- Boton de editar -->
-                            <button type="submit" class="btn verde white-text" name="editar">Editar</button>
-                            <button type="submit" class="btn verde white-text" name="borrar">Borrar</button>
-                            <button type="submit" class="btn verde white-text" name="cambiar">Activar/Desactivar</button>
-                        </div> 
+                        <!-- E-mail -->
+                        <input type="email"  id="mail" name="registro_mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
+                        <small id="mailError" class="form-text bg-danger" aria-live="polite"></small>
+
+                        <!-- Contraseña -->
+                        <input type="password" name="registro_pass" id="pass" class="form-control mb-4" placeholder="Introduce tu contraseña" aria-describedby="pass" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                        <small id="passError" class="form-text bg-danger" aria-live="polite"></small>
+
+                        <!-- Rol -->
+                        <select class="form-control" id="rol" name="registro_rol">
+                            <option value="0" >Alumno</option>
+                            <option value="1" >Profesor</option>
+                            <option value="2" >Administrador</option>
+                        </select>  
+
+                        <!-- Registro -->
+                        <div class="form-row mb-4">
+                            <div class="col">
+                                <button name="crud_registrar" class="btn verde white-text my-4 btn-block" type="submit">Registrar</button>
+                            </div
+                        </div>
+
+                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 
                     </form>
-                    <!-- Formulario CRUD -->
-                    <?php
-                    }}
-                    ?>
                 </div>
             </div>
         </div>
