@@ -193,4 +193,26 @@ class Gestion {
         $stmt->execute();
         self::cerrarConex();
     }
+    
+    public static function editUser($dni, $mail, $pass, $nombre, $apellido, $rol) {
+        self::abrirConex();
+        
+        $consulta1 = 'UPDATE usuarios SET mail=? , pass=? , nombre=? , apellido=? WHERE dni=?';
+        $stmt1 = self::$conexion->prepare($consulta1);
+        $stmt1->bind_param('sssss',$val1,$val2,$val3,$val4,$val5);
+        $val1 = $mail;
+        $val2 = $pass;
+        $val3 = $nombre;
+        $val4 = $apellido;
+        $val5 = $dni;
+        $stmt1->execute();
+        
+        $consulta2 = 'UPDATE asignacion SET id=? WHERE dni=?';
+        $stmt2 = self::$conexion->prepare($consulta2);
+        $stmt2->bind_param('is',$val6,$val7);
+        $val6 = $rol;
+        $val7 = $dni;
+        $stmt2->execute();
+        self::cerrarConex();
+    }
 }

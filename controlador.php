@@ -107,7 +107,7 @@ if (isset($_REQUEST['Back'])) {
 //*********************** Ventana CRUD *************************************
 //******************************************************************************
     
-    //BORRAR
+    // BORRAR
     if (isset($_REQUEST['borrar'])) {
         $dni = $_REQUEST['dni'];
         echo $dni;
@@ -117,6 +117,8 @@ if (isset($_REQUEST['Back'])) {
         header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
     }
 
+    
+    // CAMBIAR DE ROL
     if (isset($_REQUEST['cambiar'])) {
         $dni = $_REQUEST['dni'];
         echo $dni;
@@ -129,8 +131,22 @@ if (isset($_REQUEST['Back'])) {
         header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
     }
     
+    
+    // EDITAR SUS ROLES
     if (isset($_REQUEST['editar'])) {
-        echo 'Recupero editar';
+        $dni = $_REQUEST['dni'];
+        $mail = $_REQUEST['mail'];
+        $pass = $_REQUEST['pass'];
+        $nombre = $_REQUEST['nombre'];
+        $apellido = $_REQUEST['apellido'];
+        $rol = $_REQUEST['rol'];
+        
+        Gestion::editUser($dni, $mail, $pass, $nombre, $apellido, $rol);
+//        
+        funcAdmin();
+        header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
+        
+        echo $dni . $mail . $pass . $nombre . $apellido . $rol;
     }
 
 

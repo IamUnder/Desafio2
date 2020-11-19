@@ -57,7 +57,7 @@ and open the template in the editor.
                     <!-- Right -->
                     <ul class="navbar-nav offset-10">
                         <li class="nav-item">
-                            <button class="btn white btn-sm" type="button">Cambiar Rol</button>
+                            <a href="../controlador.php?cambiar=cambiar"><button class="btn white btn-sm" type="button">Cambiar Rol</button></a>
                         </li>
                         <li class="nav-item">
                             <a href="../controlador.php?Back=Back"><button class="btn white btn-sm" type="button">Cerrar Sesion</button></a>
@@ -135,7 +135,7 @@ and open the template in the editor.
 
                         <div class="form-group"> <!-- Pass -->
                             <label for="pass" class="control-label">Password</label>
-                            <input type="text" class="form-control" id="pass" name="pas" value="<?php echo $u->getPass(); ?>">
+                            <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $u->getPass(); ?>">
                         </div>
                         
                         <div class="form-group"> <!-- Nombre -->
@@ -211,7 +211,7 @@ and open the template in the editor.
 
                         <div class="form-group"> <!-- Pass -->
                             <label for="pass" class="control-label">Password</label>
-                            <input type="text" class="form-control" id="pass" name="pas" value="<?php echo $u->getPass(); ?>">
+                            <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $u->getPass(); ?>">
                         </div>
                         
                         <div class="form-group"> <!-- Nombre -->
