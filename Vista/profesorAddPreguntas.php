@@ -85,10 +85,10 @@ and open the template in the editor.
                             <!-- Links -->
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 border-green rounded" href="#">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
+                                    <button class="btn btn-outline-success w-100 border-green rounded" onclick="window.location='profesorPrincipal.php'">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
                                 </li>
                                 <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
+                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" onclick="window.location='profesorPrincipal.php'">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
                                 </li>
                                 <li class="nav-item">
                                     <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>

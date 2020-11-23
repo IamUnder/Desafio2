@@ -173,7 +173,7 @@ if (isset($_REQUEST['Estado'])) {
     if ($rol == 'Admin') {
         header('Location: Vista/profesorPrincipal.php');
     }else{
-        header('Location: Vista/admin.php');
+        header('Location: Vista/admin.php?rol=0');
     }
 }
 //******************************************************************************
