@@ -1,3 +1,7 @@
 .background-green{
     background-color: #03A655;
 }
+
+.border-green{
+    border: 1px solid #03A655;
+}

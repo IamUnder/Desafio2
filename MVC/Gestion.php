@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /**
  * Description of Gestion
  *
@@ -230,6 +232,41 @@ class Gestion {
 
         self::cerrarConex();
         return $modified;
+    }
+
+    public static function addPregunta($pregunta) {
+        self::abrirConex();
+
+        $add = false;
+
+        $tipo = $pregunta->getTipo();
+        //$idExamen = self::getIdExamen();
+        $idExamen = -1;
+        $descripcion = $pregunta->getDescripcion();
+        $resp1 = $pregunta->getRespuesta1();
+        $resp2 = $pregunta->getRespuesta2();
+        $resp3 = $pregunta->getRespuesta3();
+        $resp4 = $pregunta->getRespuesta4();
+        $respCorrecta = $pregunta->getRespuestaCorrecta();
+
+        $sentencia1 = "INSERT INTO preguntas VALUES(NULL, " . $idExamen . ",'" . $descripcion . "')";
+
+        if (mysqli_query(self::$conexion, $sentencia1)) {
+            $idPregunta = "SELECT idPregunta FROM preguntas where idExamen = " . $idExamen . " AND pregunta = '" . $descripcion . "'";
+
+            if ($resultado = mysqli_query(self::$conexion, $idPregunta)) {
+                if ($fila = mysqli_fetch_array($resultado)) {
+                    $idPregunta = $fila[0];
+                    $sentencia2 = "INSERT INTO respuestasCorrectas VALUES(" . $idPregunta . ",'" . $tipo . "','" . $resp1 . "','" . $resp2 . "','" . $resp3 . "','" . $resp4 . "','" . $respCorrecta . "')";
+                    if (mysqli_query(self::$conexion, $sentencia2)) {
+                        $add = true;
+                    }
+                }
+            }
+        }
+
+        self::cerrarConex();
+        return $add;
     }
 
 }
