@@ -92,6 +92,6 @@ class User {
     //-----------------------------TO STRING------------------------------------
     //**************************************************************************
     public function __toString() {
-        return '[USUARIO] Nombre: ' . $this->nombre . ' - Correo: ' . $this->mail . ' - ROL: ' . $this->rol;
+        return '[USUARIO] Nombre: ' . $this->nombre . ' - Correo: ' . $this->mail . ' - ROL: ' . $this->rol . ' - ESTADO: ' . $this->activado ;
     }
 }

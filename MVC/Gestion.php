@@ -109,6 +109,7 @@ class Gestion {
         $val4 = $usuario->getNombre();
         $val5 = $usuario->getApellido();
         $val6 = $usuario->getActivado();
+        $val7 = $usuario->getRol();
 
         $sentencia1 = "INSERT INTO usuarios VALUES('" . $val1 . "','" . $val2 . "','" . $val3 . "','" . $val4 . "','" . $val5 . "','" . $val6 . "')";
 
@@ -116,7 +117,7 @@ class Gestion {
         if (mysqli_query(self::$conexion, $sentencia1)) {
             //Si conseguimos añadirlo en la tabla usuario, lo añadimos en la tabla AsignacionRol
             //Preparamos la sentencia2
-            $sentencia2 = "INSERT INTO asignacion VALUES('" . $val1 . "'," . 0 . ");";
+            $sentencia2 = "INSERT INTO asignacion VALUES('" . $val1 . "'," . $val7 . ");";
             //Si conseguimos añadir al usuario
             if (mysqli_query(self::$conexion, $sentencia2)) {
                 //Ponemos add a true =  usuario añadido.

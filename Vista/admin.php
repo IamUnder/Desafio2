@@ -28,13 +28,13 @@ and open the template in the editor.
         require_once '../Clases/User.php';
         session_start();
         $allUser = $_SESSION['allUser'];
-//        foreach ($allUser as $value) {
-//    echo $value . '<br>';
-//    
-//    if (isset($_REQUEST['rol'])) {
-//        echo $_REQUEST['rol'];
-//    }
-//        }
+        foreach ($allUser as $value) {
+    echo $value . '<br>';
+    
+    if (isset($_REQUEST['rol'])) {
+        echo $_REQUEST['rol'];
+    }
+        }
         ?>
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light verde">
@@ -319,8 +319,6 @@ and open the template in the editor.
                                 <button name="crud_registrar" class="btn verde white-text my-4 btn-block" type="submit">Registrar</button>
                             </div
                         </div>
-
-                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 
                     </form>
                 </div>
