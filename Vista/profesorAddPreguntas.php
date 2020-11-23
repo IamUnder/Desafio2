@@ -102,7 +102,7 @@ and open the template in the editor.
 
                     </nav>
                 </aside>
-                <section class="col-md-10 col-sm-10 border-green vh-80">
+                <section class="col-md-10 col-sm-10 border-green vh-80 w-100">
                     <nav class="nav ml-3 align-items-center">
                         <h3>Tipo:</h3> 
                         <form action="../controladorProfesorPreguntas.php" name="prof_setPregunta">
@@ -158,92 +158,82 @@ and open the template in the editor.
                             <button type="submit" name="crearPregunta" class="btn btn-outline-primary">Crear</button> 
                         </form>
                     </nav>
-                    <div class="table-responsive">
-                        <table class="table text-center">
-                            <form action="../controladorProfesorPreguntas.php" name="pregunta">
-                                <tr>
-                                    <td class="text-right"><label for="ta_pregunta">Descripción:</label></td>
-                                    <td class="text-left"><textarea id="ta_pregunta" name="descripcion" rows="5" class="w-75"></textarea></td>
-                                </tr>
-                                <?php
-                                if (isset($_SESSION['tipo'])) {
-                                    $tipo = $_SESSION['tipo'];
-                                    switch ($tipo) {
-                                        case 'texto':
-                                            ?>
-                                            <tr>
-                                                <td class="text-right"><label for="ta_resp_correcta_texto">Respuesta:</label></td>
-                                                <td class="text-left"><textarea id="ta_resp_texto" name="ta_resp_correcta_texto" rows="5" class="w-75"></textarea></td>
-                                            </tr>
-                                            <?php
-                                            break;
-                                        case 'numerico':
-                                            ?>
-                                            <tr>
-                                                <td class="text-right"><label for="resp_correcta_numerico">Respuesta:</label></td>
-                                                <td class="text-left"><input type="number" id="resp_correcta_numerico" name="resp_correcta_numerico" class="w-75"></td>
-                                            </tr>
-                                            <?php
-                                            break;
-                                        case 'unaOpcion':
-                                            ?>
-                                            <tr>
-                                                <td class="text-right"> <input type="radio" id="resp_opc_a" name="opcion" value="opc_a">
-                                                    <input type="text" name="resp_a"></td>
-                                                <td class="text-left"> <input type="radio" id="resp_opc_b" name="opcion" value="opc_b">
-                                                    <input type="text" name="resp_b"></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"> <input type="radio" id="resp_opc_c" name="opcion" value="opc_c">
-                                                    <input type="text" name="resp_c"></td>
-                                                <td class="text-left"> <input type="radio" id="resp_opc_d" name="opcion" value="opc_d">
-                                                    <input type="text" name="resp_d"></td>
-                                            </tr>
-                                            <?php
-                                            break;
-                                        case 'variasOpciones':
-                                            ?>
-                                            <tr>
-                                                <td class="text-right">
-                                                    <label><input type="checkbox" id="cboxa" name="cboxa">
-                                                        <input type="text" name="resp_cbox_a"></label>
-                                                </td>
-                                                <td class="text-left">
-                                                    <label><input type="checkbox" id="cboxb" name="cboxb">
-                                                        <input type="text" name="resp_cbox_b"></label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right">
-                                                    <label><input type="checkbox" id="cboxc" name="cboxc">
-                                                        <input type="text" name="resp_cbox_c"></label>
-                                                </td>
-                                                <td class="text-left">
-                                                    <label><input type="checkbox" id="cboxd" name="cboxd">
-                                                        <input type="text" name="resp_cbox_d"></label>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                            break;
-                                    }
-                                } else {
-                                    $_SESSION['tipo'] = 'texto';
+
+                    <form action="../controladorProfesorPreguntas.php" name="pregunta">
+                        <div class="w-100 text-center mt-3">
+                            <h3>Descripción</h3>
+                            <textarea id="ta_resp_texto" name="ta_resp_correcta_texto" rows="5" class="w-50"></textarea>
+                        </div>
+                        <?php
+                        if (isset($_SESSION['tipo'])) {
+                            $tipo = $_SESSION['tipo'];
+                            switch ($tipo) {
+                                case 'texto':
                                     ?>
-                                    <tr>
-                                        <td class="text-right"><label for="ta_resp_correcta_texto">Respuesta:</label></td>
-                                        <td class="text-left"><textarea id="ta_resp_texto" name="ta_resp_correcta_texto" rows="5" class="w-75"></textarea></td>
-                                    </tr>
+                                    <div class="w-100 text-center">
+                                        <h3>Respuesta</h3>
+                                        <textarea id="ta_resp_texto" name="ta_resp_correcta_texto" rows="5" class="w-50"></textarea>
+                                    </div>
                                     <?php
-                                }
-                                ?>
-                                <tr>
-                                    <td colspan="2" class="text-center">
-                                        <button type="submit" name="addPregunta" class="btn btn-outline-success">Añadir pregunta</button>
-                                    </td>
-                                </tr>
-                            </form>
-                        </table>
-                    </div>
+                                    break;
+                                case 'numerico':
+                                    ?>
+                                    <div class="w-100 text-center">
+                                        <h3>Respuesta</h3>
+                                        <input type="number" id="resp_correcta_numerico" name="resp_correcta_numerico" class="w-50">
+                                    </div>
+                                    <?php
+                                    break;
+                                case 'unaOpcion':
+                                    ?>
+                                    <div class="w-100 text-center">
+                                        <h3>Seleccione la respuesta correcta</h3>
+                                        <input type="radio" class="mr-2" id="resp_opc_a" name="opcion" value="opc_a">
+                                        <input type="text" name="resp_a">
+                                        <input type="radio" class="ml-2" id="resp_opc_b" name="opcion" value="opc_b">
+                                        <input type="text" name="resp_b">
+                                    </div>
+                                    <div class="w-100 text-center mt-1">
+                                        <input type="radio" class="mr-2" id="resp_opc_c" name="opcion" value="opc_c">
+                                        <input type="text" name="resp_c">
+                                        <input type="radio" class="ml-2" id="resp_opc_d" name="opcion" value="opc_d">
+                                        <input type="text" name="resp_d">
+                                    </div>
+                                    <?php
+                                    break;
+                                case 'variasOpciones':
+                                    ?>
+                                    <div class="w-100 text-center">
+                                        <h3>Seleccione las respuestas correctas</h3>
+                                        <label class="mr-2"><input type="checkbox" id="cboxa" name="cboxa">
+                                            <input type="text" name="resp_cbox_a"></label>
+                                        <label class="ml-2"><input type="checkbox" id="cboxb" name="cboxb">
+                                            <input type="text" name="resp_cbox_b"></label>
+                                    </div>
+                                    <div class="w-100 text-center">
+                                        <label class="mr-2"><input type="checkbox" id="cboxc" name="cboxc">
+                                            <input type="text" name="resp_cbox_c"></label>
+                                        <label class="ml-2"><input type="checkbox" id="cboxd" name="cboxd">
+                                            <input type="text" name="resp_cbox_d"></label>
+                                    </div>
+                                    <?php
+                                    break;
+                            }
+                        } else {
+                            $_SESSION['tipo'] = 'texto';
+                            ?>
+                            <div class="w-100 text-center">
+                                <h3>Respuesta</h3>
+                                <textarea id="ta_resp_texto" name="ta_resp_correcta_texto" rows="5" class="w-50"></textarea>
+                            </div>
+                            <?php
+                        }
+                        ?>
+                        <div class="w-100 text-center mt-3">
+                            <button type="submit" name="addPregunta" class="btn btn-outline-success">Añadir pregunta</button>
+                        </div>
+                    </form>
+
                 </section>
             </main>
 
