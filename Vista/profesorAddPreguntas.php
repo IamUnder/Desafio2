@@ -24,11 +24,7 @@ and open the template in the editor.
     <body class="rosemary">
         <?php
         require_once '../Clases/Pregunta.php';
-        if (!isset($_SESSION)) {
-            session_start();
-        } else {
-            session_start();
-        }
+        session_start();
         ?>
         <div class="container-fluid">
             <header class="row text-white background-green align-items-center">

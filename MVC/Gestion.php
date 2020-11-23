@@ -153,7 +153,7 @@ class Gestion {
 
         $tipo = $pregunta->getTipo();
         //$idExamen = self::getIdExamen();
-        $idExamen = 0;
+        $idExamen = -1;
         $descripcion = $pregunta->getDescripcion();
         $resp1 = $pregunta->getRespuesta1();
         $resp2 = $pregunta->getRespuesta2();

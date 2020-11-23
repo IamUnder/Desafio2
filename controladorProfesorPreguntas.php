@@ -2,7 +2,11 @@
 
 require_once './Clases/Pregunta.php';
 require_once './MVC/Gestion.php';
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+} else {
+    session_start();
+}
 
 //******************************************************************************
 //**************** Ventana add Pregunta - Tipo de pregunta *********************
