@@ -57,7 +57,7 @@ and open the template in the editor.
                     <!-- Right -->
                     <ul class="navbar-nav offset-10">
                         <li class="nav-item">
-                            <a href="../controlador.php?cambiar=cambiar"><button class="btn white btn-sm" type="button">Cambiar Rol</button></a>
+                            <a href="../controlador.php?Estado=Admin"><button class="btn white btn-sm" type="button">Cambiar Rol</button></a>
                         </li>
                         <li class="nav-item">
                             <a href="../controlador.php?Back=Back"><button class="btn white btn-sm" type="button">Cerrar Sesion</button></a>
