@@ -31,7 +31,7 @@ if (isset($_REQUEST['LogIn'])) {
 
     if ($recaptcha->score >= 0.7) {
         $login = Gestion::getUser($mail, $pass);
-        echo $login;
+//        echo $login;
         if ($login != null) {
             $_SESSION['user'] = $login;
             $rol = $login->getRol();
@@ -43,7 +43,13 @@ if (isset($_REQUEST['LogIn'])) {
                     header('Location: Vista/profesor.php');
                     break;
                 case 2:
-                    header('Location: Vista/admin.php');
+                    funcAdmin();
+//                    $allUser = $_SESSION['allUser'];
+//
+//                    foreach ($allUser as $v) {
+//                        echo $v;
+//                    }
+                    header('Location: Vista/admin.php?rol=0');
                     break;
                 default:
                     $_SESSION['mensaje'] = 'Error de rol';
@@ -58,8 +64,6 @@ if (isset($_REQUEST['LogIn'])) {
         $_SESSION['mensaje'] = 'Captcha incorrecto';
         header('Location: index.php');
     }
-} else {
-    echo 'Soy una mierda';
 }
 
 //******************************************************************************
@@ -98,8 +102,6 @@ if (isset($_REQUEST['form_registrar'])) {
         $_SESSION['mensaje'] = 'Captcha incorrecto';
         header('Location: Vista/panelRegistro.php');
     }
-} else {
-    echo 'Soy otra mierda! :D';
 }
 
 //******************************************************************************
@@ -157,4 +159,90 @@ if (isset($_REQUEST['form_recuperar_end'])) {
         unset($_SESSION['recuperarPass']);
         header('Location: index.php');
     }
+}
+
+if (isset($_REQUEST['Back'])) {
+    session_unset();
+    session_start();
+    $_SESSION['mensaje'] = 'Sesion cerrada con exito';
+    header('Location: index.php');
+}
+//******************************************************************************
+//*********************** Ventana CRUD *************************************
+//******************************************************************************
+    
+    // BORRAR
+    if (isset($_REQUEST['borrar'])) {
+        $dni = $_REQUEST['dni'];
+        echo $dni;
+        Gestion::delUser($dni);
+        
+        funcAdmin();
+        header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
+    }
+
+    
+    // CAMBIAR DE ROL
+    if (isset($_REQUEST['cambiar'])) {
+        $dni = $_REQUEST['dni'];
+        echo $dni;
+        if (Gestion::getActivado($dni) == 0) {
+            Gestion::setRol($dni, 1);
+        }else{
+            Gestion::setRol($dni, 0);
+        }
+        funcAdmin();
+        header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
+    }
+    
+    
+    // EDITAR SUS ROLES
+    if (isset($_REQUEST['editar'])) {
+        $dni = $_REQUEST['dni'];
+        $mail = $_REQUEST['mail'];
+        $pass = $_REQUEST['pass'];
+        $nombre = $_REQUEST['nombre'];
+        $apellido = $_REQUEST['apellido'];
+        $rol = $_REQUEST['rol'];
+        
+        Gestion::editUser($dni, $mail, $pass, $nombre, $apellido, $rol);
+       
+        funcAdmin();
+        header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
+        
+        echo $dni . $mail . $pass . $nombre . $apellido . $rol;
+    }
+
+    // Añadir usuario
+    if (isset($_REQUEST['crud_registrar'])) {
+
+        $dni = $_REQUEST['registro_dni'];
+        $nombre = $_REQUEST['registro_nombre'];
+        $apellido = $_REQUEST['registro_apellido'];
+        $mail = $_REQUEST['registro_mail'];
+        $pass = $_REQUEST['registro_pass'];
+        $activado = 1;
+        $rol = $_REQUEST['registro_rol'];
+        
+        if (!Gestion::existeUsuario($dni)) {
+            $nuevo = new User($dni, $mail, $pass, $nombre, $apellido, $activado, $rol);
+            if (Gestion::addUser($nuevo)) {
+                funcAdmin();
+                header('Location: Vista/admin.php?rol='.$rol);
+            }
+        } else {
+            $_SESSION['mensaje'] = 'Ya existe el usuario.';
+            header('Location: Vista/admin.php?rol='.$rol);
+        }
+            
+    }
+
+
+//******************************************************************************
+//****************************** Funciones *************************************
+//******************************************************************************
+
+function funcAdmin() {
+    $allUser = Gestion::getAllUser();
+    $_SESSION['allUser'] = $allUser;
 }
