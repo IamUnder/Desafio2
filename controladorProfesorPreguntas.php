@@ -51,7 +51,7 @@ if (isset($_REQUEST['addPregunta'])) {
                 break;
             case 'numerico':
                 $descripcion = $_REQUEST['descripcion'];
-                $_respuestaCorrecta = $_REQUEST['resp_correcta_numerico'];
+                $respuestaCorrecta = $_REQUEST['resp_correcta_numerico'];
                 $preguntaNueva = new Pregunta($tipo, $descripcion, $respuestaCorrecta, '', '', '', $respuestaCorrecta);
                 if (Gestion::addPregunta($preguntaNueva)) {
                     header('Location: Vista/profesorAddPreguntas.php');

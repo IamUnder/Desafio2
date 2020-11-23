@@ -34,7 +34,7 @@ and open the template in the editor.
             });
         </script>
     </head>
-    <body onload="vLogin()">
+    <body onload="vLogin()" class="verde">
         <?php
         session_start();
         if (isset($_SESSION['recuperarPass'])) {

@@ -167,6 +167,15 @@ if (isset($_REQUEST['Back'])) {
     $_SESSION['mensaje'] = 'Sesion cerrada con exito';
     header('Location: index.php');
 }
+
+if (isset($_REQUEST['Estado'])) {
+    $rol = $_REQUEST['Estado'];
+    if ($rol == 'Admin') {
+        header('Location: Vista/profesorPrincipal.php');
+    }else{
+        header('Location: Vista/admin.php');
+    }
+}
 //******************************************************************************
 //*********************** Ventana CRUD *************************************
 //******************************************************************************

@@ -28,13 +28,13 @@ and open the template in the editor.
         require_once '../Clases/User.php';
         session_start();
         $allUser = $_SESSION['allUser'];
-//        foreach ($allUser as $value) {
-//    echo $value . '<br>';
-//    
-//    if (isset($_REQUEST['rol'])) {
-//        echo $_REQUEST['rol'];
-//    }
-//        }
+        foreach ($allUser as $value) {
+    //echo $value . '<br>';
+    
+    if (isset($_REQUEST['rol'])) {
+        //echo $_REQUEST['rol'];
+    }
+        }
         ?>
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light verde">
@@ -57,7 +57,7 @@ and open the template in the editor.
                     <!-- Right -->
                     <ul class="navbar-nav offset-10">
                         <li class="nav-item">
-                            <a href="../controlador.php?cambiar=cambiar"><button class="btn white btn-sm" type="button">Cambiar Rol</button></a>
+                            <a href="../controlador.php?Estado=Admin"><button class="btn white btn-sm" type="button">Cambiar Rol</button></a>
                         </li>
                         <li class="nav-item">
                             <a href="../controlador.php?Back=Back"><button class="btn white btn-sm" type="button">Cerrar Sesion</button></a>
@@ -319,8 +319,6 @@ and open the template in the editor.
                                 <button name="crud_registrar" class="btn verde white-text my-4 btn-block" type="submit">Registrar</button>
                             </div
                         </div>
-
-                        <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
 
                     </form>
                 </div>
