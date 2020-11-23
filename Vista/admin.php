@@ -29,10 +29,10 @@ and open the template in the editor.
         session_start();
         $allUser = $_SESSION['allUser'];
         foreach ($allUser as $value) {
-    echo $value . '<br>';
+    //echo $value . '<br>';
     
     if (isset($_REQUEST['rol'])) {
-        echo $_REQUEST['rol'];
+        //echo $_REQUEST['rol'];
     }
         }
         ?>
