@@ -29,11 +29,10 @@ and open the template in the editor.
         session_start();
         $allUser = $_SESSION['allUser'];
         foreach ($allUser as $value) {
-    //echo $value . '<br>';
-    
-    if (isset($_REQUEST['rol'])) {
-        //echo $_REQUEST['rol'];
-    }
+
+            if (isset($_REQUEST['rol'])) {
+                
+            }
         }
         ?>
         <!--Navbar-->
@@ -268,9 +267,9 @@ and open the template in the editor.
                     ?>
                 </div>
             </div>
-            
+
             <!-- Formulario de registro -->
-            
+
             <div class="row">
                 <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1 borde">
                     <form novalidate class="text-center mt-2 jus" action="../controlador.php" method="POST" name="formulario">
@@ -324,31 +323,31 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
-        </div>
-        
-        <!-- Footer -->
-        <div class="container-fluid">
+    </div>
 
-            <!--Section: Content-->
-            <section class="py-5 text-center white-text verde z-depth-1 rounded">
+    <!-- Footer -->
+    <div class="container-fluid">
 
-                <h3 class="">Made with <i class="fas fa-heart orange-text mx-1"></i> by Jorge y Alejandro</h3>
+        <!--Section: Content-->
+        <section class="py-5 text-center white-text verde z-depth-1 rounded">
 
-            </section>
-            <!--Section: Content-->
+            <h3 class="">Made with <i class="fas fa-heart orange-text mx-1"></i> by Jorge y Alejandro</h3>
 
-        </div>
-        <!-- ./Contenido -->
+        </section>
+        <!--Section: Content-->
 
-        <!-- jQuery -->
-        <script type="text/javascript" src="../js/jquery.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="../js/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="../js/mdb.min.js"></script>
-        <!-- Your custom scripts (optional) -->
-        <script type="text/javascript" src="../js/vFormulario.js"></script>
-    </body>
+    </div>
+    <!-- ./Contenido -->
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../js/mdb.min.js"></script>
+    <!-- Your custom scripts (optional) -->
+    <script type="text/javascript" src="../js/vFormulario.js"></script>
+</body>
 </html>
