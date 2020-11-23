@@ -21,8 +21,9 @@ and open the template in the editor.
         <link rel="stylesheet" href="../css/mdb.min.css">
         <!-- Your custom styles (optional) -->
         <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/fuentes.css">
     </head>
-    <body class="white">
+    <body onload="vCrud()" class="white rosemary">
         <?php
         require_once '../Clases/User.php';
         session_start();
@@ -124,32 +125,32 @@ and open the template in the editor.
                                 <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
                                 <div class="form-group"> <!-- DNI -->
                                     <label for="dni" class="control-label">DNI</label>
-                                    <input type="text" class="form-control" id="DNI" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
+                                    <input type="text" class="form-control" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
                                 </div>    
 
                                 <div class="form-group"> <!-- Mail-->
                                     <label for="mail" class="control-label">Mail</label>
-                                    <input type="text" class="form-control" id="mail" name="mail" value="<?php echo $u->getMail(); ?>">
+                                    <input type="text" class="form-control" name="mail" value="<?php echo $u->getMail(); ?>">
                                 </div>                                    
 
                                 <div class="form-group"> <!-- Pass -->
                                     <label for="pass" class="control-label">Password</label>
-                                    <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $u->getPass(); ?>">
+                                    <input type="text" class="form-control" name="pass" value="<?php echo $u->getPass(); ?>">
                                 </div>
 
                                 <div class="form-group"> <!-- Nombre -->
                                     <label for="nombre" class="control-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $u->getNombre(); ?>">
+                                    <input type="text" class="form-control" name="nombre" value="<?php echo $u->getNombre(); ?>">
                                 </div>                    
 
                                 <div class="form-group"> <!-- Apellido -->
                                     <label for="apellido" class="control-label">Apellido</label>
-                                    <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $u->getApellido(); ?>">
+                                    <input type="text" class="form-control" name="apellido" value="<?php echo $u->getApellido(); ?>">
                                 </div>    
 
                                 <div class="form-group"> <!-- Rol -->
                                     <label for="rol" class="control-label">Rol</label>
-                                    <select class="form-control" id="rol" name="rol">
+                                    <select class="form-control" name="rol">
                                         <option value="0" 
                                         <?php
                                         if ($u->getRol() == 0) {
@@ -201,32 +202,32 @@ and open the template in the editor.
                                 <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
                                 <div class="form-group"> <!-- DNI -->
                                     <label for="dni" class="control-label">DNI</label>
-                                    <input type="text" class="form-control" id="DNI" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
+                                    <input type="text" class="form-control" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
                                 </div>    
 
                                 <div class="form-group"> <!-- Mail-->
                                     <label for="mail" class="control-label">Mail</label>
-                                    <input type="text" class="form-control" id="mail" name="mail" value="<?php echo $u->getMail(); ?>">
+                                    <input type="text" class="form-control" name="mail" value="<?php echo $u->getMail(); ?>">
                                 </div>                                    
 
                                 <div class="form-group"> <!-- Pass -->
                                     <label for="pass" class="control-label">Password</label>
-                                    <input type="text" class="form-control" id="pass" name="pass" value="<?php echo $u->getPass(); ?>">
+                                    <input type="text" class="form-control" name="pass" value="<?php echo $u->getPass(); ?>">
                                 </div>
 
                                 <div class="form-group"> <!-- Nombre -->
                                     <label for="nombre" class="control-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo $u->getNombre(); ?>">
+                                    <input type="text" class="form-control" name="nombre" value="<?php echo $u->getNombre(); ?>">
                                 </div>                    
 
                                 <div class="form-group"> <!-- Apellido -->
                                     <label for="apellido" class="control-label">Apellido</label>
-                                    <input type="text" class="form-control" id="apellido" name="apellido" value="<?php echo $u->getApellido(); ?>">
+                                    <input type="text" class="form-control" name="apellido" value="<?php echo $u->getApellido(); ?>">
                                 </div>    
 
                                 <div class="form-group"> <!-- Rol -->
                                     <label for="rol" class="control-label">Rol</label>
-                                    <select class="form-control" id="rol" name="rol">
+                                    <select class="form-control" name="rol">
                                         <option value="0" 
                                         <?php
                                         if ($u->getRol() == 0) {
@@ -273,7 +274,7 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1 borde">
                     <form novalidate class="text-center mt-2 jus" action="../controlador.php" method="POST" name="formulario">
-                        <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Desactivados</h3>
+                        <h3 class="font-weight-bold my-4 pb-2 text-center">Añadir Usuario</h3>
                         <?php
                         if (isset($_SESSION['mensaje'])) {
                             echo $_SESSION['mensaje'];
@@ -328,7 +329,7 @@ and open the template in the editor.
         </div>
         
         <!-- Footer -->
-        <div class="container-fluid my-3">
+        <div class="container-fluid">
 
             <!--Section: Content-->
             <section class="py-5 text-center white-text verde z-depth-1 rounded">
@@ -350,6 +351,6 @@ and open the template in the editor.
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="../js/mdb.min.js"></script>
         <!-- Your custom scripts (optional) -->
-        <script type="text/javascript" src="../"></script>
+        <script type="text/javascript" src="../js/vFormulario.js"></script>
     </body>
 </html>
