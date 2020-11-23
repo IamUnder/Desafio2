@@ -28,6 +28,7 @@ and open the template in the editor.
     </head>
     <body class="rosemary">
         <?php
+        require_once '../Clases/PreguntaAux.php';
         session_start();
         ?>
         <div class="container-fluid">
@@ -67,7 +68,7 @@ and open the template in the editor.
             </header>
 
             <main class="row">
-                <aside class="col-md-2 col-sm-2 border-green">
+                <aside class="col-md-2 col-sm-2 border-green overflow-auto pl-0 pr-0" style="max-height: 80vh;">
                     <nav class="navbar navbar-expand-lg navbar-light">
 
 
@@ -78,7 +79,7 @@ and open the template in the editor.
                         </button> 
 
                         <!-- Collapsible content -->
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse" style="width: 100%;" id="navbarSupportedContent">
 
                             <!-- Links -->
                             <ul class="nav flex-column">
@@ -99,8 +100,28 @@ and open the template in the editor.
                                     <li class="nav-item">
                                         <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddExamen" type="submit">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
                                     </li>
+                                    <hr>
                                 </form>
+                                <?php
+                                if (isset($_SESSION['preguntasDisponibles'])) {
+                                    $preguntasDisponibles = $_SESSION['preguntasDisponibles'];
+                                    for ($i = 0; $i < sizeof($preguntasDisponibles); $i++) {
+                                        $idPregunta = $preguntasDisponibles[$i]->getIdPregunta();
+                                        $idExamen = $preguntasDisponibles[$i]->getIdExamen();
+                                        $pregunta = $preguntasDisponibles[$i]->getPregunta();
+                                        $preguntaAux = new PreguntaAux($idPregunta, $idExamen, $pregunta);
+                                        ?>
+                                        <li class="nav-item mt-1 background-green text-white text-center">
+                                            <p draggable="true"><?php echo $preguntaAux->getPregunta() ?></p>
+                                        </li>
+
+                                        <?php
+                                    }
+                                }
+                                ?>
+
                             </ul>
+
                             <!-- Links -->
 
                             <!-- CTA -->
@@ -108,6 +129,7 @@ and open the template in the editor.
                         </div>
 
                     </nav>
+                    <hr>
                 </aside>
 
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100">

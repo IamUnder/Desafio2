@@ -69,7 +69,7 @@ and open the template in the editor.
             </header>
 
             <main class="row">
-                <aside class="col-md-2 col-sm-2 border-green">
+                <aside class="col-md-2 col-sm-2 border-green pl-0 pr-0">
                     <nav class="navbar navbar-expand-lg navbar-light">
 
 
@@ -170,7 +170,7 @@ and open the template in the editor.
                     <form action="../controladorProfesorPreguntas.php" name="pregunta">
                         <div class="w-100 text-center mt-3">
                             <h3>Descripción</h3>
-                            <textarea id="ta_resp_texto" name="ta_resp_correcta_texto" rows="5" class="w-50"></textarea>
+                            <textarea id="ta_resp_texto" name="descripcion" rows="5" class="w-50"></textarea>
                         </div>
                         <?php
                         if (isset($_SESSION['tipo'])) {

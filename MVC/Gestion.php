@@ -1,5 +1,7 @@
 <?php
 
+require_once 'PreguntaAux.php';
+
 /**
  * Description of Gestion
  *
@@ -12,10 +14,9 @@ class Gestion {
     public static function abrirConex() {
         //Jorge
 //        self::$conexion = new mysqli('localhost:7007', 'root', 'secret', 'Desafio2');
-        
         //Alejandro
         self::$conexion = new mysqli('localhost', 'alejandro', 'Chubaca2020', 'Desafio2');
-        
+
         if (self::$conexion->connect_errno) {
             print "Fallo al conectar a MySQL: " . mysqli_connect_error();
         }
@@ -49,14 +50,14 @@ class Gestion {
         self::cerrarConex();
         return $r;
     }
-    
+
     public static function getAllUser() {
-        
+
         self::abrirConex();
-        
+
         $consulta = 'SELECT * FROM usuarios';
         $res = array();
-        
+
         if ($resultado = self::$conexion->query($consulta)) {
             while ($row = $resultado->fetch_assoc()) {
                 $rol = self::getRol($row['dni']);
@@ -146,72 +147,71 @@ class Gestion {
             }
         }
         self::cerrarConex();
-        
+
         return $res;
     }
-    
+
     public static function getActivado($dni) {
         self::abrirConex();
-        
+
         $consulta = 'SELECT activado FROM usuarios WHERE dni=?';
-        
+
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('s',$val1);
+        $stmt->bind_param('s', $val1);
         $val1 = $dni;
         $stmt->execute();
-        
+
         if ($resultado = $stmt->get_result()) {
             while ($row = $resultado->fetch_assoc()) {
                 $res = $row['activado'];
             }
         }
-        
+
         self::cerrarConex();
         return $res;
     }
-    
-    
+
     public static function setRol($dni, $rol) {
         self::abrirConex();
-        
+
         $consulta = 'UPDATE usuarios set activado=? where dni=?';
-        
+
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('is',$val1,$val2);
+        $stmt->bind_param('is', $val1, $val2);
         $val1 = $rol;
         $val2 = $dni;
         $stmt->execute();
         self::cerrarConex();
     }
-    
+
     public static function delUser($dni) {
         self::abrirConex();
-        
+
         $consulta = 'DELETE FROM usuarios WHERE dni=?';
-        
+
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('s',$val1);
+        $stmt->bind_param('s', $val1);
         $val1 = $dni;
         $stmt->execute();
         self::cerrarConex();
     }
-    
+
     public static function editUser($dni, $mail, $pass, $nombre, $apellido, $rol) {
         self::abrirConex();
-        
+
         $consulta1 = 'UPDATE usuarios SET mail=? , pass=? , nombre=? , apellido=? WHERE dni=?';
         $stmt1 = self::$conexion->prepare($consulta1);
-        $stmt1->bind_param('sssss',$val1,$val2,$val3,$val4,$val5);
+        $stmt1->bind_param('sssss', $val1, $val2, $val3, $val4, $val5);
         $val1 = $mail;
         $val2 = $pass;
         $val3 = $nombre;
         $val4 = $apellido;
         $val5 = $dni;
         $stmt1->execute();
-        
+
         $consulta2 = 'UPDATE asignacion SET id=? WHERE dni=?';
         $stmt2 = self::$conexion->prepare($consulta2);
-        $stmt2->bind_param('is',$val6,$val7);
+        $stmt2->bind_param('is', $val6, $val7);
         $val6 = $rol;
         $val7 = $dni;
         $stmt2->execute();
@@ -267,6 +267,26 @@ class Gestion {
 
         self::cerrarConex();
         return $add;
+    }
+
+    public static function getPreguntas() {
+        $preguntasDisponibles = [];
+
+        self::abrirConex();
+
+        $sentencia = "SELECT * FROM preguntas WHERE idExamen = -1";
+        if ($resultado = mysqli_query(self::$conexion, $sentencia)) {
+            while ($fila = mysqli_fetch_row($resultado)) {
+                $idPregunta = $fila[0];
+                $idExamen = $fila[1];
+                $descripcion = $fila[2];
+                $pregunta = new PreguntaAux($idPregunta, $idExamen, $descripcion);
+                $preguntasDisponibles[] = $pregunta;
+            }
+        }
+
+        self::cerrarConex();
+        return $preguntasDisponibles;
     }
 
 }

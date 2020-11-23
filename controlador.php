@@ -40,7 +40,7 @@ if (isset($_REQUEST['LogIn'])) {
                     header('Location: Vista/usuario.php');
                     break;
                 case 1:
-                    header('Location: Vista/profesor.php');
+                    header('Location: Vista/profesorPrincipal.php');
                     break;
                 case 2:
                     funcAdmin();
@@ -278,6 +278,8 @@ if (isset($_REQUEST['vistaAddPreguntas'])) {
 
 if (isset($_REQUEST['vistaAddExamen'])) {
     $ventanaSeleccionada = $_REQUEST['vistaAddExamen'];
+    $preguntasDisponibles = Gestion::getPreguntas();
+    $_SESSION['preguntasDisponibles'] = $preguntasDisponibles;
     $_SESSION['vistaMenu'] = $ventanaSeleccionada;
     header('Location: Vista/profesorAddExamen.php');
     die();
