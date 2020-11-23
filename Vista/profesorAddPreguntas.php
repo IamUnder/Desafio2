@@ -19,6 +19,12 @@ and open the template in the editor.
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+
         <title>Panel de profesorado</title>
     </head>
     <body class="rosemary">
@@ -33,7 +39,7 @@ and open the template in the editor.
                     <nav class="navbar navbar-expand-lg navbar-light pt-0 pb-0">
 
 
-                        <img src="../img/logo.png" alt="Logo_mamas2.0" class="img-fluid vh-10" />
+                        <img src="../img/logo.png" alt="Logo_mamas2.0" class="vh-10" />
 
                         <!-- Collapse button -->
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -46,11 +52,11 @@ and open the template in the editor.
 
                             <!-- Right -->
                             <ul class="navbar-nav offset-10">
-                                <li class="nav-item">
-                                    <button class="btn text-white btn-sm" type="button">Cambiar Rol</button>
+                                <li class="nav-item mr-1">
+                                    <button class="btn text-success bg-light btn-sm" type="button">Cambiar Rol</button>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../controlador.php?Back=Back"><button class="btn text-white btn-sm" type="button">Cerrar Sesion</button></a>
+                                    <a href="../controlador.php?Back=Back"><button class="btn text-success bg-light btn-sm" type="button">Cerrar Sesion</button></a>
                                 </li>
                             </ul>
 
@@ -79,19 +85,19 @@ and open the template in the editor.
                             <!-- Links -->
                             <ul class="nav flex-column">
                                 <li class="nav-item">
-                                    <a class="nav-link bt text-success" href="#">Ver exámenes activado</a>
+                                    <button class="btn btn-outline-success w-100 border-green rounded" href="#">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link bt text-success" href="#">Ver exámenes desactivados</a>
+                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link bt text-success" href="#">Ver exámenes realizados</a>
+                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active bt text-success" href="#">Añadir preguntas</a>
+                                    <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link bt text-success" href="#">Crear examen</a>
+                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
                                 </li>
                             </ul>
                             <!-- Links -->
@@ -103,7 +109,7 @@ and open the template in the editor.
                     </nav>
                 </aside>
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100">
-                    <nav class="nav ml-3 align-items-center">
+                    <nav class="nav ml-3 align-items-center mt-1">
                         <h3>Tipo:</h3> 
                         <form action="../controladorProfesorPreguntas.php" name="prof_setPregunta">
                             <select name="tipo" class="ml-2">
@@ -193,7 +199,7 @@ and open the template in the editor.
                                         <input type="radio" class="ml-2" id="resp_opc_b" name="opcion" value="opc_b">
                                         <input type="text" name="resp_b">
                                     </div>
-                                    <div class="w-100 text-center mt-1">
+                                    <div class="w-100 text-center mt-2">
                                         <input type="radio" class="mr-2" id="resp_opc_c" name="opcion" value="opc_c">
                                         <input type="text" name="resp_c">
                                         <input type="radio" class="ml-2" id="resp_opc_d" name="opcion" value="opc_d">
@@ -239,9 +245,18 @@ and open the template in the editor.
 
             <footer class="row vh-10 background-green">
                 <div class="col-sm-12 col-md-12 d-flex justify-content-center align-items-center">
-                    <h3 class="">Made by Jorge y Alejandro</h3>
+                    <h3 class="">Made with <i class="fas fa-heart text-warning mx-1"></i> by Jorge y Alejandro</h3>
                 </div>
             </footer>
         </div>
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="js/mdb.min.js"></script>
     </body>
 </html>
