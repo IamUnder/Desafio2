@@ -36,6 +36,7 @@ and open the template in the editor.
     $allExamen = $_SESSION['allExamen'];
     foreach ($allExamen as $v) {
         echo $v->getTitulo();
+        echo $v->getFecha_fin().'<br>';
     }
 }
         ?>
@@ -182,7 +183,7 @@ and open the template in the editor.
                                                         <input type="type" name="fecha_Inicio" class="form-control mb-4" readonly value="<?php echo $v->getFecha_Inicio(); ?>">
                                                     </div>
                                                     <div class="col">
-                                                        <input type="type" name="fecha_Fin" class="form-control mb-4" readonly value="<?php echo $v->getFecha_Fin(); ?><">
+                                                        <input type="type" name="fecha_Fin" class="form-control mb-4" readonly value="<?php echo $v->getFecha_Fin(); ?>">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
