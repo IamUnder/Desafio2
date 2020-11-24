@@ -67,21 +67,23 @@ and open the template in the editor.
 
                             <!-- Links -->
                             <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 border-green rounded" href="#">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" onclick="window.location='profesorAddPreguntas.php'">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" onclick="window.location='profesorAddExamen.php'">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
-                                </li>
+                                <form action="../controlador.php" name="menu" method="POST">
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 border-green rounded" name="vistaExamenesActivados" type="submit">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesDesactivados" type="submit">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddExamen" type="submit">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
+                                    </li>
+                                </form>
                             </ul>
                             <!-- Links -->
 
