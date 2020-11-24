@@ -251,21 +251,21 @@ if (isset($_REQUEST['crud_registrar'])) {
 if (isset($_REQUEST['vistaExamenesActivados'])) {
     $ventanaSeleccionada = $_REQUEST['vistaExamenesActivados'];
     $_SESSION['vistaMenu'] = $ventanaSeleccionada;
-    header('Location: Vista/profesorPrincipal.php');
+    header('Location: Vista/profesorPrincipal.php?estado=1');
     die();
 }
 
 if (isset($_REQUEST['vistaExamenesDesactivados'])) {
     $ventanaSeleccionada = $_REQUEST['vistaExamenesDesactivados'];
     $_SESSION['vistaMenu'] = $ventanaSeleccionada;
-    header('Location: Vista/profesorVerDesactivados.php');
+    header('Location: Vista/profesorPrincipal.php?estado=0');
     die();
 }
 
 if (isset($_REQUEST['vistaExamenesRealizados'])) {
     $ventanaSeleccionada = $_REQUEST['vistaExamenesRealizados'];
     $_SESSION['vistaMenu'] = $ventanaSeleccionada;
-    header('Location: Vista/profesorExamenesRealizados.php');
+    header('Location: Vista/profesorPrincipal.php?estado=2');
     die();
 }
 
