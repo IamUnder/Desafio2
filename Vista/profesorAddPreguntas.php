@@ -114,7 +114,7 @@ and open the template in the editor.
                     <nav class="nav ml-3 align-items-center mt-1">
                         <h3>Tipo:</h3> 
                         <form action="../controladorProfesorPreguntas.php" name="prof_setPregunta">
-                            <select name="tipo" class="ml-2">
+                            <select name="tipo" class="ml-2" onchange="this.form.submit()">
                                 <?php
                                 if (isset($_SESSION['tipo'])) {
                                     $tipo = $_SESSION['tipo'];
@@ -163,7 +163,6 @@ and open the template in the editor.
                                 ?>
 
                             </select>
-                            <button type="submit" name="crearPregunta" class="btn btn-outline-primary">Crear</button> 
                         </form>
                     </nav>
 

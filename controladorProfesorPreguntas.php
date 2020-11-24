@@ -11,7 +11,7 @@ if (!isset($_SESSION)) {
 //******************************************************************************
 //**************** Ventana add Pregunta - Tipo de pregunta *********************
 //******************************************************************************
-if (isset($_REQUEST['crearPregunta'])) {
+if (isset($_REQUEST['tipo'])) {
     $tipo = $_REQUEST['tipo'];
     switch ($tipo) {
         case 'texto':
