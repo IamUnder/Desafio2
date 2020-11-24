@@ -171,7 +171,7 @@ if (isset($_REQUEST['Back'])) {
 if (isset($_REQUEST['Estado'])) {
     $rol = $_REQUEST['Estado'];
     if ($rol == 'Admin') {
-        header('Location: Vista/profesorPrincipal.php');
+        header('Location: Vista/profesorPrincipal.php?estado=0');
     } else {
         header('Location: Vista/admin.php?rol=0');
     }
@@ -251,6 +251,7 @@ if (isset($_REQUEST['crud_registrar'])) {
 if (isset($_REQUEST['vistaExamenesActivados'])) {
     $ventanaSeleccionada = $_REQUEST['vistaExamenesActivados'];
     $_SESSION['vistaMenu'] = $ventanaSeleccionada;
+    funcProfesor();
     header('Location: Vista/profesorPrincipal.php?estado=1');
     die();
 }
@@ -258,6 +259,7 @@ if (isset($_REQUEST['vistaExamenesActivados'])) {
 if (isset($_REQUEST['vistaExamenesDesactivados'])) {
     $ventanaSeleccionada = $_REQUEST['vistaExamenesDesactivados'];
     $_SESSION['vistaMenu'] = $ventanaSeleccionada;
+    funcProfesor();
     header('Location: Vista/profesorPrincipal.php?estado=0');
     die();
 }
@@ -265,6 +267,7 @@ if (isset($_REQUEST['vistaExamenesDesactivados'])) {
 if (isset($_REQUEST['vistaExamenesRealizados'])) {
     $ventanaSeleccionada = $_REQUEST['vistaExamenesRealizados'];
     $_SESSION['vistaMenu'] = $ventanaSeleccionada;
+    funcProfesor();
     header('Location: Vista/profesorPrincipal.php?estado=2');
     die();
 }
@@ -292,4 +295,9 @@ if (isset($_REQUEST['vistaAddExamen'])) {
 function funcAdmin() {
     $allUser = Gestion::getAllUser();
     $_SESSION['allUser'] = $allUser;
+}
+
+function funcProfesor(){
+    $allExamen = Gestion::getAllExamen();
+    $_SESSION['allExamen'] = $allExamen;
 }

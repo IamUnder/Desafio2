@@ -30,7 +30,14 @@ and open the template in the editor.
     <body class="rosemary">
         <?php
         require_once '../Clases/Pregunta.php';
+        require_once '../MVC/Examen.php';
         session_start();
+        if (isset($_SESSION['allExamen'])) {
+    $allExamen = $_SESSION['allExamen'];
+    foreach ($allExamen as $v) {
+        echo $v->getTitulo();
+    }
+}
         ?>
         <div class="container-fluid">
             <header class="row text-white background-green align-items-center">
@@ -85,14 +92,32 @@ and open the template in the editor.
                             <!-- Links -->
                             <ul class="nav flex-column">
                                 <form action="../controlador.php" name="menu" method="POST">
-                                    <li class="nav-item">
-                                        <button class="active btn btn-outline-success w-100 border-green rounded" name="vistaExamenesActivados" type="submit">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
+                                    <li class="nav-item justify-content-center">
+                                        <button class="btn btn-outline-success w-100 border-green rounded
+                                                <?php
+                                                    if ($_REQUEST['estado'] == 1) {
+                                                        echo 'active';
+                                                    }
+                                                ?>
+                                                " name="vistaExamenesActivados" type="submit">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesDesactivados" type="submit">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded
+                                                <?php
+                                                if ($_REQUEST['estado'] == 0) {
+                                                        echo 'active';
+                                                    }
+                                                ?>
+                                                " name="vistaExamenesDesactivados" type="submit">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded
+                                                <?php
+                                                if ($_REQUEST['estado'] == 2) {
+                                                        echo 'active';
+                                                    }
+                                                ?>
+                                                " name="vistaExamenesRealizados" type="submit">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
                                     </li>
                                     <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
@@ -111,7 +136,74 @@ and open the template in the editor.
                     </nav>
                 </aside>
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100">
+                    <div class="row text-center">
+                        <?php
+                        $estado = $_REQUEST['estado'];
+                        switch ($estado) {
+                            case 0:
+                                echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Desactivados</h1>';
+                                break;
+                            case 1:
+                                echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Activados</h1>';
+                                break;
+                            case 2:
+                                echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Realizados</h1>';
+                                break;
+                            default:
+                                echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Error al recoger los datos</h1>';
+                                break;
+                        }                                               
+                        ?>
+                    </div>
+                    <div id="accordion" class="overflow-auto">
+                        <?php
+                        foreach ($allExamen as $k => $v) { 
+                            ?>
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse<?php echo $k; ?>" aria-expanded="true" aria-controls="collapse<?php echo $k; ?>">
+                                            <?php
+                                            echo $v->getTitulo();
+                                            ?>
+                                        </button>
+                                    </h5>
+                                </div>
 
+                                <div id="collapse<?php echo $k; ?>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="container">
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <input type="type" name="titulo" class="form-control mb-4" readonly value="<?php echo $v->getTitulo(); ?>">
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="type" name="fecha_Inicio" class="form-control mb-4" readonly value="<?php echo $v->getFecha_Inicio(); ?>">
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="type" name="fecha_Fin" class="form-control mb-4" readonly value="<?php echo $v->getFecha_Fin(); ?><">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <textarea name="descripcion" rows="5" class="form-control" readonly><?php echo $v->getDescripcion(); ?></textarea>
+                                                </div>
+                                                <div class="form-group"> <!-- Boton de editar -->
+                                                    <button type="submit" class="btn verde white-text" name="editar">Editar</button>
+                                                    <button type="submit" class="btn verde white-text" name="borrar">Borrar</button>
+                                                    <button type="submit" class="btn verde white-text" name="cambiar">Activar/Desactivar</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                            
+                        }
+                        ?>
+                    </div>
                 </section>
             </main>
 
