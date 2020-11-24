@@ -1,6 +1,7 @@
 <?php
 
 require_once 'PreguntaAux.php';
+require_once 'Examen.php';
 
 /**
  * Description of Gestion
@@ -296,6 +297,22 @@ class Gestion {
 
         self::cerrarConex();
         return $preguntasDisponibles;
+    }
+    
+    public static function getAllExamen() {
+        self::abrirConex();
+
+        $consulta = 'SELECT * FROM examen';
+        $res = array();
+
+        if ($resultado = self::$conexion->query($consulta)) {
+            while ($row = $resultado->fetch_assoc()) {
+                $r = new Examen($row['id'], $row['id_Profesor'] , $row['fecha_Inicio'], $row['fecha_Fin'], $row['estado'], $row['titulo'], $row['descripcion']);
+                $res[] = $r;
+            }
+        }
+        self::cerrarConex();
+        return $res;
     }
 
 }
