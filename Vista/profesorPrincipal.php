@@ -170,7 +170,7 @@ and open the template in the editor.
                                     </h5>
                                 </div>
 
-                                <div id="collapse<?php echo $k; ?>" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div id="collapse<?php echo $k; ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body">
                                         <form>
                                             <div class="container">

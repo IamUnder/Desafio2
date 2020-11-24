@@ -171,6 +171,7 @@ if (isset($_REQUEST['Back'])) {
 if (isset($_REQUEST['Estado'])) {
     $rol = $_REQUEST['Estado'];
     if ($rol == 'Admin') {
+        funcProfesor();
         header('Location: Vista/profesorPrincipal.php?estado=0');
     } else {
         header('Location: Vista/admin.php?rol=0');
