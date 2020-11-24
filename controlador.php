@@ -172,7 +172,7 @@ if (isset($_REQUEST['Estado'])) {
     $rol = $_REQUEST['Estado'];
     if ($rol == 'Admin') {
         header('Location: Vista/profesorPrincipal.php');
-    }else{
+    } else {
         header('Location: Vista/admin.php?rol=0');
     }
 }
@@ -251,7 +251,7 @@ if (isset($_REQUEST['crud_registrar'])) {
 if (isset($_REQUEST['vistaExamenesActivados'])) {
     $ventanaSeleccionada = $_REQUEST['vistaExamenesActivados'];
     $_SESSION['vistaMenu'] = $ventanaSeleccionada;
-    header('Location: Vista/profesorVerActivados_Desactivados.php');
+    header('Location: Vista/profesorPrincipal.php');
     die();
 }
 
