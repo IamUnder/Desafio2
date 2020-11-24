@@ -109,7 +109,8 @@ and open the template in the editor.
                                         $idPregunta = $preguntasDisponibles[$i]->getIdPregunta();
                                         $idExamen = $preguntasDisponibles[$i]->getIdExamen();
                                         $pregunta = $preguntasDisponibles[$i]->getPregunta();
-                                        $preguntaAux = new PreguntaAux($idPregunta, $idExamen, $pregunta);
+                                        $tipo = $preguntasDisponibles[$i]->getTipo();
+                                        $preguntaAux = new PreguntaAux($idPregunta, $idExamen, $pregunta, $tipo);
                                         ?>
                                         <li class="nav-item mt-1 background-green text-white text-center">
                                             <p draggable="true"><?php echo $preguntaAux->getPregunta() ?></p>
@@ -129,7 +130,6 @@ and open the template in the editor.
                         </div>
 
                     </nav>
-                    <hr>
                 </aside>
 
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100">
