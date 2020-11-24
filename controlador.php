@@ -40,7 +40,7 @@ if (isset($_REQUEST['LogIn'])) {
                     header('Location: Vista/usuario.php');
                     break;
                 case 1:
-                    header('Location: Vista/profesor.php');
+                    header('Location: Vista/profesorPrincipal.php');
                     break;
                 case 2:
                     funcAdmin();
