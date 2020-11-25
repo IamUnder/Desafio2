@@ -305,7 +305,7 @@ and open the template in the editor.
                             <!-- Accordion wrapper -->
                         </div>
 
-                        <div class="col-md-8 col-sm-8">
+                        <div class="col-md-8 col-sm-8 text-center">
 
                             <form action="../controlador.php" name="form_examen" id="form_examen" method="POST">
                                 <div class="card">
@@ -318,8 +318,8 @@ and open the template in the editor.
                                 </div>
                             </form>
 
-                            <img src="../img/add.png" id="add" style="width: 50px; height: 50px;">
-                            <img src="../img/del.png" id="del" style="width: 50px; height: 50px;">
+                            <img src="../img/add.png" id="add" style="width: 50px; height: 50px; cursor: pointer;">
+                            <img src="../img/del.png" id="del" style="width: 50px; height: 50px; cursor: pointer;">
                         </div>
                     </div>
                 </section>
