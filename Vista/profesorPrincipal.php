@@ -94,7 +94,7 @@ and open the template in the editor.
                             <ul class="nav flex-column">
                                 <form action="../controlador.php" name="menu" method="POST">
                                     <li class="nav-item justify-content-center">
-                                        <button class="btn btn-outline-success w-100 border-green rounded
+                                        <button class="btn btn-outline-success w-100 border-green rounded>
                                         <?php
                                         if ($_REQUEST['estado'] == 1) {
                                             echo 'active';
@@ -103,7 +103,7 @@ and open the template in the editor.
                                                 " name="vistaExamenesActivados" type="submit">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded>
                                         <?php
                                         if ($_REQUEST['estado'] == 0) {
                                             echo 'active';
@@ -112,7 +112,7 @@ and open the template in the editor.
                                                 " name="vistaExamenesDesactivados" type="submit">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded>
                                         <?php
                                         if ($_REQUEST['estado'] == 2) {
                                             echo 'active';
@@ -138,7 +138,8 @@ and open the template in the editor.
                 </aside>
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100">
                     <div class="row text-center">
-                        <?php
+                        <div class="col-12">
+                            <?php
                         $estado = $_REQUEST['estado'];
                         switch ($estado) {
                             case 0:
@@ -155,6 +156,7 @@ and open the template in the editor.
                                 break;
                         }
                         ?>
+                        </div>  
                     </div>
                     <div id="accordion" class="overflow-auto">
                         <?php
