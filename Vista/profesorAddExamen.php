@@ -306,8 +306,8 @@ and open the template in the editor.
                         </div>
 
                         <div class="col-md-8 col-sm-8 text-center">
-
-                            <form action="../controlador.php" name="form_examen" id="form_examen" method="POST">
+                            <input class="h3 w-100" type="text" placeholder="Titulo del examen">
+                            <form action="../controlador.php" name="form_examen" id="examen" method="POST">
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title">Panel title</h5>
@@ -318,8 +318,8 @@ and open the template in the editor.
                                 </div>
                             </form>
 
-                            <img src="../img/add.png" id="add" style="width: 50px; height: 50px; cursor: pointer;">
-                            <img src="../img/del.png" id="del" style="width: 50px; height: 50px; cursor: pointer;">
+                            <img src="../img/add.png" id="addPregunta" onclick="addFila()" style="width: 50px; height: 50px; cursor: pointer;">
+                            <img src="../img/del.png" id="delPregunta" style="width: 50px; height: 50px; cursor: pointer;">
                         </div>
                     </div>
                 </section>

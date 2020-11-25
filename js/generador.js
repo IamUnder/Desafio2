@@ -1,45 +1,53 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 var inicializar = function () {
-    var boton = document.getElementById('addPregunta');
-    boton.onclick = addLinea;
+    contador = 0;
 };
 
-// Inicialización de la aplicación
-document.body.onload = inicializar;
+document.body.onload = inicializar();
 
-var addLinea = function () {
-    var nombreProducto = document.getElementById('producto').value;
-    var cantidadProducto = document.getElementById('cantidad').value;
-    var precioUnitario = document.getElementById('precio-unitario').value;
-    var totalProducto = cantidadProducto * precioUnitario;
+var addFila = function () {
+    contador += 1;
 
-    addFilaTaula(nombreProducto, cantidadProducto, precioUnitario, totalProducto);
-    recalcularTotal();
-    resetLinea();
-};
+    var formulario = document.querySelector('form#examen');
 
-var addFilaTaula = function () {
-    var cosDiv = document.querySelector('div#preguntas');
+    var card = document.createElement('div');
+    card.className = 'card text-center';
 
-    var card = document.createElement('div.card');
-    var cardBody = document.createElement('div.card-body');
-    var cardText = document.createElement('div.card-text');
+    var cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
 
-    card.innerHTML = 'Hola Hola';
+    var titulo = document.createElement('h5');
+    titulo.className = 'card-title';
+    titulo.innerHTML = 'Panel titulo';
 
+    var div = document.createElement('div');
+    div.setAttribute("ondrop", "drop(event)");
+    div.setAttribute("ondragover", "allowDrop(event)");
+    div.setAttribute("id", "div" + contador);
+    div.style.width = "100%";
+    div.style.height = "50px";
+    div.style.border = "1px solid black";
+
+    var imagen = document.createElement('img');
+    imagen.style.width = "50px";
+    imagen.style.height = "50px";
+    imagen.style.marginTop = "2%";
+    imagen.style.cursor = "pointer";
+    imagen.setAttribute("id", "del" + contador);
+    imagen.setAttribute("src", "../img/del.png");
+    imagen.setAttribute("onclick", 'delFila()');
+
+    cardBody.appendChild(titulo);
+    cardBody.appendChild(div);
+    cardBody.appendChild(imagen);
     card.appendChild(cardBody);
-    card.appendChild(cardText);
 
-    cosDiv.appendChild(card);
+
+    formulario.appendChild(card);
 };
 
 var eliminarFila = function () {
     this.parentNode.parentNode.removeChild(this.parentNode);
-    recalcularTotal();
 };
 
 
