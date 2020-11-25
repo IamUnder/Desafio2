@@ -140,22 +140,22 @@ and open the template in the editor.
                     <div class="row text-center">
                         <div class="col-12">
                             <?php
-                        $estado = $_REQUEST['estado'];
-                        switch ($estado) {
-                            case 0:
-                                echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Desactivados</h1>';
-                                break;
-                            case 1:
-                                echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Activados</h1>';
-                                break;
-                            case 2:
-                                echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Realizados</h1>';
-                                break;
-                            default:
-                                echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Error al recoger los datos</h1>';
-                                break;
-                        }
-                        ?>
+                            $estado = $_REQUEST['estado'];
+                            switch ($estado) {
+                                case 0:
+                                    echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Desactivados</h1>';
+                                    break;
+                                case 1:
+                                    echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Activados</h1>';
+                                    break;
+                                case 2:
+                                    echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Realizados</h1>';
+                                    break;
+                                default:
+                                    echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Error al recoger los datos</h1>';
+                                    break;
+                            }
+                            ?>
                         </div>  
                     </div>
                     <div id="accordion" class="overflow-auto">
