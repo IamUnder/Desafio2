@@ -200,15 +200,26 @@ class Gestion {
     public static function editUser($dni, $mail, $pass, $nombre, $apellido, $rol) {
         self::abrirConex();
 
-        $consulta1 = 'UPDATE usuarios SET mail=? , pass=? , nombre=? , apellido=? WHERE dni=?';
-        $stmt1 = self::$conexion->prepare($consulta1);
-        $stmt1->bind_param('sssss', $val1, $val2, $val3, $val4, $val5);
-        $val1 = $mail;
-        $val2 = $pass;
-        $val3 = $nombre;
-        $val4 = $apellido;
-        $val5 = $dni;
-        $stmt1->execute();
+        if ($pass != null) {
+            $consulta1 = 'UPDATE usuarios SET mail=? , pass=? , nombre=? , apellido=? WHERE dni=?';
+            $stmt1 = self::$conexion->prepare($consulta1);
+            $stmt1->bind_param('sssss', $val1, $val2, $val3, $val4, $val5);
+            $val1 = $mail;
+            $val2 = $pass;
+            $val3 = $nombre;
+            $val4 = $apellido;
+            $val5 = $dni;
+            $stmt1->execute();
+        }else{
+            $consulta1 = 'UPDATE usuarios SET mail=? , nombre=? , apellido=? WHERE dni=?';
+            $stmt1 = self::$conexion->prepare($consulta1);
+            $stmt1->bind_param('ssss', $val1, $val2, $val3, $val4);
+            $val1 = $mail;
+            $val2 = $nombre;
+            $val3 = $apellido;
+            $val4 = $dni;
+            $stmt1->execute();
+        }
 
         $consulta2 = 'UPDATE asignacion SET id=? WHERE dni=?';
         $stmt2 = self::$conexion->prepare($consulta2);

@@ -205,7 +205,7 @@ if (isset($_REQUEST['cambiar'])) {
 }
 
 
-// EDITAR SUS ROLES
+// EDITAR SUS DATOS
 if (isset($_REQUEST['editar'])) {
     $dni = $_REQUEST['dni'];
     $mail = $_REQUEST['mail'];
@@ -218,7 +218,7 @@ if (isset($_REQUEST['editar'])) {
 
     funcAdmin();
     header('Location: Vista/admin.php?rol=' . $_REQUEST['rol']);
-
+    
     echo $dni . $mail . $pass . $nombre . $apellido . $rol;
 }
 
