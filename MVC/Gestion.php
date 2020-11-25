@@ -32,12 +32,14 @@ class Gestion {
 
         self::abrirConex();
 
-        $consulta = 'SELECT * FROM usuarios WHERE mail=? AND pass=?';
-
+//        $consulta = 'SELECT * FROM usuarios WHERE mail=? AND pass=?';
+        $consulta = 'SELECT * FROM usuarios WHERE mail=?';
+        
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param("ss", $val1, $val2);
+//        $stmt->bind_param("ss", $val1, $val2);
+        $stmt->bind_param("s", $val1);
         $val1 = $mail;
-        $val2 = $pass;
+//        $val2 = $pass;
         $stmt->execute();
 
         if ($resultado = $stmt->get_result()) {
