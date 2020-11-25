@@ -43,6 +43,7 @@ and open the template in the editor.
         </script>
     </head>
     <body class="rosemary">
+        <script src="../js/generador.js"></script>
         <?php
         require_once '../Clases/PreguntaAux.php';
         session_start();
@@ -145,166 +146,178 @@ and open the template in the editor.
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100 overflow-auto">
                     <div class="row">
                         <div class="col-md-4 col-sm-4 w-100 vh-80 overflow-auto">
-                            <!--Accordion wrapper-->
-                                <div class="accordion md-accordion w-100" id="accordionEx1" role="tablist" aria-multiselectable="true">
+                            <h3 class="text-center mt-1">Banco de preguntas</h3>
+                            <div class="accordion md-accordion w-100" id="accordionEx1" role="tablist" aria-multiselectable="true">
 
-                                    <?php
-                                    //Cargar preguntas de tipo texto
-                                    if (isset($tipoTexto)) {
-                                        ?>
-                                        <!-- Card - TipoTexto -->
-                                        <div class="card">
-
-                                            <!-- Card header -->
-                                            <div class="card-header" role="tab" id="headingTwo1">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
-                                                   aria-expanded="false" aria-controls="collapseTwo1">
-                                                    <h6 class="mb-0 text-success">
-                                                        Preguntas de texto&nbsp;<i class="fas fa-angle-down rotate-icon"></i>
-                                                    </h6>
-                                                </a>
-                                            </div>
-
-                                            <!-- Card body -->
-                                            <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
-                                                 data-parent="#accordionEx1">
-                                                <div class="card-body p-0 pl-2 pt-2 pr-2">
-                                                    <?php
-                                                    for ($i = 0; $i < sizeof($tipoTexto); $i++) {
-                                                        $descripcion = $tipoTexto[$i]->getPregunta();
-                                                        ?>
-                                                        <p class="bg-success text-white"><?php echo $descripcion ?></p>
-                                                        <?php
-                                                    }
-                                                    ?>
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!-- Fin Card - Tipo Texto -->
-                                        <?php
-                                    }
+                                <?php
+                                //Cargar preguntas de tipo texto
+                                if (isset($tipoTexto)) {
                                     ?>
+                                    <!-- Card - TipoTexto -->
+                                    <div class="card">
 
-                                    <?php
-                                    //Cargar preguntas de tipo texto
-                                    if (isset($tipoNumerico)) {
-                                        ?>
-                                        <!-- Accordion card -->
-                                        <div class="card">
-
-                                            <!-- Card header -->
-                                            <div class="card-header" role="tab" id="headingTwo2">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo21"
-                                                   aria-expanded="false" aria-controls="collapseTwo21">
-                                                    <h6 class="mb-0 text-success">
-                                                        Preguntas numéricas&nbsp;<i class="fas fa-angle-down rotate-icon"></i>
-                                                    </h6>
-                                                </a>
-                                            </div>
-
-                                            <!-- Card body -->
-                                            <div id="collapseTwo21" class="collapse" role="tabpanel" aria-labelledby="headingTwo21"
-                                                 data-parent="#accordionEx1">
-                                                <div class="card-body p-0 pl-2 pt-2 pr-2">
-                                                    <?php
-                                                    for ($i = 0; $i < sizeof($tipoNumerico); $i++) {
-                                                        $descripcion = $tipoNumerico[$i]->getPregunta();
-                                                        ?>
-                                                        <p class="bg-success text-white"><?php echo $descripcion ?></p>
-                                                        <?php
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-
+                                        <!-- Card header -->
+                                        <div class="card-header" role="tab" id="headingTwo1">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                                               aria-expanded="false" aria-controls="collapseTwo1">
+                                                <h6 class="mb-0 text-success">
+                                                    Preguntas de texto&nbsp;<i class="fas fa-angle-down rotate-icon"></i>
+                                                </h6>
+                                            </a>
                                         </div>
-                                        <?php
-                                    }
-                                    ?>
 
-                                    <?php
-                                    //Cargar preguntas de una sola opcion
-                                    if (isset($tipoUnaOpcion)) {
-                                        ?>
-                                        <!-- Accordion card -->
-                                        <div class="card">
-
-                                            <!-- Card header -->
-                                            <div class="card-header" role="tab" id="headingThree31">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseThree31"
-                                                   aria-expanded="false" aria-controls="collapseThree31">
-                                                    <h6 class="mb-0 text-success">
-                                                        Preguntas de una sola opción&nbsp;<i class="fas fa-angle-down rotate-icon"></i>
-                                                    </h6>
-                                                </a>
-                                            </div>
-
-                                            <!-- Card body -->
-                                            <div id="collapseThree31" class="collapse" role="tabpanel" aria-labelledby="headingThree31"
-                                                 data-parent="#accordionEx1">
-                                                <div class="card-body p-0 pl-2 pt-2 pr-2">
-                                                    <?php
-                                                    for ($i = 0; $i < sizeof($tipoUnaOpcion); $i++) {
-                                                        $descripcion = $tipoUnaOpcion[$i]->getPregunta();
-                                                        ?>
-                                                        <p class="bg-success text-white"><?php echo $descripcion ?></p>
-                                                        <?php
-                                                    }
+                                        <!-- Card body -->
+                                        <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                                             data-parent="#accordionEx1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                            <div class="card-body p-0 pl-2 pt-2 pr-2">
+                                                <?php
+                                                for ($i = 0; $i < sizeof($tipoTexto); $i++) {
+                                                    $descripcion = $tipoTexto[$i]->getPregunta();
                                                     ?>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <!-- Accordion card -->
-                                        <?php
-                                    }
-                                    ?>
-
-                                    <?php
-                                    //Cargar preguntas de tipo texto
-                                    if (isset($tipoVariasOpciones)) {
-                                        ?>
-                                        <!-- Card - TipoTexto -->
-                                        <div class="card">
-
-                                            <!-- Card header -->
-                                            <div class="card-header" role="tab" id="headingFour41">
-                                                <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseFour41"
-                                                   aria-expanded="false" aria-controls="collapseFour41">
-                                                    <h6 class="mb-0 text-success">
-                                                        Preguntas de varias opciones&nbsp;<i class="fas fa-angle-down rotate-icon"></i>
-                                                    </h6>
-                                                </a>
-                                            </div>
-
-                                            <!-- Card body -->
-                                            <div id="collapseFour41" class="collapse" role="tabpanel" aria-labelledby="headingFour41"
-                                                 data-parent="#accordionEx1">
-                                                <div class="card-body p-0 pl-2 pt-2 pr-2">
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
                                                     <?php
-                                                    for ($i = 0; $i < sizeof($tipoVariasOpciones); $i++) {
-                                                        $descripcion = $tipoVariasOpciones[$i]->getPregunta();
-                                                        ?>
-                                                        <p class="bg-success text-white"><?php echo $descripcion ?></p>
-                                                        <?php
-                                                    }
-                                                    ?>
+                                                }
+                                                ?>
 
-                                                </div>
                                             </div>
-
                                         </div>
-                                        <!-- Fin Card - Tipo Texto -->
-                                        <?php
-                                    }
+
+                                    </div>
+                                    <!-- Fin Card - Tipo Texto -->
+                                    <?php
+                                }
+                                ?>
+
+                                <?php
+                                //Cargar preguntas de tipo texto
+                                if (isset($tipoNumerico)) {
                                     ?>
-                                </div>
-                                <!-- Accordion wrapper -->
+                                    <!-- Accordion card -->
+                                    <div class="card">
+
+                                        <!-- Card header -->
+                                        <div class="card-header" role="tab" id="headingTwo2">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo21"
+                                               aria-expanded="false" aria-controls="collapseTwo21">
+                                                <h6 class="mb-0 text-success">
+                                                    Preguntas numéricas&nbsp;<i class="fas fa-angle-down rotate-icon"></i>
+                                                </h6>
+                                            </a>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseTwo21" class="collapse" role="tabpanel" aria-labelledby="headingTwo21"
+                                             data-parent="#accordionEx1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                            <div class="card-body p-0 pl-2 pt-2 pr-2">
+                                                <?php
+                                                for ($i = 0; $i < sizeof($tipoNumerico); $i++) {
+                                                    $descripcion = $tipoNumerico[$i]->getPregunta();
+                                                    ?>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded" id="drag2-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <?php
+                                }
+                                ?>
+
+                                <?php
+                                //Cargar preguntas de una sola opcion
+                                if (isset($tipoUnaOpcion)) {
+                                    ?>
+                                    <!-- Accordion card -->
+                                    <div class="card">
+
+                                        <!-- Card header -->
+                                        <div class="card-header" role="tab" id="headingThree31">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseThree31"
+                                               aria-expanded="false" aria-controls="collapseThree31">
+                                                <h6 class="mb-0 text-success">
+                                                    Preguntas de una sola opción&nbsp;<i class="fas fa-angle-down rotate-icon"></i>
+                                                </h6>
+                                            </a>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseThree31" class="collapse" role="tabpanel" aria-labelledby="headingThree31"
+                                             data-parent="#accordionEx1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                            <div class="card-body p-0 pl-2 pt-2 pr-2">
+                                                <?php
+                                                for ($i = 0; $i < sizeof($tipoUnaOpcion); $i++) {
+                                                    $descripcion = $tipoUnaOpcion[$i]->getPregunta();
+                                                    ?>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded" id="drag3-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Accordion card -->
+                                    <?php
+                                }
+                                ?>
+
+                                <?php
+                                //Cargar preguntas de tipo texto
+                                if (isset($tipoVariasOpciones)) {
+                                    ?>
+                                    <!-- Card - TipoTexto -->
+                                    <div class="card">
+
+                                        <!-- Card header -->
+                                        <div class="card-header" role="tab" id="headingFour41">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseFour41"
+                                               aria-expanded="false" aria-controls="collapseFour41">
+                                                <h6 class="mb-0 text-success">
+                                                    Preguntas de varias opciones&nbsp;<i class="fas fa-angle-down rotate-icon"></i>
+                                                </h6>
+                                            </a>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseFour41" class="collapse" role="tabpanel" aria-labelledby="headingFour41"
+                                             data-parent="#accordionEx1" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                            <div class="card-body p-0 pl-2 pt-2 pr-2">
+                                                <?php
+                                                for ($i = 0; $i < sizeof($tipoVariasOpciones); $i++) {
+                                                    $descripcion = $tipoVariasOpciones[$i]->getPregunta();
+                                                    ?>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded" id="drag4-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <?php
+                                                }
+                                                ?>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Fin Card - Tipo Texto -->
+                                    <?php
+                                }
+                                ?>
+                            </div>
+                            <!-- Accordion wrapper -->
                         </div>
-                        
+
                         <div class="col-md-8 col-sm-8">
+
+                            <form action="../controlador.php" name="form_examen" id="form_examen" method="POST">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Panel title</h5>
+                                        <p class="card-text">Some quick example text to build on the panel title and make up the bulk of the panel's content.</p>
+                                        <a class="card-link">Card link</a>
+                                        <a class="card-link">Another link</a>
+                                    </div>
+                                </div>
+                            </form>
+
                             <img src="../img/add.png" id="add" style="width: 50px; height: 50px;">
                             <img src="../img/del.png" id="del" style="width: 50px; height: 50px;">
                         </div>
