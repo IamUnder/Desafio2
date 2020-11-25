@@ -131,9 +131,21 @@ and open the template in the editor.
                                     </li>
                                     <hr>
                                 </form>
+                            </ul>
 
+                            <!-- Links -->
 
-                                <!--Accordion wrapper-->
+                            <!-- CTA -->
+
+                        </div>
+
+                    </nav>
+                </aside>
+
+                <section class="col-md-10 col-sm-10 border-green vh-80 w-100 overflow-auto">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 w-100 vh-80 overflow-auto">
+                            <!--Accordion wrapper-->
                                 <div class="accordion md-accordion w-100" id="accordionEx1" role="tablist" aria-multiselectable="true">
 
                                     <?php
@@ -290,21 +302,13 @@ and open the template in the editor.
                                     ?>
                                 </div>
                                 <!-- Accordion wrapper -->
-                            </ul>
-
-                            <!-- Links -->
-
-                            <!-- CTA -->
-
                         </div>
-
-                    </nav>
-                </aside>
-
-                <section class="col-md-10 col-sm-10 border-green vh-80 w-100 overflow-auto d-flex justify-content-center">
-
-                    <img src="../img/add.png" id="add" style="width: 50px; height: 50px;">
-
+                        
+                        <div class="col-md-8 col-sm-8">
+                            <img src="../img/add.png" id="add" style="width: 50px; height: 50px;">
+                            <img src="../img/del.png" id="del" style="width: 50px; height: 50px;">
+                        </div>
+                    </div>
                 </section>
             </main>
             <footer class="row vh-10 background-green">
