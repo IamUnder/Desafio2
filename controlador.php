@@ -232,7 +232,7 @@ if (isset($_REQUEST['crud_registrar'])) {
     $pass = $_REQUEST['registro_pass'];
     $activado = 1;
     $rol = $_REQUEST['registro_rol'];
-
+    
     if (!Gestion::existeUsuario($dni)) {
         $nuevo = new User($dni, $mail, $pass, $nombre, $apellido, $activado, $rol);
         if (Gestion::addUser($nuevo)) {
