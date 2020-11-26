@@ -10,7 +10,7 @@ var addFila = function () {
 
     nombre = 'card-' + contador;
 
-    var formulario = document.querySelector('form#examen');
+    var formulario = document.querySelector('div#preguntas');
 
     //Creo la card
     var card = document.createElement('div');
@@ -23,7 +23,7 @@ var addFila = function () {
 
     //Pongo el titulo de la 
     var titulo = document.createElement('h5');
-    card.setAttribute("name", "tituloPregunta");
+    titulo.setAttribute("name", "tituloPregunta");
     titulo.className = 'card-title';
     titulo.innerHTML = 'Pregunta&nbsp;' + contador;
 
@@ -57,14 +57,22 @@ var addFila = function () {
 };
 
 var delPregunta = function () {
-    this.parentNode.parentNode.removeChild(this.parentNode.parentNode.removeChild(this.parentNode));
+    this.parentNode.parentNode.removeChild(this.parentNode);
 
     resetearContador();
 
 };
 
 var resetearContador = function () {
+    //Resetear el contrador de las preguntas para enumerarlas de nuevo
+    contadorTotal = contador - 1;
+
+    titulos = document.getElementsByName('tituloPregunta');
+    console.log(titulos);
 
 
+    for (var i = 1; i <= contadorTotal; i++) {
+        titulos[i].innerHTML = 'Pregunta&nbsp;' + i;
+    }
 
 };

@@ -307,13 +307,17 @@ and open the template in the editor.
                         <div class="col-md-8 col-sm-8">
                             <input class="h3 w-100 mt-1" type="text" placeholder="Titulo del examen">
                             <form action="../controlador.php" name="form_examen" id="examen" class="form_examen" method="POST">
+
+                                <div id="preguntas">
+                                </div>
+                                <div class="w-100 text-center h5 mt-1" id="addPregunta" onclick="addFila()" style="cursor: pointer;">
+                                    Añadir preguntas&nbsp;<img src="../img/add.png" style="width: 50px; height: 50px;">
+                                </div>
+                                <div class="w-100 text-center mt-1">
+                                    <button class="w-100 bt btn-outline-success" type="submit" name="crearExamen" id="crearExamen">Crear examen</button>
+                                </div>
                             </form>
-                            <div class="w-100 text-center h5 mt-1" id="addPregunta" onclick="addFila()" style="cursor: pointer;">
-                                Añadir preguntas&nbsp;<img src="../img/add.png" style="width: 50px; height: 50px;">
-                            </div>
-                            <div class="w-100 text-center mt-1">
-                                <button class="w-100 bt btn-outline-success" type="submit" name="crearExamen" id="crearExamen">Crear examen</button>
-                            </div>
+
                         </div>
                     </div>
                 </section>
