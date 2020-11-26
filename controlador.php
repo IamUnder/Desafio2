@@ -22,6 +22,7 @@ require_once './phpmailer/src/SMTP.php';
 if (isset($_REQUEST['LogIn'])) {
     $mail = $_REQUEST['mail'];
     $pass = $_REQUEST['pass'];
+    
 
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_secret = '6Lft9OMZAAAAAKX9KvyCQVyhuchB0UqDsbwsPO5d';
@@ -33,28 +34,39 @@ if (isset($_REQUEST['LogIn'])) {
         $login = Gestion::getUser($mail, $pass);
 //        echo $login;
         if ($login != null) {
-            $_SESSION['user'] = $login;
-            $rol = $login->getRol();
-            switch ($rol) {
-                case 0:
-                    header('Location: Vista/usuario.php');
-                    break;
-                case 1:
-                    header('Location: Vista/profesor.php');
-                    break;
-                case 2:
-                    funcAdmin();
+            if (password_verify($pass, $login->getPass())) {
+                if ($login->getActivado() == 1) {
+                    $_SESSION['user'] = $login;
+                    $rol = $login->getRol();
+                    switch ($rol) {
+                        case 0:
+                            header('Location: Vista/usuario.php');
+                            break;
+                        case 1:
+                            funcProfesor();
+                            header('Location: Vista/profesorPrincipal.php');
+                            break;
+                        case 2:
+                            funcAdmin();
 //                    $allUser = $_SESSION['allUser'];
 //
 //                    foreach ($allUser as $v) {
 //                        echo $v;
 //                    }
-                    header('Location: Vista/admin.php?rol=0');
-                    break;
-                default:
-                    $_SESSION['mensaje'] = 'Error de rol';
+                            header('Location: Vista/admin.php?rol=0');
+                            break;
+                        default:
+                            $_SESSION['mensaje'] = 'Error de rol';
+                            header('Location: index.php');
+                            break;
+                    }
+                } else {
+                    $_SESSION['mensaje'] = 'Usuario deshabilitado';
                     header('Location: index.php');
-                    break;
+                }
+            } else {
+                $_SESSION['mensaje'] = 'Contraseña incorrecta';
+                header('Location: index.php');
             }
         } else {
             $_SESSION['mensaje'] = 'Usuario incorrecto';
@@ -76,7 +88,8 @@ if (isset($_REQUEST['form_registrar'])) {
     $nombre = $_REQUEST['registro_nombre'];
     $apellido = $_REQUEST['registro_apellido'];
     $mail = $_REQUEST['registro_mail'];
-    $pass = $_REQUEST['registro_pass'];
+//    $pass = $_REQUEST['registro_pass'];
+    $pass = password_hash($_REQUEST['registro_pass'], PASSWORD_DEFAULT);
     $activado = 1;
     $rol = 0;
 
@@ -124,11 +137,13 @@ if (isset($_REQUEST['form_recuperar_next'])) {
 
 if (isset($_REQUEST['form_recuperar_end'])) {
     $pass1 = $_REQUEST['recuperar_pass1'];
-    $pass2 = $_REQUEST['recuperar_pass2'];
+//    $pass2 = $_REQUEST['recuperar_pass2'];
+    $pass2 = password_hash($_REQUEST['recuperar_pass2'], PASSWORD_DEFAULT);
     $cambios = $_SESSION['cambioPassword'];
     $dni = $cambios[0];
     //En mail siempre pongo el mio, para que minetras haga pruebas, los correos me lleguen a mi
-    $mail = 'alejandro.martin.perez.99@gmail.com';
+//    $mail = 'alejandro.martin.perez.99@gmail.com';
+    $mail = 'jorgeolmo.I@gmail.com';
     if (Gestion::alterPassword($dni, $pass2)) {
         //Enviar el correo
 
@@ -171,81 +186,136 @@ if (isset($_REQUEST['Back'])) {
 if (isset($_REQUEST['Estado'])) {
     $rol = $_REQUEST['Estado'];
     if ($rol == 'Admin') {
-        header('Location: Vista/profesorPrincipal.php');
-    }else{
-        header('Location: Vista/admin.php');
+        funcProfesor();
+        header('Location: Vista/profesorPrincipal.php?estado=0');
+    } else {
+        funcAdmin();
+        header('Location: Vista/admin.php?rol=0');
     }
 }
 //******************************************************************************
 //*********************** Ventana CRUD *************************************
 //******************************************************************************
-    
-    // BORRAR
-    if (isset($_REQUEST['borrar'])) {
-        $dni = $_REQUEST['dni'];
-        echo $dni;
-        Gestion::delUser($dni);
-        
-        funcAdmin();
-        header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
-    }
+// BORRAR
+if (isset($_REQUEST['borrar'])) {
+    $dni = $_REQUEST['dni'];
+    echo $dni;
+    Gestion::delUser($dni);
 
+    funcAdmin();
+    header('Location: Vista/admin.php?rol=' . $_REQUEST['rol']);
+}
+
+
+// CAMBIAR DE ROL
+if (isset($_REQUEST['cambiar'])) {
+    $dni = $_REQUEST['dni'];
+    echo $dni;
+    if (Gestion::getActivado($dni) == 0) {
+        Gestion::setRol($dni, 1);
+    } else {
+        Gestion::setRol($dni, 0);
+    }
+    funcAdmin();
+    header('Location: Vista/admin.php?rol=' . $_REQUEST['rol']);
+}
+
+
+// EDITAR SUS DATOS
+if (isset($_REQUEST['editar'])) {
+    $dni = $_REQUEST['dni'];
+    $mail = $_REQUEST['mail'];
+//    $pass = $_REQUEST['pass'];
+    if ($_REQUEST['pass'] != null) {
+        $pass = password_hash($_REQUEST['pass'], PASSWORD_DEFAULT);
+    }else{
+        $pass = null;
+    }
+    $nombre = $_REQUEST['nombre'];
+    $apellido = $_REQUEST['apellido'];
+    $rol = $_REQUEST['rol'];
+
+    Gestion::editUser($dni, $mail, $pass, $nombre, $apellido, $rol);
     
-    // CAMBIAR DE ROL
-    if (isset($_REQUEST['cambiar'])) {
-        $dni = $_REQUEST['dni'];
-        echo $dni;
-        if (Gestion::getActivado($dni) == 0) {
-            Gestion::setRol($dni, 1);
-        }else{
-            Gestion::setRol($dni, 0);
+    funcAdmin();
+    header('Location: Vista/admin.php?rol=' . $_REQUEST['rol']);
+    
+    echo $dni . $mail . $pass . $nombre . $apellido . $rol;
+}
+
+// Añadir usuario
+if (isset($_REQUEST['crud_registrar'])) {
+
+    $dni = $_REQUEST['registro_dni'];
+    $nombre = $_REQUEST['registro_nombre'];
+    $apellido = $_REQUEST['registro_apellido'];
+    $mail = $_REQUEST['registro_mail'];
+//    $pass = $_REQUEST['registro_pass'];
+    $pass = password_hash($_REQUEST['registro_pass'], PASSWORD_DEFAULT);
+    $activado = 1;
+    $rol = $_REQUEST['registro_rol'];
+    
+    if (!Gestion::existeUsuario($dni)) {
+        $nuevo = new User($dni, $mail, $pass, $nombre, $apellido, $activado, $rol);
+        if (Gestion::addUser($nuevo)) {
+            funcAdmin();
+            header('Location: Vista/admin.php?rol=' . $rol);
         }
-        funcAdmin();
-        header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
+    } else {
+        $_SESSION['mensaje'] = 'Ya existe el usuario.';
+        header('Location: Vista/admin.php?rol=' . $rol);
     }
-    
-    
-    // EDITAR SUS ROLES
-    if (isset($_REQUEST['editar'])) {
-        $dni = $_REQUEST['dni'];
-        $mail = $_REQUEST['mail'];
-        $pass = $_REQUEST['pass'];
-        $nombre = $_REQUEST['nombre'];
-        $apellido = $_REQUEST['apellido'];
-        $rol = $_REQUEST['rol'];
-        
-        Gestion::editUser($dni, $mail, $pass, $nombre, $apellido, $rol);
-       
-        funcAdmin();
-        header('Location: Vista/admin.php?rol='.$_REQUEST['rol']);
-        
-        echo $dni . $mail . $pass . $nombre . $apellido . $rol;
-    }
+}
 
-    // Añadir usuario
-    if (isset($_REQUEST['crud_registrar'])) {
+//******************************************************************************
+//*********************** Botones Vistas del menu ******************************
+//******************************************************************************
 
-        $dni = $_REQUEST['registro_dni'];
-        $nombre = $_REQUEST['registro_nombre'];
-        $apellido = $_REQUEST['registro_apellido'];
-        $mail = $_REQUEST['registro_mail'];
-        $pass = $_REQUEST['registro_pass'];
-        $activado = 1;
-        $rol = $_REQUEST['registro_rol'];
-        
-        if (!Gestion::existeUsuario($dni)) {
-            $nuevo = new User($dni, $mail, $pass, $nombre, $apellido, $activado, $rol);
-            if (Gestion::addUser($nuevo)) {
-                funcAdmin();
-                header('Location: Vista/admin.php?rol='.$rol);
-            }
-        } else {
-            $_SESSION['mensaje'] = 'Ya existe el usuario.';
-            header('Location: Vista/admin.php?rol='.$rol);
-        }
-            
-    }
+if (isset($_REQUEST['vistaExamenesActivados'])) {
+    $ventanaSeleccionada = $_REQUEST['vistaExamenesActivados'];
+    $_SESSION['vistaMenu'] = $ventanaSeleccionada;
+    funcProfesor();
+    header('Location: Vista/profesorPrincipal.php?estado=1');
+    die();
+}
 
+if (isset($_REQUEST['vistaExamenesDesactivados'])) {
+    $ventanaSeleccionada = $_REQUEST['vistaExamenesDesactivados'];
+    $_SESSION['vistaMenu'] = $ventanaSeleccionada;
+    funcProfesor();
+    header('Location: Vista/profesorPrincipal.php?estado=0');
+    die();
+}
+
+if (isset($_REQUEST['vistaExamenesRealizados'])) {
+    $ventanaSeleccionada = $_REQUEST['vistaExamenesRealizados'];
+    $_SESSION['vistaMenu'] = $ventanaSeleccionada;
+    funcProfesor();
+    header('Location: Vista/profesorPrincipal.php?estado=2');
+    die();
+}
+
+if (isset($_REQUEST['vistaAddPreguntas'])) {
+    $ventanaSeleccionada = $_REQUEST['vistaAddPreguntas'];
+    $_SESSION['vistaMenu'] = $ventanaSeleccionada;
+    header('Location: Vista/profesorAddPreguntas.php');
+    die();
+}
+
+if (isset($_REQUEST['vistaAddExamen'])) {
+    $ventanaSeleccionada = $_REQUEST['vistaAddExamen'];
+    $preguntasDisponibles = Gestion::getPreguntas();
+    $_SESSION['preguntasDisponibles'] = $preguntasDisponibles;
+    $_SESSION['vistaMenu'] = $ventanaSeleccionada;
+    header('Location: Vista/profesorAddExamen.php');
+    die();
+}
+
+if (isset($_REQUEST['vistaEditProfile'])) {
+    echo 'Editar perfil, bitch';
+//    header('Location: Vista/profesorAddExamen.php');
+    die();
+}
 
 //******************************************************************************
 //****************************** Funciones *************************************
@@ -254,4 +324,9 @@ if (isset($_REQUEST['Estado'])) {
 function funcAdmin() {
     $allUser = Gestion::getAllUser();
     $_SESSION['allUser'] = $allUser;
+}
+
+function funcProfesor(){
+    $allExamen = Gestion::getAllExamen();
+    $_SESSION['allExamen'] = $allExamen;
 }

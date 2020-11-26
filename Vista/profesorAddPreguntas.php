@@ -53,10 +53,10 @@ and open the template in the editor.
                             <!-- Right -->
                             <ul class="navbar-nav offset-10">
                                 <li class="nav-item mr-1">
-                                    <button class="btn text-success bg-light btn-sm" type="button">Cambiar Rol</button>
+                                    <a href="../controlador.php?Estado=Profesor"><button class="btn white btn text-success bg-light btn-sm-sm" type="button">Cambiar Rol</button></a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../controlador.php?Back=Back"><button class="btn text-success bg-light btn-sm" type="button">Cerrar Sesion</button></a>
+                                    <a href="../controlador.php?Back=Back"><button class="btn white btn text-success bg-light btn-sm-sm" type="button">Cerrar Sesion</button></a>
                                 </li>
                             </ul>
 
@@ -69,7 +69,7 @@ and open the template in the editor.
             </header>
 
             <main class="row">
-                <aside class="col-md-2 col-sm-2 border-green">
+                <aside class="col-md-2 col-sm-2 border-green pl-0 pr-0">
                     <nav class="navbar navbar-expand-lg navbar-light">
 
 
@@ -84,21 +84,23 @@ and open the template in the editor.
 
                             <!-- Links -->
                             <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 border-green rounded" href="#">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
-                                </li>
-                                <li class="nav-item">
-                                    <button class="btn btn-outline-success w-100 mt-1 border-green rounded" href="#">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
-                                </li>
+                                <form action="../controlador.php" name="menu" method="POST">
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 border-green rounded" name="vistaExamenesActivados" type="submit">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesDesactivados" type="submit">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddExamen" type="submit">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
+                                    </li>
+                                </form>
                             </ul>
                             <!-- Links -->
 
@@ -168,7 +170,7 @@ and open the template in the editor.
                     <form action="../controladorProfesorPreguntas.php" name="pregunta">
                         <div class="w-100 text-center mt-3">
                             <h3>Descripción</h3>
-                            <textarea id="ta_resp_texto" name="ta_resp_correcta_texto" rows="5" class="w-50"></textarea>
+                            <textarea id="ta_resp_texto" name="descripcion" rows="5" class="w-50"></textarea>
                         </div>
                         <?php
                         if (isset($_SESSION['tipo'])) {

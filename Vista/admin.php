@@ -21,28 +21,30 @@ and open the template in the editor.
         <link rel="stylesheet" href="../css/mdb.min.css">
         <!-- Your custom styles (optional) -->
         <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/fondos.css">
+        <link rel="stylesheet" href="../css/tamanios.css">
         <link rel="stylesheet" href="../css/fuentes.css">
     </head>
-    <body onload="vCrud()" class="white rosemary">
+    <body onload="validacion()" class="white rosemary">
         <?php
         require_once '../Clases/User.php';
         session_start();
+        $user = $_SESSION['user'];
         $allUser = $_SESSION['allUser'];
         foreach ($allUser as $value) {
-    //echo $value . '<br>';
-    
-    if (isset($_REQUEST['rol'])) {
-        //echo $_REQUEST['rol'];
-    }
+
+            if (isset($_REQUEST['rol'])) {
+                
+            }
         }
         ?>
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light verde">
+        <nav class="navbar navbar-expand-lg navbar-light background-green">
 
-            <div class="container"> 
+            <div class="container-fluid">
 
                 <a class="navbar-brand" href="#">
-                    <img src="../img/logo.png" height="30" alt="mdb logo">
+                    <img src="../img/logo.png" class="vh-10" alt="mdb logo">
                 </a>
 
                 <!-- Collapse button -->
@@ -51,286 +53,199 @@ and open the template in the editor.
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Links -->
+                <!-- Collapsible content -->
                 <div class="collapse navbar-collapse" id="basicExampleNav">
 
-                    <!-- Right -->
-                    <ul class="navbar-nav offset-10">
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto offset-9 align-items-end text-right">
                         <li class="nav-item">
-                            <a href="../controlador.php?Estado=Admin"><button class="btn white btn-sm" type="button">Cambiar Rol</button></a>
+                            <a href="../controlador.php?Estado=Admin" class="btn btn-white btn-sm text-success">Cambiar rol</a>
                         </li>
                         <li class="nav-item">
-                            <a href="../controlador.php?Back=Back"><button class="btn white btn-sm" type="button">Cerrar Sesion</button></a>
+                            <a href="../controlador.php?Back=Back" class="btn btn-white btn-sm text-success">Cerrar sesion</a>
                         </li>
                     </ul>
+                    <!-- Links -->
 
                 </div>
-
-            </div>
-
-        </nav>
-        <!--/.Navbar-->
-        <!--Navba2r-->
-        <nav class="navbar navbar-expand-lg navbar-light verde">
-
-            <div class="container">
-
-                <!-- Collapse button -->
-                <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button> 
-
                 <!-- Collapsible content -->
-                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-
-                    <!-- Links -->
-                    <ul class="navbar-nav">
-
-
-                        <li class="nav-item">
-                            <a href="admin.php?rol=0"><button class="btn white btn-sm" type="button">Ver Alumnos</button></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="admin.php?rol=1"><button class="btn white btn-sm" type="button">Ver Profesores</button></a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="admin.php?rol=2"><button class="btn white btn-sm" type="button">Ver Administradores</button></a>
-                        </li>
-
-                    </ul>
-                    <!-- Links -->
-
-                </div>
-                <!-- CTA -->
 
             </div>
 
         </nav>
-        <!--/.Navbar2-->
+        <!--/.Navbar-->    
+
 
         <!-- Contenido -->
-        <div class="container-fluid my-3">
-            <div class="row">
-
-                <div class="col-lg-5 col-md-6 col-sm-12 offset-lg-1 borde">
-                    <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Desactivados</h3>
-                    <?php
-                    foreach ($allUser as $u) {
-                        if ($u->getActivado() == 0 && $_REQUEST['rol'] == $u->getRol()) {
-                            ?>
-                            <!-- Formulario CRUD -->
-                            <form action="../controlador.php" method="POST">
-                                <hr>
-                                <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
-                                <div class="form-group"> <!-- DNI -->
-                                    <label for="dni" class="control-label">DNI</label>
-                                    <input type="text" class="form-control" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
-                                </div>    
-
-                                <div class="form-group"> <!-- Mail-->
-                                    <label for="mail" class="control-label">Mail</label>
-                                    <input type="text" class="form-control" name="mail" value="<?php echo $u->getMail(); ?>">
-                                </div>                                    
-
-                                <div class="form-group"> <!-- Pass -->
-                                    <label for="pass" class="control-label">Password</label>
-                                    <input type="text" class="form-control" name="pass" value="<?php echo $u->getPass(); ?>">
-                                </div>
-
-                                <div class="form-group"> <!-- Nombre -->
-                                    <label for="nombre" class="control-label">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" value="<?php echo $u->getNombre(); ?>">
-                                </div>                    
-
-                                <div class="form-group"> <!-- Apellido -->
-                                    <label for="apellido" class="control-label">Apellido</label>
-                                    <input type="text" class="form-control" name="apellido" value="<?php echo $u->getApellido(); ?>">
-                                </div>    
-
-                                <div class="form-group"> <!-- Rol -->
-                                    <label for="rol" class="control-label">Rol</label>
-                                    <select class="form-control" name="rol">
-                                        <option value="0" 
-                                        <?php
-                                        if ($u->getRol() == 0) {
-                                            echo 'selected="true"';
-                                        }
-                                        ?>
-                                                >Alumno</option>
-                                        <option value="1"  
-                                        <?php
-                                        if ($u->getRol() == 1) {
-                                            echo 'selected="true"';
-                                        }
-                                        ?>
-                                                >Profesor</option>
-                                        <option value="2"  
-                                        <?php
-                                        if ($u->getRol() == 2) {
-                                            echo 'selected="true"';
-                                        }
-                                        ?>
-                                                >Administrador</option>
-                                    </select>                    
-                                </div>
-
-
-
-                                <div class="form-group"> <!-- Boton de editar -->
-                                    <button type="submit" class="btn verde white-text" name="editar">Editar</button>
-                                    <button type="submit" class="btn verde white-text" name="borrar">Borrar</button>
-                                    <button type="submit" class="btn verde white-text" name="cambiar">Activar/Desactivar</button>
-                                </div> 
-
-                            </form>
-                            <!-- Formulario CRUD -->
-                            <?php
-                        }
-                    }
-                    ?>
-                </div>
-                <div class="col-lg-5 col-md-6 col-sm-12 borde">
-                    <h3 class="font-weight-bold my-4 pb-2 text-center">Usuarios Activados</h3>
-                    <?php
-                    foreach ($allUser as $u) {
-                        if ($u->getActivado() == 1 && $_REQUEST['rol'] == $u->getRol()) {
-                            ?>
-                            <!-- Formulario CRUD -->
-                            <form action="../controlador.php" method="POST">
-                                <hr>
-                                <h2 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">User</h2>
-                                <div class="form-group"> <!-- DNI -->
-                                    <label for="dni" class="control-label">DNI</label>
-                                    <input type="text" class="form-control" name="dni" value="<?php echo $u->getDni(); ?>" readonly>
-                                </div>    
-
-                                <div class="form-group"> <!-- Mail-->
-                                    <label for="mail" class="control-label">Mail</label>
-                                    <input type="text" class="form-control" name="mail" value="<?php echo $u->getMail(); ?>">
-                                </div>                                    
-
-                                <div class="form-group"> <!-- Pass -->
-                                    <label for="pass" class="control-label">Password</label>
-                                    <input type="text" class="form-control" name="pass" value="<?php echo $u->getPass(); ?>">
-                                </div>
-
-                                <div class="form-group"> <!-- Nombre -->
-                                    <label for="nombre" class="control-label">Nombre</label>
-                                    <input type="text" class="form-control" name="nombre" value="<?php echo $u->getNombre(); ?>">
-                                </div>                    
-
-                                <div class="form-group"> <!-- Apellido -->
-                                    <label for="apellido" class="control-label">Apellido</label>
-                                    <input type="text" class="form-control" name="apellido" value="<?php echo $u->getApellido(); ?>">
-                                </div>    
-
-                                <div class="form-group"> <!-- Rol -->
-                                    <label for="rol" class="control-label">Rol</label>
-                                    <select class="form-control" name="rol">
-                                        <option value="0" 
-                                        <?php
-                                        if ($u->getRol() == 0) {
-                                            echo 'selected="true"';
-                                        }
-                                        ?>
-                                                >Alumno</option>
-                                        <option value="1"  
-                                        <?php
-                                        if ($u->getRol() == 1) {
-                                            echo 'selected="true"';
-                                        }
-                                        ?>
-                                                >Profesor</option>
-                                        <option value="2"  
-                                        <?php
-                                        if ($u->getRol() == 2) {
-                                            echo 'selected="true"';
-                                        }
-                                        ?>
-                                                >Administrador</option>
-                                    </select>                    
-                                </div>
-
-
-
-                                <div class="form-group"> <!-- Boton de editar -->
-                                    <button type="submit" class="btn verde white-text" name="editar">Editar</button>
-                                    <button type="submit" class="btn verde white-text" name="borrar">Borrar</button>
-                                    <button type="submit" class="btn verde white-text" name="cambiar">Activar/Desactivar</button>
-                                </div> 
-
-                            </form>
-                            <!-- Formulario CRUD -->
-                            <?php
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
-            
-            <!-- Formulario de registro -->
-            
-            <div class="row">
-                <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1 borde">
-                    <form novalidate class="text-center mt-2 jus" action="../controlador.php" method="POST" name="formulario">
-                        <h3 class="font-weight-bold my-4 pb-2 text-center">Añadir Usuario</h3>
-                        <?php
-                        if (isset($_SESSION['mensaje'])) {
-                            echo $_SESSION['mensaje'];
-                            $_SESSION['mensaje'] = null;
-                        }
-                        ?>
-                        <div class="form-row mb-4">
-                            <div class="col">
-                                <!-- Primer nombre -->
-                                <input type="text" id="nombre" name="registro_nombre" aria-describedby="nombreError" class="form-control" placeholder="Introduce el nombre" required>
-                                <small id="nombreError" class="form-text bg-danger" aria-live="polite"></small>
-                            </div>
-                            <div class="col">
-                                <!--<!-- Apellidos -->
-                                <input type="text" id="apellido" name="registro_apellido" aria-describedby="apellidoError" class="form-control" placeholder="Introduce tus apellidos" required>
-                                <small id="apellidoError" class="form-text bg-danger" aria-live="polite"></small>
-                            </div>
-                        </div>
-
-                        <!-- DNI -->
-                        <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{9}[A-Z]">
-                        <small id="dniError" class="form-text bg-danger" aria-live="polite"></small>
-
-                        <!-- E-mail -->
-                        <input type="email"  id="mail" name="registro_mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
-                        <small id="mailError" class="form-text bg-danger" aria-live="polite"></small>
-
-                        <!-- Contraseña -->
-                        <input type="password" name="registro_pass" id="pass" class="form-control mb-4" placeholder="Introduce tu contraseña" aria-describedby="pass" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
-                        <small id="passError" class="form-text bg-danger" aria-live="polite"></small>
-
-                        <!-- Rol -->
-                        <select class="form-control" id="rol" name="registro_rol">
-                            <option value="0" >Alumno</option>
-                            <option value="1" >Profesor</option>
-                            <option value="2" >Administrador</option>
-                        </select>  
-
-                        <!-- Registro -->
-                        <div class="form-row mb-4">
-                            <div class="col">
-                                <button name="crud_registrar" class="btn verde white-text my-4 btn-block" type="submit">Registrar</button>
-                            </div
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        </div>
-        </div>
-        
-        <!-- Footer -->
         <div class="container-fluid">
+            <div class="row my-5">
+                <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1">
+                    <div class="row">
+                        <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
+                            <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-tools"></i></i></p>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <h1 class="text-center">Lista de usuarios</h1>
+                        <table class="table border shadow">
+                            <tr class="background-light-green">
+                                <th>DNI</th>
+                                <th>Mail</th>
+                                <th>Password</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Estado</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                            <?php
+                            foreach ($allUser as $v) {
+                                ?>
+                                <form action="../controlador.php">
+                                    <tr>
+                                        <td><input type="text" name="dni" value="<?= $v->getDNI() ?>" readonly class="form-control-plaintext"></td><!-- DNI -->
+                                        <td><input type="email" name="mail" value="<?= $v->getMail() ?>" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required></td><!-- Mail -->
+                                        <td><input type="password" name="pass" value="" placeholder="Nueva Contraseña" class="form-control" minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}"></td><!-- Password -->
+                                        <td><input type="text" name="nombre" value="<?= $v->getNombre() ?>" class="form-control" required></td><!-- Nombre -->
+                                        <td><input type="text" name="apellido" value="<?= $v->getApellido() ?>" class="form-control" required></td><!-- Apellido -->
+                                        <td><!-- Estado -->
+                                            <?php
+                                            if ($v->getActivado() == 0) {
+                                                $estado = '#dc3545';
+                                            } else {
+                                                $estado = '#28a745';
+                                            }
+                                            ?>
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-fill align-middle" fill="<?= $estado ?>" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="8" cy="8" r="8"/>
+                                            </svg>
+                                        </td>
+                                        <td><!-- Rol -->
+                                            <select class="form-control" name="rol">
+                                                <option value="0" 
+                                                <?php
+                                                if ($v->getRol() == 0) {
+                                                    echo 'selected="true"';
+                                                }
+                                                ?>
+                                                        >Alumno</option>
+                                                <option value="1"  
+                                                <?php
+                                                if ($v->getRol() == 1) {
+                                                    echo 'selected="true"';
+                                                }
+                                                ?>
+                                                        >Profesor</option>
+                                                <option value="2"  
+                                                <?php
+                                                if ($v->getRol() == 2) {
+                                                    echo 'selected="true"';
+                                                }
+                                                ?>
+                                                        >Administrador</option>
+                                            </select> 
+                                        </td>
+                                        <td><!-- Acciones -->
+                                            <button name="cambiar" type="submit" class="btn-white border-0">
+                                                <?php
+                                                if ($v->getActivado() == 0) {
+                                                    ?>
+                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                                    </svg>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                                                    </svg>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </button>
+                                            <button name="editar" type="submit" class="btn-white border-0">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                </svg>
+                                            </button>
+                                            <button name="borrar" type="submit" class="btn-white border-0">
+                                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="#dc3545" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </form>
+                                <?php
+                            }
+                            ?>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Formulario de registro -->
+            <div class="row my-5">
+                <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1">
+                    <div class="table-responsive">
+                        <h1 class="text-center">Agregar Usuario</h1>
+                        <table class="table border shadow">
+                            <tr class="background-light-green">
+                                <th>DNI</th>
+                                <th>Mail</th>
+                                <th>Password</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                            <form action="../controlador.php" id="registro" novalidate>
+                                <tr>
+                                    <td><!-- DNI -->
+                                        <input type="text" id="dni" name="registro_dni" value="" placeholder="DNI" class="form-control" required pattern="\d{8}[A-Z]">
+                                        <small id="dniError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Mail -->
+                                        <input type="email" id="mail" name="registro_mail" value="" placeholder="Mail" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$">
+                                        <small id="mailError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Password -->
+                                        <input type="password" id="pass" name="registro_pass" value="" placeholder="Password" class="form-control" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                                        <small id="passError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Nombre -->
+                                        <input type="text" id="nombre" name="registro_nombre" value="" placeholder="Nombre" class="form-control" required>
+                                        <small id="nombreError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Apellido -->
+                                        <input type="text" id="apellido" name="registro_apellido" value=""  placeholder="Apellido" class="form-control" required>
+                                        <small id="apellidoError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Rol -->
+                                        <select class="form-control" name="registro_rol">
+                                            <option value="0" >Alumno</option>
+                                            <option value="1" >Profesor</option>
+                                            <option value="2" >Administrador</option>
+                                        </select> 
+                                    </td>
+                                    <td><!-- Acciones -->
+                                        <button name="crud_registrar" type="submit" class="btn-white border-0">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </form>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div class="container-fluid background-green">
 
             <!--Section: Content-->
-            <section class="py-5 text-center white-text verde z-depth-1 rounded">
+            <section class="py-5 text-center white-text">
 
                 <h3 class="">Made with <i class="fas fa-heart orange-text mx-1"></i> by Jorge y Alejandro</h3>
 
@@ -349,6 +264,6 @@ and open the template in the editor.
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="../js/mdb.min.js"></script>
         <!-- Your custom scripts (optional) -->
-        <script type="text/javascript" src="../js/vFormulario.js"></script>
+        <script type="text/javascript" src="../js/registroValidacion_1.js"></script>
     </body>
 </html>
