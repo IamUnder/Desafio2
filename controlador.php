@@ -40,6 +40,7 @@ if (isset($_REQUEST['LogIn'])) {
                     $rol = $login->getRol();
                     switch ($rol) {
                         case 0:
+                            funcProfesor();
                             header('Location: Vista/usuario.php');
                             break;
                         case 1:
