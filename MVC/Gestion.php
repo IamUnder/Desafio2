@@ -306,7 +306,7 @@ class Gestion {
     public static function getAllExamen() {
         self::abrirConex();
 
-        $consulta = 'SELECT * FROM examen';
+        $consulta = 'SELECT * FROM examen ORDER BY estado DESC';
         $res = array();
 
         if ($resultado = self::$conexion->query($consulta)) {

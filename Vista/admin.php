@@ -98,10 +98,10 @@ and open the template in the editor.
                                 <form action="../controlador.php">
                                     <tr>
                                         <td><input type="text" name="dni" value="<?= $v->getDNI() ?>" readonly class="form-control-plaintext"></td><!-- DNI -->
-                                        <td><input type="email" name="mail" value="<?= $v->getMail() ?>" class="form-control"></td><!-- Mail -->
-                                        <td><input type="password" name="pass" value="" placeholder="Nueva Contraseña" class="form-control"></td><!-- Password -->
-                                        <td><input type="text" name="nombre" value="<?= $v->getNombre() ?>" class="form-control"></td><!-- Nombre -->
-                                        <td><input type="text" name="apellido" value="<?= $v->getApellido() ?>" class="form-control"></td><!-- Apellido -->
+                                        <td><input type="email" name="mail" value="<?= $v->getMail() ?>" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$" required></td><!-- Mail -->
+                                        <td><input type="password" name="pass" value="" placeholder="Nueva Contraseña" class="form-control" minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}"></td><!-- Password -->
+                                        <td><input type="text" name="nombre" value="<?= $v->getNombre() ?>" class="form-control" required></td><!-- Nombre -->
+                                        <td><input type="text" name="apellido" value="<?= $v->getApellido() ?>" class="form-control" required></td><!-- Apellido -->
                                         <td><!-- Estado -->
                                             <?php
                                             if ($v->getActivado() == 0) {

@@ -6,32 +6,32 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/fuentes.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Panel de Profesorado</title>
+        <!-- MDB icon -->
+        <link rel="icon" href="" type="../image/x-icon">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <!-- Google Fonts Roboto -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <!-- Material Design Bootstrap -->
+        <link rel="stylesheet" href="../css/mdb.min.css">
+        <!-- Your custom styles (optional) -->
+        <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/fondos.css">
         <link rel="stylesheet" href="../css/tamanios.css">
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-        <!-- Bootstrap core CSS -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
-
-
-        <title>Panel de profesorado</title>
+        <link rel="stylesheet" href="../css/fuentes.css">
     </head>
     <body class="rosemary">
         <?php
         require_once '../Clases/Pregunta.php';
+        require_once '../Clases/User.php';
         require_once '../MVC/Examen.php';
         session_start();
+        $user = $_SESSION['user'];
         if (isset($_SESSION['allExamen'])) {
             $allExamen = $_SESSION['allExamen'];
             foreach ($allExamen as $v) {
@@ -40,45 +40,55 @@ and open the template in the editor.
             }
         }
         ?>
-        <div class="container-fluid">
-            <header class="row text-white background-green align-items-center">
-                <div class="col-md-12 col-sm-12">
-                    <!--Navbar-->
-                    <nav class="navbar navbar-expand-lg navbar-light pt-0 pb-0">
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-light background-green">
 
+            <div class="container-fluid">
 
-                        <img src="../img/logo.png" alt="Logo_mamas2.0" class="vh-10" />
+                <a class="navbar-brand" href="#">
+                    <img src="../img/logo.png" class="vh-10" alt="mdb logo">
+                </a>
 
-                        <!-- Collapse button -->
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-                                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+                <!-- Collapse button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+                        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                        <!-- Links -->
-                        <div class="collapse navbar-collapse background-green" id="basicExampleNav">
+                <!-- Collapsible content -->
+                <div class="collapse navbar-collapse" id="basicExampleNav">
 
-                            <!-- Right -->
-                            <ul class="navbar-nav offset-10">
-                                <li class="nav-item mr-1">
-                                    <a href="../controlador.php?Estado=Profesor"><button class="btn white btn text-success bg-light btn-sm-sm" type="button">Cambiar Rol</button></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../controlador.php?Back=Back"><button class="btn white btn text-success bg-light btn-sm-sm" type="button">Cerrar Sesion</button></a>
-                                </li>
-                            </ul>
+                    <!-- Links -->
+                    <ul class="navbar-nav mr-auto offset-9 align-items-end text-right">
+                        <?php
+                        if ($user->getRol() == 2) {
+                            ?>
+                            <li class="nav-item">
+                                <a href="../controlador.php?Estado=Profesor" class="btn btn-white btn-sm text-success">Cambiar rol</a>
+                            </li>
+                            <?php
+                        }
+                        ?>
 
-                        </div>
+                        <li class="nav-item">
+                            <a href="../controlador.php?Back=Back" class="btn btn-white btn-sm text-success">Cerrar sesion</a>
+                        </li>
+                    </ul>
+                    <!-- Links -->
 
-
-                    </nav>
-                    <!--/.Navbar-->
                 </div>
-            </header>
+                <!-- Collapsible content -->
 
-            <main class="row">
+            </div>
+
+        </nav>
+        <!--/.Navbar--> 
+
+
+        <main class="container-fluid">
+            <div class="row">
                 <aside class="col-md-2 col-sm-2 border-green pl-0 pr-0">
-                    <nav class="navbar navbar-expand-lg navbar-light">
+                    <nav class="navbar navbar-expand-lg navbar-light my-2">
 
 
                         <!-- Collapse button -->
@@ -93,33 +103,6 @@ and open the template in the editor.
                             <!-- Links -->
                             <ul class="nav flex-column">
                                 <form action="../controlador.php" name="menu" method="POST">
-                                    <li class="nav-item justify-content-center">
-                                        <button class="btn btn-outline-success w-100 border-green rounded>
-                                        <?php
-                                        if ($_REQUEST['estado'] == 1) {
-                                            echo 'active';
-                                        }
-                                        ?>
-                                                " name="vistaExamenesActivados" type="submit">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded>
-                                        <?php
-                                        if ($_REQUEST['estado'] == 0) {
-                                            echo 'active';
-                                        }
-                                        ?>
-                                                " name="vistaExamenesDesactivados" type="submit">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded>
-                                        <?php
-                                        if ($_REQUEST['estado'] == 2) {
-                                            echo 'active';
-                                        }
-                                        ?>
-                                                " name="vistaExamenesRealizados" type="submit">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
-                                    </li>
                                     <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
                                     </li>
@@ -136,110 +119,202 @@ and open the template in the editor.
 
                     </nav>
                 </aside>
-                <section class="col-md-10 col-sm-10 border-green vh-80 w-100">
-                    <div class="row text-center">
-                        <div class="col-12">
-                            <?php
-                            $estado = $_REQUEST['estado'];
-                            switch ($estado) {
-                                case 0:
-                                    echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Desactivados</h1>';
-                                    break;
-                                case 1:
-                                    echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Activados</h1>';
-                                    break;
-                                case 2:
-                                    echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Examenes Realizados</h1>';
-                                    break;
-                                default:
-                                    echo '<h1 class="font-weight-bold my-2 pb-2 text-center dark-grey-text">Error al recoger los datos</h1>';
-                                    break;
-                            }
-                            ?>
-                        </div>  
+                <section class="col-md-10 col-sm-10 border-green">
+                    <div class="row">
+                        <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
+                            <p>Buenos dias: <?= $user->getNombre() ?> </p>
+                        </div>
                     </div>
-                    <div id="accordion" class="overflow-auto">
-                        <?php
-                        foreach ($allExamen as $k => $v) {
-                            if ($v->getEstado() == $estado) {
-                                ?>
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h5 class="mb-0">
-                                            <button class="btn text-success" data-toggle="collapse" data-target="#collapse<?php echo $k; ?>" aria-expanded="true" aria-controls="collapse<?php echo $k; ?>">
-                                                <?php
-                                                echo $v->getTitulo();
-                                                ?>
+                    <div class="row my-4">
+                        <div class="col-lg-5 col-sm-12 offset-lg-1 align-self-center">
+                            <h1 class="text-left">Listado de Examenes</h1>
+                        </div>
+                        <div class="col-lg-5 col-sm-12">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card z-depth-0 border-success">
+                                    <div class="card-header " id="headingOne">
+                                        <h5 class="mb-0 text-right">
+                                            <button class="btn btn-link border-success text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                <h3 class="text-decoration-none">Leyenda <i class="fas fa-angle-down rotate-icon"></i></h3>
                                             </button>
                                         </h5>
                                     </div>
-
-                                    <div id="collapse<?php echo $k; ?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                         data-parent="#accordionExample">
                                         <div class="card-body">
-                                            <form>
-                                                <div class="container">
-                                                    <div class="form-row">
-                                                        <div class="col">
-                                                            <input type="type" name="titulo" class="form-control mb-4" readonly value="<?php echo $v->getTitulo(); ?>">
-                                                        </div>
-                                                        <div class="col">
-                                                            <input type="type" name="fecha_Inicio" class="form-control mb-4" readonly value="<?php echo $v->getFecha_Inicio(); ?>">
-                                                        </div>
-                                                        <div class="col">
-                                                            <input type="type" name="fecha_Fin" class="form-control mb-4" readonly value="<?php echo $v->getFecha_Fin(); ?>">
-                                                        </div>
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <ul>
+                                                            <li>Estados:</li>
+                                                            <ul>
+                                                                <li>
+                                                                    Corregido:
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-fill align-middle" fill="#007bff" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="8" cy="8" r="8"/>
+                                                                    </svg> 
+                                                                </li>
+                                                                <li>
+                                                                    Activo:
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-fill align-middle" fill="#28a745" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="8" cy="8" r="8"/>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    Desactivo:
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-fill align-middle" fill="#dc3545" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="8" cy="8" r="8"/>
+                                                                    </svg>
+                                                                </li>
+                                                            </ul>
+                                                        </ul>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <textarea name="descripcion" rows="5" class="form-control" readonly><?php echo $v->getDescripcion(); ?></textarea>
-                                                    </div>
-                                                    <div class="form-group"> <!-- Boton de editar -->
-                                                        <button type="submit" class="btn white btn text-success bg-light btn-sm-sm" name="ver_examen">Ver</button>
-                                                        <?php
-                                                        if ($v->getEstado() == 1) {
-                                                            ?>
-                                                            <button type="submit" class="btn white btn text-success bg-light btn-sm-sm" name="fin_examen">Finalizar Examen</button>
-                                                            <?php
-                                                        }
-                                                        if ($v->getEstado() == 0 || $v->getEstado() == 1) {
-                                                            ?>
-                                                            <button type="submit" class="btn white btn text-success bg-light btn-sm-sm" name="estado_examen">Activar/Desactivar</button>
-                                                            <?php
-                                                        } else {
-                                                            ?>
-                                                            <button type="submit" class="btn white btn text-success bg-light btn-sm-sm" name="corregir_examen">Corregir</button>
-                                                            <?php
-                                                        }
-                                                        ?>
-                                                        <button type="submit" class="btn white btn text-danger bg-light btn-sm-sm" name="borrar_examen">Borrar</button>
+                                                    <div class="col-6">
+                                                        <ul>
+                                                            <li>Acciones:</li>
+                                                            <ul>
+                                                                <li>
+                                                                    Editar:
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                                    </svg> 
+                                                                </li>
+                                                                <li>
+                                                                    Activo:
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-fill align-middle" fill="#28a745" xmlns="http://www.w3.org/2000/svg">
+                                                                    <circle cx="8" cy="8" r="8"/>
+                                                                    </svg>
+                                                                </li>
+                                                                <li>
+                                                                    Borrar:
+                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="#dc3545" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                                                    </svg>
+                                                                </li>
+                                                            </ul>
+                                                        </ul>
                                                     </div>
                                                 </div>
-                                            </form>
+                                            </div>
 
                                         </div>
                                     </div>
                                 </div>
-                                <?php
-                            }
-                        }
-                        ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10 col-sm-12 offset-lg-1">
+                            <div class="table-responsive">
+                                <table class="table border shadow">
+                                    <tr class="background-light-green">
+                                        <th>Titulo</th> 
+                                        <th>Fecha Inicio</th>
+                                        <th>Fecha Fin</th>
+                                        <th>Descripción</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    <?php
+                                    foreach ($allExamen as $v) {
+                                        if ($v->getId_Profesor() == $user->getDni()) {
+                                            ?>
+                                            <form action="../controladorEditarExamen.php">
+                                                <tr>
+                                                    <td><input type="text" name="titulo" value="<?= $v->getTitulo() ?>" class="form-control-plaintext"></td>
+                                                    <td><input type="text" name="fecha_inicio" value="<?= $v->getFecha_Inicio() ?>" class="form-control"></td>
+                                                    <td><input type="text" name="fecha_fin" value="<?= $v->getFecha_Fin() ?>" class="form-control"></td>
+                                                    <td><input type="text" name="descripcion" value="<?= $v->getDescripcion() ?>" class="form-control"></td>
+                                                    <td>
+                                                        <?php
+                                                        if ($v->getEstado() == 0) {
+                                                            $estado = '#dc3545';
+                                                        } else if ($v->getEstado() == 1) {
+                                                            $estado = '#28a745';
+                                                        } else if ($v->getEstado() == 2) {
+                                                            $estado = '#007bff';
+                                                        }
+                                                        ?>
+                                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-fill align-middle" fill="<?= $estado ?>" xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="8" cy="8" r="8"/>
+                                                        </svg>
+                                                    </td>
+                                                    <td>
+                                                        <?php
+                                                        if ($v->getEstado() == 0) {
+                                                            ?>
+                                                            <button name="borrar" type="submit" class="btn-white border-0"><!-- Activar -->
+                                                                <i class="fas fa-check green-text"></i>
+                                                            </button>
+                                                            <?php
+                                                        } else {
+                                                            ?>
+                                                            <button name="borrar" type="submit" class="btn-white border-0"><!-- Desactivar -->
+                                                                <i class="fas fa-times green-text"></i>
+                                                            </button>
+                                                            <?php
+                                                        }
+                                                        ?>
+
+                                                        <button name="editar" type="submit" class="btn-white border-0"><!-- Editar -->
+                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                            </svg>
+                                                        </button>
+                                                        <?php
+                                                        if ($v->getEstado() == 1) {
+                                                            ?>
+                                                            <button name="borrar" type="submit" class="btn-white border-0"><!-- Correguir -->
+                                                                <i class="fas fa-file-import green-text"></i>
+                                                            </button>
+                                                            <?php
+                                                        }
+                                                        ?>
+
+                                                        <button name="borrar" type="submit" class="btn-white border-0"><!-- Borrar -->
+                                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="#dc3545" xmlns="http://www.w3.org/2000/svg">
+                                                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </form>
+                                            <?php
+                                        }
+                                    }
+                                    ?>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </section>
-            </main>
+            </div>
+        </main>
 
-            <footer class="row vh-10 background-green">
-                <div class="col-sm-12 col-md-12 d-flex justify-content-center align-items-center">
-                    <h3 class="">Made with <i class="fas fa-heart text-warning mx-1"></i> by Jorge y Alejandro</h3>
-                </div>
-            </footer>
+        <!-- Footer -->
+        <div class="container-fluid background-green">
+
+            <!--Section: Content-->
+            <section class="py-5 text-center white-text">
+
+                <h3 class="">Made with <i class="fas fa-heart orange-text mx-1"></i> by Jorge y Alejandro</h3>
+
+            </section>
+            <!--Section: Content-->
+
         </div>
+
         <!-- SCRIPTS -->
-        <!-- JQuery -->
-        <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+        <!-- jQuery -->
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
         <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="js/popper.min.js"></script>
+        <script type="text/javascript" src="../js/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
         <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="js/mdb.min.js"></script>
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
+        <!-- Your custom scripts (optional) -->
+        <script type="text/javascript" src="../js/registroValidacion_1.js"></script>
     </body>
 </html>

@@ -43,6 +43,7 @@ if (isset($_REQUEST['LogIn'])) {
                             header('Location: Vista/usuario.php');
                             break;
                         case 1:
+                            funcProfesor();
                             header('Location: Vista/profesorPrincipal.php');
                             break;
                         case 2:
@@ -188,6 +189,7 @@ if (isset($_REQUEST['Estado'])) {
         funcProfesor();
         header('Location: Vista/profesorPrincipal.php?estado=0');
     } else {
+        funcAdmin();
         header('Location: Vista/admin.php?rol=0');
     }
 }
@@ -224,7 +226,11 @@ if (isset($_REQUEST['editar'])) {
     $dni = $_REQUEST['dni'];
     $mail = $_REQUEST['mail'];
 //    $pass = $_REQUEST['pass'];
-    $pass = password_hash($_REQUEST['pass'], PASSWORD_DEFAULT);
+    if ($_REQUEST['pass'] != null) {
+        $pass = password_hash($_REQUEST['pass'], PASSWORD_DEFAULT);
+    }else{
+        $pass = null;
+    }
     $nombre = $_REQUEST['nombre'];
     $apellido = $_REQUEST['apellido'];
     $rol = $_REQUEST['rol'];
