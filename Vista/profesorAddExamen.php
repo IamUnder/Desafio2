@@ -144,7 +144,7 @@ and open the template in the editor.
 
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100 overflow-auto">
                     <div class="row">
-                        <div class="col-md-4 col-sm-4 w-100 vh-80 overflow-auto">
+                        <div class="col-md-4 col-sm-4 w-100 sticky-top vh-75 overflow-auto">
                             <h3 class="text-center mt-1 mb-2">Banco de preguntas</h3>
                             <div class="accordion md-accordion w-100" id="accordionEx1" role="tablist" aria-multiselectable="true">
 
@@ -173,7 +173,7 @@ and open the template in the editor.
                                                 for ($i = 0; $i < sizeof($tipoTexto); $i++) {
                                                     $descripcion = $tipoTexto[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
                                                     <?php
                                                 }
                                                 ?>
@@ -212,7 +212,7 @@ and open the template in the editor.
                                                 for ($i = 0; $i < sizeof($tipoNumerico); $i++) {
                                                     $descripcion = $tipoNumerico[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-0" id="drag2-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mt-1 mb-1 w-100" id="drag2-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
                                                     <?php
                                                 }
                                                 ?>
@@ -249,7 +249,7 @@ and open the template in the editor.
                                                 for ($i = 0; $i < sizeof($tipoUnaOpcion); $i++) {
                                                     $descripcion = $tipoUnaOpcion[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-0" id="drag3-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100" id="drag3-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
                                                     <?php
                                                 }
                                                 ?>
@@ -287,7 +287,7 @@ and open the template in the editor.
                                                 for ($i = 0; $i < sizeof($tipoVariasOpciones); $i++) {
                                                     $descripcion = $tipoVariasOpciones[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-0" id="drag4-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100" id="drag4-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
                                                     <?php
                                                 }
                                                 ?>
@@ -305,16 +305,15 @@ and open the template in the editor.
                         </div>
 
                         <div class="col-md-8 col-sm-8">
-                            <input class="h3 w-100 mt-1" type="text" placeholder="Titulo del examen">
                             <form action="../controlador.php" name="form_examen" id="examen" class="form_examen" method="POST">
-
-                                <div id="preguntas">
+                                <input class="h3 w-100 mt-1" type="text" placeholder="Titulo del examen" required>
+                                <div id="preguntas" class="overflow-auto">
                                 </div>
                                 <div class="w-100 text-center h5 mt-1" id="addPregunta" onclick="addFila()" style="cursor: pointer;">
                                     Añadir preguntas&nbsp;<img src="../img/add.png" style="width: 50px; height: 50px;">
                                 </div>
                                 <div class="w-100 text-center mt-1">
-                                    <button class="w-100 bt btn-outline-success" type="submit" name="crearExamen" id="crearExamen">Crear examen</button>
+                                    <button class="w-100 bt btn-outline-success rounded h3" type="submit" name="crearExamen" id="crearExamen">Crear examen</button>
                                 </div>
                             </form>
 

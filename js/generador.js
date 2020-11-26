@@ -14,8 +14,8 @@ var addFila = function () {
 
     //Creo la card
     var card = document.createElement('div');
-    card.className = 'card d-flex justify-content-center mb-1 ' + nombre;
-    card.id = 'card-' + contador;
+    card.className = 'card d-flex justify-content-center mb-1  border-success ' + nombre;
+    card.id = nombre;
 
     //Creo el card-body
     var cardBody = document.createElement('div');
@@ -34,7 +34,7 @@ var addFila = function () {
     div.setAttribute("ondragover", "allowDrop(event)");
     div.setAttribute("id", "div" + contador);
     div.style.width = "100%";
-    div.style.height = "100px";
+    div.style.height = "10vh";
     div.style.border = "1px solid black";
 
     var imagen = document.createElement('img');
