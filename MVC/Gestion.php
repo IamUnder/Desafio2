@@ -318,5 +318,69 @@ class Gestion {
         self::cerrarConex();
         return $res;
     }
+    
+    public static function examenOn($id) {
+        self::abrirConex();
+        
+        $consulta = 'UPDATE examen SET estado=1 WHERE id=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('i',$val1);
+        $val1 = $id;
+        $stmt->execute();
+        
+        self::cerrarConex();
+    }
+    
+    public static function examenOff($id) {
+        self::abrirConex();
+        
+        $consulta = 'UPDATE examen SET estado=0 WHERE id=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('i',$val1);
+        $val1 = $id;
+        $stmt->execute();
+        
+        self::cerrarConex();
+    }
+    
+    public static function editExamen($id,$titulo,$fecha_inicio,$fecha_fin,$descripcion) {
+        self::abrirConex();
+        
+        $consulta = 'UPDATE examen SET titulo=? , fecha_Inicio=? , fecha_Fin=? , descripcion=? WHERE id=? ';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('ssssi',$val1,$val2,$val3,$val4,$val5);
+        $val1 = $titulo;
+        $val2 = $fecha_inicio;
+        $val3 = $fecha_fin;
+        $val4 = $descripcion;
+        $val5 = $id;
+        $stmt->execute();
+        
+        self::cerrarConex();
+    }
 
+    public static function deleteExamen($id) {
+        self::abrirConex();
+        
+        $consulta = 'DELETE FROM examen WHERE id=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('s',$val1);
+        $val1 = $id;
+        $stmt->execute();
+        
+        self::cerrarConex();
+    }
+    
+    public static function checkExamen($id) {
+        self::abrirConex();
+        
+        $consulta = 'UPDATE examen SET estado=2 WHERE id=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('i',$val1);
+        $val1 = $id;
+        $stmt->execute();
+        
+        self::cerrarConex();
+    }
+    
 }

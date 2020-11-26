@@ -29,6 +29,7 @@ and open the template in the editor.
         <?php
         require_once '../Clases/User.php';
         session_start();
+        $user = $_SESSION['user'];
         $allUser = $_SESSION['allUser'];
         foreach ($allUser as $value) {
 
@@ -79,6 +80,11 @@ and open the template in the editor.
         <div class="container-fluid">
             <div class="row my-5">
                 <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1">
+                    <div class="row">
+                        <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
+                            <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-tools"></i></i></p>
+                        </div>
+                    </div>
                     <div class="table-responsive">
                         <h1 class="text-center">Lista de usuarios</h1>
                         <table class="table border shadow">

@@ -104,6 +104,9 @@ and open the template in the editor.
                             <ul class="nav flex-column">
                                 <form action="../controlador.php" name="menu" method="POST">
                                     <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
+                                    </li>
+                                    <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
                                     </li>
                                     <li class="nav-item">
@@ -122,7 +125,7 @@ and open the template in the editor.
                 <section class="col-md-10 col-sm-10 border-green">
                     <div class="row">
                         <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
-                            <p>Buenos dias: <?= $user->getNombre() ?> </p>
+                            <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>
                         </div>
                     </div>
                     <div class="row my-4">
@@ -175,16 +178,22 @@ and open the template in the editor.
                                                             <li>Acciones:</li>
                                                             <ul>
                                                                 <li>
+                                                                    Activar examen:
+                                                                    <i class="fas fa-check green-text"></i>
+                                                                </li>
+                                                                <li>
+                                                                    Desactivar examen:
+                                                                     <i class="fas fa-times green-text"></i>
+                                                                </li>
+                                                                <li>
                                                                     Editar:
                                                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
                                                                     <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                                    </svg> 
+                                                                    </svg>
                                                                 </li>
                                                                 <li>
-                                                                    Activo:
-                                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-circle-fill align-middle" fill="#28a745" xmlns="http://www.w3.org/2000/svg">
-                                                                    <circle cx="8" cy="8" r="8"/>
-                                                                    </svg>
+                                                                    Corregir:
+                                                                    <i class="fas fa-file-import green-text"></i>
                                                                 </li>
                                                                 <li>
                                                                     Borrar:
@@ -222,7 +231,10 @@ and open the template in the editor.
                                             ?>
                                             <form action="../controladorEditarExamen.php">
                                                 <tr>
-                                                    <td><input type="text" name="titulo" value="<?= $v->getTitulo() ?>" class="form-control-plaintext"></td>
+                                                    <td>
+                                                        <input type="hidden" name="id" value="<?= $v->getId() ?>" class="form-control-plaintext">
+                                                        <input type="text" name="titulo" value="<?= $v->getTitulo() ?>" class="form-control">
+                                                    </td>
                                                     <td><input type="text" name="fecha_inicio" value="<?= $v->getFecha_Inicio() ?>" class="form-control"></td>
                                                     <td><input type="text" name="fecha_fin" value="<?= $v->getFecha_Fin() ?>" class="form-control"></td>
                                                     <td><input type="text" name="descripcion" value="<?= $v->getDescripcion() ?>" class="form-control"></td>
@@ -244,20 +256,20 @@ and open the template in the editor.
                                                         <?php
                                                         if ($v->getEstado() == 0) {
                                                             ?>
-                                                            <button name="borrar" type="submit" class="btn-white border-0"><!-- Activar -->
+                                                            <button name="activar_examen" type="submit" class="btn-white border-0"><!-- Activar -->
                                                                 <i class="fas fa-check green-text"></i>
                                                             </button>
                                                             <?php
-                                                        } else {
+                                                        } else if ($v->getEstado() == 1){
                                                             ?>
-                                                            <button name="borrar" type="submit" class="btn-white border-0"><!-- Desactivar -->
+                                                            <button name="desactivar_examen" type="submit" class="btn-white border-0"><!-- Desactivar -->
                                                                 <i class="fas fa-times green-text"></i>
                                                             </button>
                                                             <?php
                                                         }
                                                         ?>
 
-                                                        <button name="editar" type="submit" class="btn-white border-0"><!-- Editar -->
+                                                        <button name="editar_examen" type="submit" class="btn-white border-0"><!-- Editar -->
                                                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                             </svg>
@@ -265,14 +277,14 @@ and open the template in the editor.
                                                         <?php
                                                         if ($v->getEstado() == 1) {
                                                             ?>
-                                                            <button name="borrar" type="submit" class="btn-white border-0"><!-- Correguir -->
+                                                            <button name="corregir_examen" type="submit" class="btn-white border-0"><!-- Correguir -->
                                                                 <i class="fas fa-file-import green-text"></i>
                                                             </button>
                                                             <?php
                                                         }
                                                         ?>
 
-                                                        <button name="borrar" type="submit" class="btn-white border-0"><!-- Borrar -->
+                                                        <button name="borrar_examen" type="submit" class="btn-white border-0"><!-- Borrar -->
                                                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="#dc3545" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
                                                             </svg>
