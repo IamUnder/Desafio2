@@ -130,7 +130,6 @@ and open the template in the editor.
                                     <li class="nav-item">
                                         <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddExamen" type="submit">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
                                     </li>
-                                    <hr>
                                 </form>
                             </ul>
 
@@ -146,7 +145,7 @@ and open the template in the editor.
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100 overflow-auto">
                     <div class="row">
                         <div class="col-md-4 col-sm-4 w-100 vh-80 overflow-auto">
-                            <h3 class="text-center mt-1">Banco de preguntas</h3>
+                            <h3 class="text-center mt-1 mb-2">Banco de preguntas</h3>
                             <div class="accordion md-accordion w-100" id="accordionEx1" role="tablist" aria-multiselectable="true">
 
                                 <?php
@@ -169,12 +168,12 @@ and open the template in the editor.
                                         <!-- Card body -->
                                         <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
                                              data-parent="#accordionEx1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                            <div class="card-body p-0 pl-2 pt-2 pr-2">
+                                            <div class="card-body p-0 pl-2 pt-2 pr-2 pb-2">
                                                 <?php
                                                 for ($i = 0; $i < sizeof($tipoTexto); $i++) {
                                                     $descripcion = $tipoTexto[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
                                                     <?php
                                                 }
                                                 ?>
@@ -208,12 +207,12 @@ and open the template in the editor.
                                         <!-- Card body -->
                                         <div id="collapseTwo21" class="collapse" role="tabpanel" aria-labelledby="headingTwo21"
                                              data-parent="#accordionEx1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                            <div class="card-body p-0 pl-2 pt-2 pr-2">
+                                            <div class="card-body p-0 pl-2 pt-2 pr-2 pb-2">
                                                 <?php
                                                 for ($i = 0; $i < sizeof($tipoNumerico); $i++) {
                                                     $descripcion = $tipoNumerico[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded" id="drag2-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-0" id="drag2-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
                                                     <?php
                                                 }
                                                 ?>
@@ -245,12 +244,12 @@ and open the template in the editor.
                                         <!-- Card body -->
                                         <div id="collapseThree31" class="collapse" role="tabpanel" aria-labelledby="headingThree31"
                                              data-parent="#accordionEx1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                            <div class="card-body p-0 pl-2 pt-2 pr-2">
+                                            <div class="card-body p-0 pl-2 pt-2 pr-2 pb-2">
                                                 <?php
                                                 for ($i = 0; $i < sizeof($tipoUnaOpcion); $i++) {
                                                     $descripcion = $tipoUnaOpcion[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded" id="drag3-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-0" id="drag3-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
                                                     <?php
                                                 }
                                                 ?>
@@ -283,12 +282,12 @@ and open the template in the editor.
                                         <!-- Card body -->
                                         <div id="collapseFour41" class="collapse" role="tabpanel" aria-labelledby="headingFour41"
                                              data-parent="#accordionEx1" ondrop="drop(event)" ondragover="allowDrop(event)">
-                                            <div class="card-body p-0 pl-2 pt-2 pr-2">
+                                            <div class="card-body p-0 pl-2 pt-2 pr-2 pb-2">
                                                 <?php
                                                 for ($i = 0; $i < sizeof($tipoVariasOpciones); $i++) {
                                                     $descripcion = $tipoVariasOpciones[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded" id="drag4-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-0" id="drag4-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
                                                     <?php
                                                 }
                                                 ?>
@@ -305,21 +304,16 @@ and open the template in the editor.
                             <!-- Accordion wrapper -->
                         </div>
 
-                        <div class="col-md-8 col-sm-8 text-center">
-                            <input class="h3 w-100" type="text" placeholder="Titulo del examen">
-                            <form action="../controlador.php" name="form_examen" id="examen" method="POST">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Panel title</h5>
-                                        <p class="card-text">Some quick example text to build on the panel title and make up the bulk of the panel's content.</p>
-                                        <a class="card-link">Card link</a>
-                                        <a class="card-link">Another link</a>
-                                    </div>
-                                </div>
+                        <div class="col-md-8 col-sm-8">
+                            <input class="h3 w-100 mt-1" type="text" placeholder="Titulo del examen">
+                            <form action="../controlador.php" name="form_examen" id="examen" class="form_examen" method="POST">
                             </form>
-
-                            <img src="../img/add.png" id="addPregunta" onclick="addFila()" style="width: 50px; height: 50px; cursor: pointer;">
-                            <img src="../img/del.png" id="delPregunta" style="width: 50px; height: 50px; cursor: pointer;">
+                            <div class="w-100 text-center h5 mt-1" id="addPregunta" onclick="addFila()" style="cursor: pointer;">
+                                Añadir preguntas&nbsp;<img src="../img/add.png" style="width: 50px; height: 50px;">
+                            </div>
+                            <div class="w-100 text-center mt-1">
+                                <button class="w-100 bt btn-outline-success" type="submit" name="crearExamen" id="crearExamen">Crear examen</button>
+                            </div>
                         </div>
                     </div>
                 </section>
