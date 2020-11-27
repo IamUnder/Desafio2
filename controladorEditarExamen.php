@@ -9,6 +9,7 @@
 session_start();
 
 require_once './MVC/Gestion.php';
+require_once './Clases/User.php';
 //******************************************************************************
 //****************************** CRUD EXAMEN ***********************************
 //******************************************************************************
@@ -61,6 +62,32 @@ if (isset($_REQUEST['corregir_examen'])) {
     
     header('Location: Vista/profesorPrincipal.php');
 }
+
+//******************************************************************************
+//**************************** Modificar perfil ********************************
+//******************************************************************************
+if (isset($_REQUEST['editarPerfil'])) {
+    $dni = $_REQUEST['dni'];
+    $mail = $_REQUEST['mail'];
+//    $pass = $_REQUEST['pass'];
+    if ($_REQUEST['pass'] != null) {
+        $pass = password_hash($_REQUEST['pass'], PASSWORD_DEFAULT);
+    }else{
+        $pass = null;
+    }
+    $nombre = $_REQUEST['nombre'];
+    $apellido = $_REQUEST['apellido'];
+    $rol = $_REQUEST['rol'];
+
+    Gestion::editUser($dni, $mail, $pass, $nombre, $apellido, $rol);
+    
+    $login = Gestion::getUser($mail, $pass);
+    $_SESSION['user'] = $login;
+    header('Location: Vista/profesorPerfil.php');
+    
+    echo $dni . $mail . $pass . $nombre . $apellido . $rol;
+}
+
 
 //******************************************************************************
 //****************************** Funciones *************************************

@@ -25,7 +25,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="../css/tamanios.css">
         <link rel="stylesheet" href="../css/fuentes.css">
     </head>
-    <body>
+    <body onload="validacion()">
         
         <?php
         
@@ -96,7 +96,7 @@ and open the template in the editor.
                             <ul class="nav flex-column">
                                 <form action="../controlador.php" name="menu" method="POST">
                                     <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver examenes&nbsp;<i class="fas fa-file-signature"></i></button>
                                     </li>
                                     <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
@@ -133,40 +133,38 @@ and open the template in the editor.
                                         <div class="col-md-6">
 
                                             <!-- Default form contact -->
-                                            <form class="text-center" action="#!">
+                                            <form class="text-center" id="registro" action="../controladorEditarExamen.php" novalidate>
 
-                                                <h3 class="font-weight-bold mb-4">Contact Us</h3>
-
-                                                <!-- Name -->
-                                                <input type="text" id="defaultContactFormName" class="form-control mb-4" placeholder="Name">
-
-                                                <!-- Email -->
-                                                <input type="email" id="defaultContactFormEmail" class="form-control mb-4" placeholder="E-mail">
-
+                                                <h3 class="font-weight-bold mb-4">Editar Perfil</h3>
+                                                
+                                                <input type="hidden" id="dni" name="dni" value="<?= $user->getDNI() ?>" readonly class="form-control-plaintext">
+                                                <input type="hidden" id="rol" name="rol" value="<?= $user->getRol() ?>" readonly class="form-control-plaintext">
+                                                <!-- Mail -->
+                                                <label>Mail</label>
+                                                <input type="text" id="mail" class="form-control mb-4" name="mail" value="<?= $user->getMail() ?>" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$">
+                                                <small id="mailError" class="form-text" aria-live="polite"></small>
+                                                
+                                                <!-- Pass -->
+                                                <label>Password</label>
+                                                <input type="password" id="pass" class="form-control mb-4" name="pass" value="" placeholder="Nueva Password" minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                                                <small id="passError" class="form-text" aria-live="polite"></small>
+                                                
                                                 <!-- Subject -->
-                                                <label>Subject</label>
-                                                <select class="browser-default custom-select mb-4">
-                                                    <option value="" disabled>Choose option</option>
-                                                    <option value="1" selected>Feedback</option>
-                                                    <option value="2">Report a bug</option>
-                                                    <option value="3">Feature request</option>
-                                                    <option value="4">Feature request</option>
-                                                </select>
-
-                                                <!-- Message -->
-                                                <div class="form-group">
-                                                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
-                                                              placeholder="Message"></textarea>
-                                                </div>
-
-                                                <!-- Copy -->
-                                                <div class="custom-control custom-checkbox mb-4">
-                                                    <input type="checkbox" class="custom-control-input" id="defaultContactFormCopy">
-                                                    <label class="custom-control-label" for="defaultContactFormCopy">Send me a copy of this message</label>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label>Nombre</label>
+                                                        <input type="text" id="nombre" class="form-control mb-4" name="nombre" value="<?= $user->getNombre() ?>" required>
+                                                        <small id="nombreError" class="form-text" aria-live="polite"></small>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label>Apellido</label>
+                                                        <input type="text" id="apellido" class="form-control mb-4" name="apellido" value="<?= $user->getApellido() ?>" required>
+                                                        <small id="apellidoError" class="form-text" aria-live="polite"></small>
+                                                    </div>
                                                 </div>
 
                                                 <!-- Send button -->
-                                                <button class="btn btn-info btn-block" type="submit">Send</button>
+                                                <button class="btn background-green text-white btn-block" type="submit" name="editarPerfil">Guardar cambios</button>
 
                                             </form>
                                             <!-- Default form contact -->
@@ -211,6 +209,6 @@ and open the template in the editor.
         <!-- MDB core JavaScript -->
         <script type="text/javascript" src="../js/mdb.min.js"></script>
         <!-- Your custom scripts (optional) -->
-        <script type="text/javascript" src="../js/registroValidacion_1.js"></script>
+        <script type="text/javascript" src="../js/registroValidacion_2.js"></script>
     </body>
 </html>
