@@ -345,8 +345,7 @@ if (isset($_REQUEST['vistaAddExamen'])) {
 }
 
 if (isset($_REQUEST['vistaEditProfile'])) {
-    echo 'Editar perfil, bitch';
-//    header('Location: Vista/profesorAddExamen.php');
+    header('Location: Vista/profesorPerfil.php');
     die();
 }
 
