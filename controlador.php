@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,7 +22,7 @@ require_once './phpmailer/src/SMTP.php';
 if (isset($_REQUEST['LogIn'])) {
     $mail = $_REQUEST['mail'];
     $pass = $_REQUEST['pass'];
-    
+
 
     $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
     $recaptcha_secret = '6Lft9OMZAAAAAKX9KvyCQVyhuchB0UqDsbwsPO5d';
@@ -228,7 +228,7 @@ if (isset($_REQUEST['editar'])) {
 //    $pass = $_REQUEST['pass'];
     if ($_REQUEST['pass'] != null) {
         $pass = password_hash($_REQUEST['pass'], PASSWORD_DEFAULT);
-    }else{
+    } else {
         $pass = null;
     }
     $nombre = $_REQUEST['nombre'];
@@ -236,10 +236,10 @@ if (isset($_REQUEST['editar'])) {
     $rol = $_REQUEST['rol'];
 
     Gestion::editUser($dni, $mail, $pass, $nombre, $apellido, $rol);
-    
+
     funcAdmin();
     header('Location: Vista/admin.php?rol=' . $_REQUEST['rol']);
-    
+
     echo $dni . $mail . $pass . $nombre . $apellido . $rol;
 }
 
@@ -254,7 +254,7 @@ if (isset($_REQUEST['crud_registrar'])) {
     $pass = password_hash($_REQUEST['registro_pass'], PASSWORD_DEFAULT);
     $activado = 1;
     $rol = $_REQUEST['registro_rol'];
-    
+
     if (!Gestion::existeUsuario($dni)) {
         $nuevo = new User($dni, $mail, $pass, $nombre, $apellido, $activado, $rol);
         if (Gestion::addUser($nuevo)) {
@@ -359,7 +359,7 @@ function funcAdmin() {
     $_SESSION['allUser'] = $allUser;
 }
 
-function funcProfesor(){
+function funcProfesor() {
     $allExamen = Gestion::getAllExamen();
     $_SESSION['allExamen'] = $allExamen;
 }

@@ -14,7 +14,8 @@ var addFila = function () {
 
     //Creo la card
     var card = document.createElement('div');
-    card.className = 'card d-flex justify-content-center mb-1  border-success ' + nombre;
+    card.setAttribute("name", "cards");
+    card.className = 'card d-flex justify-content-center mb-1  border-success';
     card.id = nombre;
 
     //Creo el card-body
@@ -33,6 +34,7 @@ var addFila = function () {
     div.setAttribute("ondrop", "drop(event)");
     div.setAttribute("ondragover", "allowDrop(event)");
     div.setAttribute("id", "div" + contador);
+    div.setAttribute("name", "DragDrop");
     div.style.width = "100%";
     div.style.height = "10vh";
     div.style.border = "1px solid black";
@@ -64,15 +66,22 @@ var delPregunta = function () {
 };
 
 var resetearContador = function () {
-    //Resetear el contrador de las preguntas para enumerarlas de nuevo
-    contadorTotal = contador - 1;
 
-    titulos = document.getElementsByName('tituloPregunta');
-    console.log(titulos);
+    var preguntas;
+    var cards;
+    var contadorAux;
+    var divsDragDrop;
 
+    preguntas = document.getElementsByName('tituloPregunta');
+    cards = document.getElementsByName('cards');
+    divsDragDrop = document.getElementsByName('DragDrop');
 
-    for (var i = 1; i <= contadorTotal; i++) {
-        titulos[i].innerHTML = 'Pregunta&nbsp;' + i;
+    for (var i = 0; i < preguntas.length; i++) {
+        preguntas[i].innerHTML = 'Pregunta&nbsp;' + (i + 1);
+        cards[i].id = 'card-' + (i + 1);
+        divsDragDrop[i].id = 'div' + (i + 1);
+        contadorAux = (i + 1);
     }
+    contador = contadorAux;
 
 };

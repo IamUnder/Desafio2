@@ -46,6 +46,7 @@ and open the template in the editor.
         <script src="../js/generador.js"></script>
         <?php
         require_once '../Clases/PreguntaAux.php';
+        require_once '../Clases/User.php';
         session_start();
         //Comprobamos las sesiones y recogemos los tipos de preguntas disponibles
         if (isset($_SESSION['preguntasDisponiblesTexto'])) {
@@ -59,6 +60,9 @@ and open the template in the editor.
         }
         if (isset($_SESSION['preguntasDisponiblesVariasOpciones'])) {
             $tipoVariasOpciones = $_SESSION['preguntasDisponiblesVariasOpciones'];
+        }
+        if (isset($_SESSION['user'])) {
+            $user = $_SESSION['user'];
         }
         ?>
         <div class="container-fluid">
@@ -115,15 +119,8 @@ and open the template in the editor.
                             <ul class="nav flex-column">
                                 <form action="../controlador.php" name="menu" method="POST">
                                     <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 border-green rounded" name="vistaExamenesActivados" type="submit">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver examenes&nbsp;<i class="fas fa-file-signature"></i></button>
                                     </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesDesactivados" type="submit">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
-                                    </li>
-
                                     <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
                                     </li>
@@ -144,7 +141,12 @@ and open the template in the editor.
 
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100 overflow-auto">
                     <div class="row">
-                        <div class="col-md-4 col-sm-4 w-100 sticky-top vh-75 overflow-auto">
+                        <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
+                            <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4 w-100 sticky-top vh-60 overflow-auto">
                             <h3 class="text-center mt-1 mb-2">Banco de preguntas</h3>
                             <div class="accordion md-accordion w-100" id="accordionEx1" role="tablist" aria-multiselectable="true">
 
@@ -306,7 +308,8 @@ and open the template in the editor.
 
                         <div class="col-md-8 col-sm-8">
                             <form action="../controlador.php" name="form_examen" id="examen" class="form_examen" method="POST">
-                                <input class="h3 w-100 mt-1" type="text" placeholder="Titulo del examen" required>
+                                <h3 class="text-center mt-1 mb-2"><i class="fas fa-angle-down rotate-icon"></i>&nbsp;Crea un nuevo examen&nbsp;<i class="fas fa-angle-down rotate-icon"></i></h3>
+                                <input class="h3 w-100 sticky-top" type="text" placeholder="Titulo del examen" required>
                                 <div id="preguntas" class="overflow-auto">
                                 </div>
                                 <div class="w-100 text-center h5 mt-1" id="addPregunta" onclick="addFila()" style="cursor: pointer;">

@@ -30,7 +30,11 @@ and open the template in the editor.
     <body class="rosemary">
         <?php
         require_once '../Clases/Pregunta.php';
+        require_once '../Clases/User.php';
         session_start();
+        if (isset($_SESSION['user'])) {
+            $user = $_SESSION['user'];
+        }
         ?>
         <div class="container-fluid">
             <header class="row text-white background-green align-items-center">
@@ -86,13 +90,7 @@ and open the template in the editor.
                             <ul class="nav flex-column">
                                 <form action="../controlador.php" name="menu" method="POST">
                                     <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 border-green rounded" name="vistaExamenesActivados" type="submit">Ver exámenes activados&nbsp;<i class="fas fa-file-signature"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesDesactivados" type="submit">Ver exámenes desactivados&nbsp;<i class="fas fa-file-excel"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver exámenes realizados&nbsp;<i class="fas fa-clipboard-check"></i></button>
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver examenes&nbsp;<i class="fas fa-file-signature"></i></button>
                                     </li>
                                     <li class="nav-item">
                                         <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
@@ -111,7 +109,13 @@ and open the template in the editor.
                     </nav>
                 </aside>
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100">
-                    <nav class="nav ml-3 align-items-center mt-1">
+                    <div class="row">
+                        <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
+                            <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>
+                        </div>
+                    </div>
+                    <hr class="mt-1 mb-1">
+                    <nav class="nav align-items-center d-flex justify-content-center">
                         <h3>Tipo:</h3> 
                         <form action="../controladorProfesorPreguntas.php" name="prof_setPregunta">
                             <select name="tipo" class="ml-2" onchange="this.form.submit()">
@@ -165,10 +169,10 @@ and open the template in the editor.
                             </select>
                         </form>
                     </nav>
-
+                    <hr class="mt-1 mb-1">
                     <form action="../controladorProfesorPreguntas.php" name="pregunta">
                         <div class="w-100 text-center mt-3">
-                            <h3>Descripción</h3>
+                            <h5>Descripción</h5>
                             <textarea id="ta_resp_texto" name="descripcion" rows="5" class="w-50"></textarea>
                         </div>
                         <?php
@@ -178,7 +182,7 @@ and open the template in the editor.
                                 case 'texto':
                                     ?>
                                     <div class="w-100 text-center">
-                                        <h3>Respuesta</h3>
+                                        <h5>Respuesta</h5>
                                         <textarea id="ta_resp_texto" name="ta_resp_correcta_texto" rows="5" class="w-50"></textarea>
                                     </div>
                                     <?php
@@ -186,7 +190,7 @@ and open the template in the editor.
                                 case 'numerico':
                                     ?>
                                     <div class="w-100 text-center">
-                                        <h3>Respuesta</h3>
+                                        <h5>Respuesta</h5>
                                         <input type="number" id="resp_correcta_numerico" name="resp_correcta_numerico" class="w-50">
                                     </div>
                                     <?php
@@ -194,7 +198,7 @@ and open the template in the editor.
                                 case 'unaOpcion':
                                     ?>
                                     <div class="w-100 text-center">
-                                        <h3>Seleccione la respuesta correcta</h3>
+                                        <h5>Seleccione la respuesta correcta</h5>
                                         <input type="radio" class="mr-2" id="resp_opc_a" name="opcion" value="opc_a">
                                         <input type="text" name="resp_a">
                                         <input type="radio" class="ml-2" id="resp_opc_b" name="opcion" value="opc_b">
@@ -211,7 +215,7 @@ and open the template in the editor.
                                 case 'variasOpciones':
                                     ?>
                                     <div class="w-100 text-center">
-                                        <h3>Seleccione las respuestas correctas</h3>
+                                        <h5>Seleccione las respuestas correctas</h5>
                                         <label class="mr-2"><input type="checkbox" id="cboxa" name="cboxa">
                                             <input type="text" name="resp_cbox_a"></label>
                                         <label class="ml-2"><input type="checkbox" id="cboxb" name="cboxb">
@@ -230,13 +234,13 @@ and open the template in the editor.
                             $_SESSION['tipo'] = 'texto';
                             ?>
                             <div class="w-100 text-center">
-                                <h3>Respuesta</h3>
+                                <h5>Respuesta</h5>
                                 <textarea id="ta_resp_texto" name="ta_resp_correcta_texto" rows="5" class="w-50"></textarea>
                             </div>
                             <?php
                         }
                         ?>
-                        <div class="w-100 text-center mt-3">
+                        <div class="w-100 text-center mt-1">
                             <button type="submit" name="addPregunta" class="btn btn-outline-success">Añadir pregunta</button>
                         </div>
                     </form>
