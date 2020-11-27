@@ -14,9 +14,9 @@ class Gestion {
 
     public static function abrirConex() {
         //Jorge
-        self::$conexion = new mysqli('localhost:7007', 'root', 'secret', 'Desafio2');
+//        self::$conexion = new mysqli('localhost:7007', 'root', 'secret', 'Desafio2');
         //Alejandro
-//        self::$conexion = new mysqli('localhost', 'alejandro', 'Chubaca2020', 'Desafio2');
+        self::$conexion = new mysqli('localhost', 'alejandro', 'Chubaca2020', 'Desafio2');
 
         if (self::$conexion->connect_errno) {
             print "Fallo al conectar a MySQL: " . mysqli_connect_error();
@@ -24,6 +24,7 @@ class Gestion {
     }
 
     public static function cerrarConex() {
+        //No funciona con mysqli_close();
         //mysqli_close(self::$conexion);
         self::$conexion = NULL;
     }
@@ -294,8 +295,16 @@ class Gestion {
                 $idPregunta = $fila[0];
                 $idExamen = $fila[1];
                 $descripcion = $fila[2];
-                $pregunta = new PreguntaAux($idPregunta, $idExamen, $descripcion);
-                $preguntasDisponibles[] = $pregunta;
+
+                $queryTipo = "SELECT tipo FROM respuestasCorrectas WHERE idPregunta = " . $idPregunta;
+
+                if ($resultadoTipo = mysqli_query(self::$conexion, $queryTipo)) {
+                    if ($tipoPregunta = mysqli_fetch_row($resultadoTipo)) {
+                        $tipo = $tipoPregunta[0];
+                        $pregunta = new PreguntaAux($idPregunta, $idExamen, $descripcion, $tipo);
+                        $preguntasDisponibles[] = $pregunta;
+                    }
+                }
             }
         }
 

@@ -304,7 +304,40 @@ if (isset($_REQUEST['vistaAddPreguntas'])) {
 
 if (isset($_REQUEST['vistaAddExamen'])) {
     $ventanaSeleccionada = $_REQUEST['vistaAddExamen'];
+    //Recogemos las preguntas sin asignar de la BBDD
     $preguntasDisponibles = Gestion::getPreguntas();
+    $tipoTexto = [];
+    $tipoNumerico = [];
+    $tipoUnaOpcion = [];
+    $tipoVariasOpciones = [];
+    for ($i = 0; $i < sizeof($preguntasDisponibles); $i++) {
+        $idPregunta = $preguntasDisponibles[$i]->getIdPregunta();
+        $idExamen = $preguntasDisponibles[$i]->getIdExamen();
+        $pregunta = $preguntasDisponibles[$i]->getPregunta();
+        $tipo = $preguntasDisponibles[$i]->getTipo();
+        $preguntaAux = new PreguntaAux($idPregunta, $idExamen, $pregunta, $tipo);
+        //Comprobamos el tipo de pregunta para poder filtrar por el tipo de pregunta, así poder 
+        //tener una clasificación a la hora de mostrarlas en el HTML
+        switch ($tipo) {
+            case 'texto':
+                $tipoTexto[] = $preguntaAux;
+                $_SESSION['preguntasDisponiblesTexto'] = $tipoTexto;
+                break;
+            case 'numerico':
+                $tipoNumerico[] = $preguntaAux;
+                $_SESSION['preguntasDisponiblesNumerico'] = $tipoNumerico;
+                break;
+            case 'unaOpcion':
+                $tipoUnaOpcion[] = $preguntaAux;
+                $_SESSION['preguntasDisponiblesUnaOpcion'] = $tipoUnaOpcion;
+                break;
+            case 'variasOpciones':
+                $tipoVariasOpciones[] = $preguntaAux;
+                $_SESSION['preguntasDisponiblesVariasOpciones'] = $tipoVariasOpciones;
+                break;
+        }
+    }
+
     $_SESSION['preguntasDisponibles'] = $preguntasDisponibles;
     $_SESSION['vistaMenu'] = $ventanaSeleccionada;
     header('Location: Vista/profesorAddExamen.php');

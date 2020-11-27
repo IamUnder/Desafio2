@@ -16,11 +16,13 @@ class PreguntaAux {
     private $idPregunta;
     private $idExamen;
     private $pregunta;
+    private $tipo;
 
-    function __construct($idPregunta, $idExamen, $pregunta) {
+    function __construct($idPregunta, $idExamen, $pregunta, $tipo) {
         $this->idPregunta = $idPregunta;
         $this->idExamen = $idExamen;
         $this->pregunta = $pregunta;
+        $this->tipo = $tipo;
     }
 
     function getIdPregunta() {
@@ -45,6 +47,14 @@ class PreguntaAux {
 
     function setPregunta($pregunta): void {
         $this->pregunta = $pregunta;
+    }
+
+    function getTipo() {
+        return $this->tipo;
+    }
+
+    function setTipo($tipo): void {
+        $this->tipo = $tipo;
     }
 
 }
