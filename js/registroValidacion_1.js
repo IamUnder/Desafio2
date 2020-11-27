@@ -85,11 +85,11 @@ function validacion() {
             event.preventDefault();
         }
         if (!apellido.validity.valid) {
-            mostrarapellidoError();
+            mostrarApellidoError();
             event.preventDefault();
         }
         if (!mail.validity.valid) {
-            mostrarmailError();
+            mostrarMailError();
             event.preventDefault();
         }
         if (!pass.validity.valid) {
@@ -145,7 +145,7 @@ function mostrarMailError() {
 function mostrarPassError() {
     if (pass.validity.valueMissing) {
         // Si el campo está vacío
-        pass.textContent = 'Debe introducir una contraseña.';
+        passError.textContent = 'Debe introducir una contraseña.';
     } else if (pass.validity.tooShort) {
         // Si los datos son demasiado cortos
         passError.textContent = 'La contraseña debe contener entre 8 -10 crácteres, una mayúscula y un dígito';
