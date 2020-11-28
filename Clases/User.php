@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Description of Usuario
  *
  * @author alejandro
  */
 class User {
+
     //**************************************************************************
     //-----------------------------Atributos------------------------------------
     //**************************************************************************
@@ -15,7 +17,7 @@ class User {
     private $apellido;
     private $activado;
     private $rol;
-    
+
     //---------------------------Constructor------------------------------------
     function __construct($dni, $mail, $pass, $nombre, $apellido, $activado, $rol) {
         $this->dni = $dni;
@@ -28,7 +30,7 @@ class User {
         //0 alumno, 1 profesor, 2 admin
         $this->rol = $rol;
     }
-    
+
     //**************************************************************************
     //--------------------------Getters & Setters-------------------------------
     //**************************************************************************
@@ -87,11 +89,12 @@ class User {
     function setRol($rol): void {
         $this->rol = $rol;
     }
-    
+
     //**************************************************************************
     //-----------------------------TO STRING------------------------------------
     //**************************************************************************
     public function __toString() {
-        return '[USUARIO] Nombre: ' . $this->nombre . ' - Correo: ' . $this->mail . ' - ROL: ' . $this->rol . ' - ESTADO: ' . $this->activado ;
+        return '[USUARIO] Nombre: ' . $this->nombre . ' - DNI: ' . $this->dni . ' - Correo: ' . $this->mail . ' - ROL: ' . $this->rol . ' - ESTADO: ' . $this->activado;
     }
+
 }

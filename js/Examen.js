@@ -1,7 +1,8 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
+class Examen {
+    constructor(dni_Profesor, titulo, descripcion, preguntas) {
+        this.dni_Profesor = dni_Profesor;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.preguntas = preguntas;
+    }
+}

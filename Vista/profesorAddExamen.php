@@ -31,13 +31,12 @@ and open the template in the editor.
             }
 
             function drag(ev) {
-                ev.dataTransfer.setData("p", ev.target.id);
-
+                ev.dataTransfer.setData("input", ev.target.id);
             }
 
             function drop(ev) {
                 ev.preventDefault();
-                var data = ev.dataTransfer.getData("p");
+                var data = ev.dataTransfer.getData("input");
                 ev.target.appendChild(document.getElementById(data));
             }
         </script>
@@ -63,6 +62,7 @@ and open the template in the editor.
         }
         if (isset($_SESSION['user'])) {
             $user = $_SESSION['user'];
+            //echo $user->__toString();
         }
         ?>
         <div class="container-fluid">
@@ -141,12 +141,7 @@ and open the template in the editor.
 
                 <section class="col-md-10 col-sm-10 border-green vh-80 w-100 overflow-auto">
                     <div class="row">
-                        <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
-                            <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 w-100 sticky-top vh-60 overflow-auto">
+                        <div class="col-md-4 col-sm-4 w-100 sticky-top vh-75 overflow-auto">
                             <h3 class="text-center mt-1 mb-2">Banco de preguntas</h3>
                             <div class="accordion md-accordion w-100" id="accordionEx1" role="tablist" aria-multiselectable="true">
 
@@ -175,7 +170,7 @@ and open the template in the editor.
                                                 for ($i = 0; $i < sizeof($tipoTexto); $i++) {
                                                     $descripcion = $tipoTexto[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <input name="pregunta[]"class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100 pregunta" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;" value="<?php echo $descripcion ?>" readonly>
                                                     <?php
                                                 }
                                                 ?>
@@ -214,7 +209,7 @@ and open the template in the editor.
                                                 for ($i = 0; $i < sizeof($tipoNumerico); $i++) {
                                                     $descripcion = $tipoNumerico[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mt-1 mb-1 w-100" id="drag2-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <input name="pregunta[]" class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100 pregunta" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;" value="<?php echo $descripcion ?>" readonly>
                                                     <?php
                                                 }
                                                 ?>
@@ -251,7 +246,7 @@ and open the template in the editor.
                                                 for ($i = 0; $i < sizeof($tipoUnaOpcion); $i++) {
                                                     $descripcion = $tipoUnaOpcion[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100" id="drag3-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <input name="pregunta[]" class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100 pregunta" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;" value="<?php echo $descripcion ?>" readonly>
                                                     <?php
                                                 }
                                                 ?>
@@ -289,7 +284,7 @@ and open the template in the editor.
                                                 for ($i = 0; $i < sizeof($tipoVariasOpciones); $i++) {
                                                     $descripcion = $tipoVariasOpciones[$i]->getPregunta();
                                                     ?>
-                                                    <p class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100" id="drag4-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;"><?php echo $descripcion ?></p>
+                                                    <input name="pregunta[]" class="border-green bg-light-green pl-2 pr-2 rounded mb-1 mt-1 w-100 pregunta" id="drag1-<?php echo $i ?>" draggable="true" ondragstart="drag(event)" style="cursor: pointer;" value="<?php echo $descripcion ?>" readonly>
                                                     <?php
                                                 }
                                                 ?>
@@ -307,19 +302,29 @@ and open the template in the editor.
                         </div>
 
                         <div class="col-md-8 col-sm-8">
-                            <form action="../controlador.php" name="form_examen" id="examen" class="form_examen" method="POST">
-                                <h3 class="text-center mt-1 mb-2"><i class="fas fa-angle-down rotate-icon"></i>&nbsp;Crea un nuevo examen&nbsp;<i class="fas fa-angle-down rotate-icon"></i></h3>
-                                <input class="h3 w-100 sticky-top" type="text" placeholder="Titulo del examen" required>
-                                <div id="preguntas" class="overflow-auto">
+                            <div class="row">
+                                <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
+                                    <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>
                                 </div>
-                                <div class="w-100 text-center h5 mt-1" id="addPregunta" onclick="addFila()" style="cursor: pointer;">
-                                    Añadir preguntas&nbsp;<img src="../img/add.png" style="width: 50px; height: 50px;">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                    <form action="../controladorProfesorExamen.php" name="form_examen" id="examen" class="form_examen" method="POST">
+                                        <small style="display: none;" name="dniProfesor" class="dniProfesor"><?php echo $user->getDni() ?></small> 
+                                        <h3 class="text-center mt-1 mb-2"><i class="fas fa-angle-down rotate-icon"></i>&nbsp;Crea un nuevo examen&nbsp;<i class="fas fa-angle-down rotate-icon"></i></h3>
+                                        <input class="h3 w-100 sticky-top" name="tituloExamen" type="text" placeholder="Titulo del examen" required>
+                                        <textarea rows="2" class="w-100" name="descripcion" placeholder="Introduce una breve descripción..."></textarea>
+                                        <div id="preguntas" class="overflow-auto">
+                                        </div>
+                                        <div class="w-100 text-center h5 mt-1" id="addPregunta" onclick="addFila()" style="cursor: pointer;">
+                                            Añadir preguntas&nbsp;<img src="../img/add.png" style="width: 50px; height: 50px;">
+                                        </div>
+                                        <div class="w-100 text-center mt-1">
+                                            <button class="w-100 bt btn-outline-success rounded h3" type="" name="crearExamen" id="crearExamen">Crear examen</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="w-100 text-center mt-1">
-                                    <button class="w-100 bt btn-outline-success rounded h3" type="submit" name="crearExamen" id="crearExamen">Crear examen</button>
-                                </div>
-                            </form>
-
+                            </div>
                         </div>
                     </div>
                 </section>
