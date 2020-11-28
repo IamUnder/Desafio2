@@ -65,6 +65,13 @@ if (isset($_REQUEST['crearExamen'])) {
             }
         }
 
+        if (sizeof($preguntasDisponibles) <= 0) {
+            unset($_SESSION['preguntasDisponiblesTexto']);
+            unset($_SESSION['preguntasDisponiblesNumerico']);
+            unset($_SESSION['preguntasDisponiblesUnaOpcion']);
+            unset($_SESSION['preguntasDisponiblesVariasOpciones']);
+        }
+
         $_SESSION['preguntasDisponibles'] = $preguntasDisponibles;
         header('Location: Vista/profesorAddExamen.php');
     }
