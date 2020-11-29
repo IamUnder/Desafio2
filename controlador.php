@@ -15,6 +15,7 @@ require_once './Clases/User.php';
 require_once './phpmailer/src/Exception.php';
 require_once './phpmailer/src/PHPMailer.php';
 require_once './phpmailer/src/SMTP.php';
+require_once './Clases/examenAlumno.php';
 
 //******************************************************************************
 //*********************** Ventana Login ****************************************
@@ -41,6 +42,7 @@ if (isset($_REQUEST['LogIn'])) {
                     switch ($rol) {
                         case 0:
                             funcProfesor();
+                            getNotas($login->getDni());
                             header('Location: Vista/usuario.php');
                             break;
                         case 1:
@@ -330,4 +332,9 @@ function funcAdmin() {
 function funcProfesor(){
     $allExamen = Gestion::getAllExamen();
     $_SESSION['allExamen'] = $allExamen;
+}
+
+function getNotas($dni) {
+    $notas = Gestion::getNotas($dni);
+    $_SESSION['notas'] = $notas;
 }

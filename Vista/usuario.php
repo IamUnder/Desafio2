@@ -24,15 +24,22 @@ and open the template in the editor.
         <link rel="stylesheet" href="../css/fondos.css">
         <link rel="stylesheet" href="../css/tamanios.css">
         <link rel="stylesheet" href="../css/fuentes.css">
+        <script type="text/javascript" src="../js/script.js"></script>
     </head>
     <body class="rosemary">
 
         <?php
         require_once '../Clases/User.php';
         require_once '../MVC/Examen.php';
+        require_once '../Clases/examenAlumno.php';
         session_start();
         $user = $_SESSION['user'];
         $allExamen = $_SESSION['allExamen'];
+        $notas = $_SESSION['notas'];
+        
+        foreach ($notas as $v) {
+            echo $v->getNota();
+        }
         ?>
 
         <!--Navbar-->
@@ -159,8 +166,39 @@ and open the template in the editor.
                                 </table>
                             </div>
                         </div>
-                        <div class="col-3 bg-secondary offset-1">
-                            Aqui van las notas
+                        <div class="col-3 offset-1">
+                            <table class="table border shadow">
+                                <tr class="background-light-green">
+                                    <th>Titulo Examen</th>
+                                    <th>Nota</th>
+                                </tr>
+                                <?php
+                                
+                                foreach ($notas as $v) {
+
+                                   for($i = 0; $i <= count($allExamen); $i++) {
+                                       
+                                       if ($v->getId_Examen() == $allExamen[$i]->getId()) {
+                                           
+                                           ?>
+                                
+                                <tr>
+                                    <td><?= $allExamen[$i]->getTitulo() ?></td>
+                                    <td>
+                                        <button  type="button" class="btn-white border-0" onclick="verNota(<?= $v->getNota() ?>)"><!-- Activar -->
+                                            <i class="far fa-eye green-text"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                
+                                           <?php
+                                       }
+                                   }
+                                    
+                                }
+                                
+                                ?>
+                            </table>
                         </div>
                     </div>
                 </section>
@@ -194,5 +232,6 @@ and open the template in the editor.
         <script type="text/javascript" src="../js/mdb.min.js"></script>
         <!-- Your custom scripts (optional) -->
         <script type="text/javascript" src="../js/registroValidacion_1.js"></script>
+        
     </body>
 </html>

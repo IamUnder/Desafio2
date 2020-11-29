@@ -444,4 +444,27 @@ class Gestion {
         return $r;
         
     }
+    
+    public static function getNotas($dni) {
+        
+        self::abrirConex();
+        
+        $notas = [];
+        
+        $consulta = 'SELECT * FROM examenAlumno WHERE id_Alumno=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('s',$val1);
+        $val1 = $dni;
+        $stmt->execute();
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $r = new examenAlumno($row['id_Examen'], $row['id_Alumno'], $row['nota']);
+                $notas[] = $r;
+            }
+        }
+        
+        self::cerrarConex();
+        return $notas;
+        
+    }
 }

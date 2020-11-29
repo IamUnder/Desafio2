@@ -5,3 +5,6 @@
  */
 
 
+function verNota(nota) {
+    alert('La nota de este examen es: ' + nota);
+}

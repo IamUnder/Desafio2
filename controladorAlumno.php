@@ -10,6 +10,7 @@ require_once './MVC/Gestion.php';
 require_once './MVC/PreguntaAux.php';
 require_once './Clases/Pregunta.php';
 require_once './Clases/User.php';
+require_once './Clases/examenAlumno.php';
 
 session_start();
 
