@@ -9,6 +9,7 @@
 require_once './MVC/Gestion.php';
 require_once './MVC/PreguntaAux.php';
 require_once './Clases/Pregunta.php';
+require_once './Clases/User.php';
 
 session_start();
 
@@ -59,6 +60,38 @@ if (isset($_REQUEST['send_examen'])) {
     }
 }
 
+// EDITAR SUS DATOS
+if (isset($_REQUEST['editarPerfil'])) {
+    $dni = $_REQUEST['dni'];
+    $mail = $_REQUEST['mail'];
+//    $pass = $_REQUEST['pass'];
+    if ($_REQUEST['pass'] != null) {
+        $pass = password_hash($_REQUEST['pass'], PASSWORD_DEFAULT);
+    }else{
+        $pass = null;
+    }
+    $nombre = $_REQUEST['nombre'];
+    $apellido = $_REQUEST['apellido'];
+    $rol = $_REQUEST['rol'];
+
+    Gestion::editUser($dni, $mail, $pass, $nombre, $apellido, $rol);
+    
+    $_SESSION['user'] = Gestion::getUser($mail, $pass);
+    header('Location: Vista/alumnoEditarPerfil.php');
+    
+    echo $dni . $mail . $pass . $nombre . $apellido . $rol;
+}
+
 if (isset($_REQUEST['vistaEditProfile'])) {
     header('Location: Vista/alumnoEditarPerfil.php');
+}
+
+if (isset($_REQUEST['vistaPrincipal'])) {
+    header('Location: Vista/usuario.php');
+}
+
+
+function funcAdmin() {
+    $allUser = Gestion::getAllUser();
+    $_SESSION['allUser'] = $allUser;
 }
