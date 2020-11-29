@@ -383,4 +383,65 @@ class Gestion {
         self::cerrarConex();
     }
     
+    public static function getExamen($id) {
+        self::abrirConex();
+
+        $consulta = 'SELECT * FROM examen WHERE id=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('i',$val1);
+        $val1 = $id;
+        $stmt->execute();
+
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $r = new Examen($row['id'], $row['id_Profesor'] , $row['fecha_Inicio'], $row['fecha_Fin'], $row['estado'], $row['titulo'], $row['descripcion']);
+            }
+        }
+        self::cerrarConex();
+        return $r;
+    }
+    
+    public static function getPreguntasExamen($id) {
+        $preguntasExamen = [];
+
+        self::abrirConex();
+
+        $consulta = "SELECT * FROM preguntas WHERE idExamen=?";
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('i',$val1);
+        $val1 = $id;
+        $stmt->execute(); 
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $idPregunta = $row['idPregunta'];
+                $idExamen = $row['idExamen'];
+                $descripcion = $row['pregunta'];
+                $pregunta = new PreguntaAux($idPregunta, $idExamen, $descripcion);
+                $preguntasExamen[] = $pregunta;
+            }
+        }
+
+        self::cerrarConex();
+        return $preguntasExamen;
+    }
+    
+    public static function getRespuestas($id2) {
+        
+        self::abrirConex();
+        
+        $consulta = 'SELECT * FROM respuestasCorrectas WHERE idPregunta=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('i',$val1);
+        $val1 = $id2;
+        $stmt->execute();
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $r = new Pregunta($row['idPregunta'], $row['tipo'], $row['respuesta1'], $row['respuesta2'], $row['respuesta3'], $row['respuesta4'], $row['respuestaCorrecta']);
+            }
+        }
+        
+        self::cerrarConex();
+        return $r;
+        
+    }
 }

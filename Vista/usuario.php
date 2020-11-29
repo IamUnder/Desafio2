@@ -138,7 +138,7 @@ and open the template in the editor.
                                     foreach ($allExamen as $v) {
                                         if ($v->getEstado() == 1) {
                                             ?>
-                                            
+                                    <form action="../controladorAlumno.php">   
                                     <tr>
                                         <td>
                                             <input type="hidden" name="id" value="<?= $v->getId() ?>" class="form-control-plaintext">
@@ -151,12 +151,13 @@ and open the template in the editor.
                                             <input type="text" name="fecha_inicio" value="<?= $v->getFecha_Inicio() ?>" class="form-control-plaintext">
                                         </td>
                                         <td>
-                                            <button name="activar_examen" type="submit" class="btn-white border-0"><!-- Activar -->
+                                            <button name="realizar_examen" type="submit" class="btn-white border-0"><!-- Activar -->
                                                 <i class="fas fa-arrow-right green-text"></i>
                                             </button>
                                         </td>
                                         
                                     </tr>
+                                    </form>
                                     <?php
                                         }
                                     }
