@@ -176,7 +176,7 @@ and open the template in the editor.
                                 
                                 foreach ($notas as $v) {
 
-                                   for($i = 0; $i <= count($allExamen); $i++) {
+                                   for($i = 0; $i <= count($allExamen)-1; $i++) {
                                        
                                        if ($v->getId_Examen() == $allExamen[$i]->getId()) {
                                            
