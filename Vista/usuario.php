@@ -98,15 +98,9 @@ and open the template in the editor.
 
                             <!-- Links -->
                             <ul class="nav flex-column">
-                                <form action="../controlador.php" name="menu" method="POST">
+                                <form action="../controladorAlumno.php" name="menu" method="POST">
                                     <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddExamen" type="submit">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
                                     </li>
                                 </form>
                             </ul>

@@ -58,3 +58,7 @@ if (isset($_REQUEST['send_examen'])) {
         
     }
 }
+
+if (isset($_REQUEST['vistaEditProfile'])) {
+    header('Location: Vista/alumnoEditarPerfil.php');
+}
