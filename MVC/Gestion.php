@@ -71,6 +71,26 @@ class Gestion {
         self::cerrarConex();
         return $res;
     }
+    
+    public static function getAlumnos() {
+
+        self::abrirConex();
+
+        $consulta = 'SELECT * FROM usuarios';
+        $res = array();
+
+        if ($resultado = self::$conexion->query($consulta)) {
+            while ($row = $resultado->fetch_assoc()) {
+                $rol = self::getRol($row['dni']);
+                if ($rol == 0) {
+                    $r = new User($row['dni'], $row['mail'], $row['pass'], $row['nombre'], $row['apellido'], $row['activado'], $rol);
+                    $res[] = $r;
+                }
+            }
+        }
+        self::cerrarConex();
+        return $res;
+    }
 
     public static function existeUsuario($dni) {
         //Abrimos conexion
@@ -455,6 +475,29 @@ class Gestion {
         $stmt = self::$conexion->prepare($consulta);
         $stmt->bind_param('s',$val1);
         $val1 = $dni;
+        $stmt->execute();
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $r = new examenAlumno($row['id_Examen'], $row['id_Alumno'], $row['nota']);
+                $notas[] = $r;
+            }
+        }
+        
+        self::cerrarConex();
+        return $notas;
+        
+    }
+    
+    public static function getNotasProfesor($id) {
+        
+        self::abrirConex();
+        
+        $notas = [];
+        
+        $consulta = 'SELECT * FROM examenAlumno WHERE id_Examen=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('s',$val1);
+        $val1 = $id;
         $stmt->execute();
         if ($resultado = $stmt->get_result()) {
             while ($row = $resultado->fetch_assoc()) {
