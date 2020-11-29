@@ -45,11 +45,16 @@ if (isset($_REQUEST['realizar_examen'])) {
 //    }
 }
 
-if (isset($_REQUEST['ejemplo'])) {
+if (isset($_REQUEST['send_examen'])) {
     
     $respuesta = $_REQUEST['respuesta'];
     
     foreach ($respuesta as $v) {
-        echo $v;
+        if ($v == null) {
+            echo 'null <br>';
+        }else{
+            echo $v.'<br>';
+        }
+        
     }
 }

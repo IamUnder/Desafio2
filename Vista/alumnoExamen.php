@@ -97,7 +97,7 @@ and open the template in the editor.
                             <h1> <?= $examen->getTitulo() ?> </h1>
                         </div>
                     </div>
-                    
+                    <form action="../controladorAlumno.php">
                     <?php
                     
                     foreach ($preguntasExamen as $k => $v) {
@@ -108,6 +108,7 @@ and open the template in the editor.
                                 <div class="row my-3">
                                     <div class="col-lg-10 offset-1 border shadow p-2">
                                         <h1>Pregunta: <?= $v->getPregunta() ?> </h1>
+                                        <h2>Tipo: <?= $respuestasExamen[$k]->getTipo() ?></h2>
                                         <textarea name="respuesta[]" rows="5" class="form-control"></textarea>
                                     </div>
                                 </div>
@@ -118,16 +119,53 @@ and open the template in the editor.
                                 <div class="row my-3">
                                     <div class="col-lg-10 offset-1 border shadow p-2">
                                         <h1>Pregunta: <?= $v->getPregunta() ?> </h1>
+                                        <h2>Tipo: <?= $respuestasExamen[$k]->getTipo() ?></h2>
                                         <input type="number" name="respuesta[]" class="form-control" placeholder="Respuesta">
                                     </div>
                                 </div>
                                 <?php
                                     break;
                                 case 'unaOpcion':
-                                    
+                                    ?>
+                                <div class="row my-3">
+                                    <div class="col-lg-10 offset-1 border shadow p-2">
+                                        <h1>Pregunta: <?= $v->getPregunta() ?> </h1>
+                                        <h2>Tipo: <?= $respuestasExamen[$k]->getTipo() ?></h2>
+                                        <!--<input type="number" name="respuesta[]" class="form-control" placeholder="Respuesta">-->
+                                        <div class="text-center">
+                                            <input type="radio" class="mr-2" id="resp_opc_a" name="respuesta[]" value=" <?= $respuestasExamen[$k]->getRespuesta1() ?> ">
+                                            <input type="text" name="op" class="" readonly value=" <?= $respuestasExamen[$k]->getRespuesta1() ?> ">
+                                            <input type="radio" class="ml-2" id="resp_opc_b" name="respuesta[]" value=" <?= $respuestasExamen[$k]->getRespuesta2() ?> ">
+                                            <input type="text" name="op" class="" readonly value=" <?= $respuestasExamen[$k]->getRespuesta2() ?> ">
+                                        </div>
+                                        <div class="text-center my-2">
+                                            <input type="radio" class="mr-2" id="resp_opc_c" name="respuesta[]" value="<?= $respuestasExamen[$k]->getRespuesta3() ?>">
+                                            <input type="text" name="op" class="" readonly value=" <?= $respuestasExamen[$k]->getRespuesta3() ?> ">
+                                            <input type="radio" class="ml-2" id="resp_opc_d" name="respuesta[]" value=" <?= $respuestasExamen[$k]->getRespuesta4() ?> ">
+                                            <input type="text" name="op" class="" readonly value=" <?= $respuestasExamen[$k]->getRespuesta4() ?> ">
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
                                     break;
                                 case 'variasOpciones':
-                                    
+                                    ?>
+                                <div class="row my-3">
+                                    <div class="col-lg-10 offset-1 border shadow p-2">
+                                        <h1>Pregunta: <?= $v->getPregunta() ?> </h1>
+                                        <h2>Tipo: <?= $respuestasExamen[$k]->getTipo() ?></h2>
+                                        <!--<input type="number" name="respuesta[]" class="form-control" placeholder="Respuesta">-->
+                                        <div class="text-center">
+                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta1() ?>" name="respuesta[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta1() ?></label>
+                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta2() ?>" name="respuesta[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta2() ?></label>
+                                        </div>
+                                        <div class="text-center my-2">
+                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta3() ?>" name="respuesta[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta3() ?></label>
+                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta4() ?>" name="respuesta[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta4() ?></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php
                                     break;
 
                                 default:
@@ -149,9 +187,10 @@ and open the template in the editor.
                             <a href="usuario.php" class="btn btn-outline-danger my-4 btn-block" type="submit">Cancelar</a>
                         </div>
                         <div class="col">
-                            <button name="form_registrar" class="btn btn-outline-success my-4 btn-block" type="submit">Entregar examen</button>
+                            <button name="send_examen" class="btn btn-outline-success my-4 btn-block" type="submit">Entregar examen</button>
                         </div>
                     </div>
+                </form>
                 </div>
             </div>
         </div>
