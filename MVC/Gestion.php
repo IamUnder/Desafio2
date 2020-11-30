@@ -641,5 +641,86 @@ class Gestion {
         $stmt->execute();
         
         self::cerrarConex();
+        
+    }
+    
+    public static function getDNI($id) {
+        
+        self::abrirConex();
+        
+        $r = [];
+        
+        $consulta = 'SELECT DISTINCT id_Alumno from respuestasAlumnos WHERE id_Examen=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('i',$val1);
+        $val1 = $id;
+        $stmt->execute();
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $r[] = $row['id_Alumno'];
+            }
+        }
+        
+        self::cerrarConex();
+        return $r;
+        
+    }
+    
+    public static function getRespuestasAlumno($dni) {
+        
+        self::abrirConex();
+        
+        $r = [];
+        
+        $consulta = 'SELECT * FROM respuestasAlumnos WHERE id_Alumno=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('s',$val1);
+        $val1 = $dni;
+        $stmt->execute();
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $aux = new RespuestasAlumno($row['id_Examen'], $row['id_Alumno'], $row['id_Pregunta'], $row['respuesta']);
+                $r[] = $aux;
+            }
+        }
+        
+        self::cerrarConex();
+        return $r;
+    }
+    
+    public static function getCorrecta($id) {
+        
+        self::abrirConex();
+        
+        $consulta = 'SELECT respuestaCorrecta FROM respuestasCorrectas WHERE idPregunta=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('i',$val1);
+        $val1 = $id;
+        $stmt->execute();
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()){
+                $r = $row['respuestaCorrecta'];
+            }
+        }
+        
+        self::cerrarConex();
+        return $r;
+        
+    }
+    
+    public static function setNota($id_Examen, $id_Alumno, $nota) {
+        
+        self::abrirConex();
+        
+        $consulta = 'INSERT INTO examenAlumno VALUE (?,?,?)';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('iss',$val1,$val2,$val3);
+        $val1 = $id_Examen;
+        $val2 = $id_Alumno;
+        $val3 = $nota;
+        $stmt->execute();
+        
+        self::cerrarConex();
+        
     }
 }
