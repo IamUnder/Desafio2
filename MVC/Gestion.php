@@ -35,7 +35,7 @@ class Gestion {
 
 //        $consulta = 'SELECT * FROM usuarios WHERE mail=? AND pass=?';
         $consulta = 'SELECT * FROM usuarios WHERE mail=?';
-        
+
         $stmt = self::$conexion->prepare($consulta);
 //        $stmt->bind_param("ss", $val1, $val2);
         $stmt->bind_param("s", $val1);
@@ -213,7 +213,7 @@ class Gestion {
             $val4 = $apellido;
             $val5 = $dni;
             $stmt1->execute();
-        }else{
+        } else {
             $consulta1 = 'UPDATE usuarios SET mail=? , nombre=? , apellido=? WHERE dni=?';
             $stmt1 = self::$conexion->prepare($consulta1);
             $stmt1->bind_param('ssss', $val1, $val2, $val3, $val4);
@@ -311,7 +311,7 @@ class Gestion {
         self::cerrarConex();
         return $preguntasDisponibles;
     }
-    
+
     public static function getAllExamen() {
         self::abrirConex();
 
@@ -320,76 +320,136 @@ class Gestion {
 
         if ($resultado = self::$conexion->query($consulta)) {
             while ($row = $resultado->fetch_assoc()) {
-                $r = new Examen($row['id'], $row['id_Profesor'] , $row['fecha_Inicio'], $row['fecha_Fin'], $row['estado'], $row['titulo'], $row['descripcion']);
+                $r = new Examen($row['id'], $row['id_Profesor'], $row['fecha_Inicio'], $row['fecha_Fin'], $row['estado'], $row['titulo'], $row['descripcion']);
                 $res[] = $r;
             }
         }
         self::cerrarConex();
         return $res;
     }
-    
+
     public static function examenOn($id) {
         self::abrirConex();
-        
+
         $consulta = 'UPDATE examen SET estado=1 WHERE id=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('i',$val1);
+        $stmt->bind_param('i', $val1);
         $val1 = $id;
         $stmt->execute();
-        
+
         self::cerrarConex();
     }
-    
+
     public static function examenOff($id) {
         self::abrirConex();
-        
+
         $consulta = 'UPDATE examen SET estado=0 WHERE id=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('i',$val1);
+        $stmt->bind_param('i', $val1);
         $val1 = $id;
         $stmt->execute();
-        
+
         self::cerrarConex();
     }
-    
-    public static function editExamen($id,$titulo,$fecha_inicio,$fecha_fin,$descripcion) {
+
+    public static function editExamen($id, $titulo, $fecha_inicio, $fecha_fin, $descripcion) {
         self::abrirConex();
-        
+
         $consulta = 'UPDATE examen SET titulo=? , fecha_Inicio=? , fecha_Fin=? , descripcion=? WHERE id=? ';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('ssssi',$val1,$val2,$val3,$val4,$val5);
+        $stmt->bind_param('ssssi', $val1, $val2, $val3, $val4, $val5);
         $val1 = $titulo;
         $val2 = $fecha_inicio;
         $val3 = $fecha_fin;
         $val4 = $descripcion;
         $val5 = $id;
         $stmt->execute();
-        
+
         self::cerrarConex();
     }
 
     public static function deleteExamen($id) {
         self::abrirConex();
-        
+
         $consulta = 'DELETE FROM examen WHERE id=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('s',$val1);
+        $stmt->bind_param('s', $val1);
         $val1 = $id;
         $stmt->execute();
-        
+
         self::cerrarConex();
     }
-    
+
     public static function checkExamen($id) {
         self::abrirConex();
-        
+
         $consulta = 'UPDATE examen SET estado=2 WHERE id=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('i',$val1);
+        $stmt->bind_param('i', $val1);
         $val1 = $id;
         $stmt->execute();
-        
+
         self::cerrarConex();
     }
-    
+
+    public static function getIdPregunta($pregunta) {
+        self::abrirConex();
+        $idPregunta;
+
+        $sentencia = "SELECT idPregunta FROM preguntas WHERE pregunta = '" . $pregunta . "'";
+
+        if ($resultado = mysqli_query(self::$conexion, $sentencia)) {
+            if ($fila = mysqli_fetch_array($resultado)) {
+                $idPregunta = $fila[0];
+            }
+        }
+        self::cerrarConex();
+        return $idPregunta;
+    }
+
+    public static function addExamen($examen) {
+        self::abrirConex();
+        $add = false;
+
+        $idProfesor = $examen->getId_Profesor();
+        $titulo = $examen->getTitulo();
+        $descripcion = $examen->getDescripcion();
+
+        $sentencia = "INSERT INTO examen values(NULL,'" . $idProfesor . "',default,default,0,'" . $titulo . "','" . $descripcion . "')";
+
+        if (mysqli_query(self::$conexion, $sentencia)) {
+            $add = true;
+        }
+
+        self::cerrarConex();
+        return $add;
+    }
+
+    public static function getIdExamen($dniProfesor, $titulo) {
+        self::abrirConex();
+        $idExamen;
+
+        $sentencia = "SELECT id FROM examen WHERE id_Profesor = '" . $dniProfesor . "' AND titulo = '" . $titulo . "'";
+
+        if ($resultado = mysqli_query(self::$conexion, $sentencia)) {
+            if ($fila = mysqli_fetch_array($resultado)) {
+                $idExamen = $fila[0];
+            }
+        }
+
+        self::cerrarConex();
+        return $idExamen;
+    }
+
+    public static function asignarPreguntasAExamen($idExamen, $idPregunta) {
+        self::abrirConex();
+        $asignados = false;
+
+        $sentencia = "UPDATE preguntas SET idExamen = " . $idExamen . " WHERE idPregunta = " . $idPregunta;
+
+        if (mysqli_query(self::$conexion, $sentencia)) {
+            $asignados = true;
+        }
+    }
+
 }

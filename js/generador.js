@@ -14,7 +14,8 @@ var addFila = function () {
 
     //Creo la card
     var card = document.createElement('div');
-    card.className = 'card d-flex justify-content-center mb-1  border-success ' + nombre;
+    card.setAttribute("name", "cards");
+    card.className = 'card d-flex justify-content-center mb-1  border-success cards';
     card.id = nombre;
 
     //Creo el card-body
@@ -29,10 +30,11 @@ var addFila = function () {
 
     //Creamos el div con el drop and Drop
     var div = document.createElement('div');
-    div.className = 'd-flex justify-content-center align-items-center';
+    div.className = 'd-flex justify-content-center align-items-center overflow-auto';
     div.setAttribute("ondrop", "drop(event)");
     div.setAttribute("ondragover", "allowDrop(event)");
     div.setAttribute("id", "div" + contador);
+    div.setAttribute("name", "DragDrop");
     div.style.width = "100%";
     div.style.height = "10vh";
     div.style.border = "1px solid black";
@@ -64,15 +66,66 @@ var delPregunta = function () {
 };
 
 var resetearContador = function () {
-    //Resetear el contrador de las preguntas para enumerarlas de nuevo
-    contadorTotal = contador - 1;
 
-    titulos = document.getElementsByName('tituloPregunta');
-    console.log(titulos);
+    var preguntas;
+    var cards;
+    var contadorAux;
+    var divsDragDrop;
 
+    preguntas = document.getElementsByName('tituloPregunta');
+    cards = document.getElementsByName('cards');
+    divsDragDrop = document.getElementsByName('DragDrop');
 
-    for (var i = 1; i <= contadorTotal; i++) {
-        titulos[i].innerHTML = 'Pregunta&nbsp;' + i;
+    for (var i = 0; i < preguntas.length; i++) {
+        preguntas[i].innerHTML = 'Pregunta&nbsp;' + (i + 1);
+        cards[i].id = 'card-' + (i + 1);
+        divsDragDrop[i].id = 'div' + (i + 1);
+        contadorAux = (i + 1);
     }
+    contador = contadorAux;
 
 };
+
+var prepararObjeto = function () {
+
+    var formulario;
+    formulario = document.getElementById('examen');
+
+    var tituloExamen;
+    tituloExamen = formulario.getElementsByTagName('input');
+
+    var descripcion;
+    descripcion = formulario.getElementsByTagName('textarea');
+
+    var dniProfesor;
+    dniProfesor = formulario.getElementsByTagName('small');
+    var textoDNI;
+    textoDNI = dniProfesor[0].innerHTML;
+    console.log('El DNI del profesor es: ' + textoDNI);
+
+    console.log('Titulo del examen: ' + tituloExamen[0].value);
+    console.log('La descripcion es: ' + descripcion[0].value);
+
+
+    var conjPreguntas;
+    conjPreguntas = formulario.getElementsByTagName('p');
+    var preguntasTam = conjPreguntas.length;
+
+    var pregunta;
+
+    for (i = 0; i < conjPreguntas.length; i++) {
+        pregunta = conjPreguntas[i].innerHTML;
+        console.log('La pregunta numero ' + (i + 1) + ' es: ' + pregunta);
+    }
+    let examen = new Examen(textoDNI, tituloExamen, descripcion, conjPreguntas);
+};
+
+class Examen {
+    constructor(dni_Profesor, titulo, descripcion, preguntas) {
+        this.dni_Profesor = dni_Profesor;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.preguntas = preguntas;
+    }
+    
+}
