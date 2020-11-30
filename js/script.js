@@ -6,5 +6,5 @@
 
 
 function verNota(nota) {
-    alert('La nota de este examen es: ' + nota);
+    alert('La nota de este examen es: ' + (nota*10));
 }
