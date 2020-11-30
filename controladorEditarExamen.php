@@ -64,7 +64,7 @@ if (isset($_REQUEST['corregir_examen'])) {
     foreach ($dnis as $v) {
         $contador = 0;
         $contador2 = 0;
-        $respuestasAlumno = Gestion::getRespuestasAlumno($v);
+        $respuestasAlumno = Gestion::getRespuestasAlumno($v,$id);
         foreach ($respuestasAlumno as $x) {
             echo $x . '<br>';
             $respCorrecta = Gestion::getCorrecta($x->getId_Pregunta());

@@ -14,9 +14,9 @@ class Gestion {
 
     public static function abrirConex() {
         //Jorge
-//        self::$conexion = new mysqli('localhost:7007', 'root', 'secret', 'Desafio2');
+        self::$conexion = new mysqli('localhost:7007', 'root', 'secret', 'Desafio2');
         //Alejandro
-        self::$conexion = new mysqli('localhost', 'alejandro', 'Chubaca2020', 'Desafio2');
+//        self::$conexion = new mysqli('localhost', 'alejandro', 'Chubaca2020', 'Desafio2');
 
         if (self::$conexion->connect_errno) {
             print "Fallo al conectar a MySQL: " . mysqli_connect_error();
@@ -672,16 +672,17 @@ class Gestion {
         return $r;
     }
 
-    public static function getRespuestasAlumno($dni) {
+    public static function getRespuestasAlumno($dni,$id) {
 
         self::abrirConex();
 
         $r = [];
 
-        $consulta = 'SELECT * FROM respuestasAlumnos WHERE id_Alumno=?';
+        $consulta = 'SELECT * FROM respuestasAlumnos WHERE id_Alumno=? AND id_Examen=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('s', $val1);
+        $stmt->bind_param('si', $val1,$val2);
         $val1 = $dni;
+        $val2 = $id;
         $stmt->execute();
         if ($resultado = $stmt->get_result()) {
             while ($row = $resultado->fetch_assoc()) {
