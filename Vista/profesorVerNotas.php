@@ -37,10 +37,10 @@ and open the template in the editor.
         $alumnos = $_SESSION['alumnos'];
         if (isset($_SESSION['allExamen'])) {
             $allExamen = $_SESSION['allExamen'];
-            foreach ($allExamen as $v) {
-                echo $v->getTitulo();
-                echo $v->getFecha_fin() . '<br>';
-            }
+//            foreach ($allExamen as $v) {
+//                echo $v->getTitulo();
+//                echo $v->getFecha_fin() . '<br>';
+//            }
         }
         ?>
         <!--Navbar-->

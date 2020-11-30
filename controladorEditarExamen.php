@@ -11,6 +11,7 @@ session_start();
 require_once './MVC/Gestion.php';
 require_once './Clases/examenAlumno.php';
 require_once './Clases/User.php';
+require_once './Clases/RespuestasAlumno.php';
 //******************************************************************************
 //****************************** CRUD EXAMEN ***********************************
 //******************************************************************************
@@ -58,6 +59,26 @@ if (isset($_REQUEST['corregir_examen'])) {
     $id = $_REQUEST['id'];
     
     // Falta funcionalidad
+    $dnis = Gestion::getDNI($id);
+    foreach ($dnis as $v) {
+        $contador = 0;
+        $contador2 = 0;
+        $respuestasAlumno = Gestion::getRespuestasAlumno($v);
+        foreach ($respuestasAlumno as $x) {
+            echo $x. '<br>';
+            $respCorrecta = Gestion::getCorrecta($x->getId_Pregunta());
+            echo 'La respuesta correcta es: ' . $respCorrecta . '<br>';
+            if (trim($x->getRespuesta()) == trim($respCorrecta)) {
+                $contador++;
+            }
+            $contador2++;
+        }
+        $aux = $respuestasAlumno[0];
+        $nota = $contador.'/'.$contador2;
+        echo 'La nota del alumno es: ' . $nota.'<br>';
+        Gestion::setNota($aux->getId_Examen(), $aux->getId_Alumno(), $nota);
+    }
+    
     Gestion::checkExamen($id);
     funcProfesor();
     
