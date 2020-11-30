@@ -14,9 +14,9 @@ class Gestion {
 
     public static function abrirConex() {
         //Jorge
-        self::$conexion = new mysqli('localhost:7007', 'root', 'secret', 'Desafio2');
+//        self::$conexion = new mysqli('localhost:7007', 'root', 'secret', 'Desafio2');
         //Alejandro
-//        self::$conexion = new mysqli('localhost', 'alejandro', 'Chubaca2020', 'Desafio2');
+        self::$conexion = new mysqli('localhost', 'alejandro', 'Chubaca2020', 'Desafio2');
 
         if (self::$conexion->connect_errno) {
             print "Fallo al conectar a MySQL: " . mysqli_connect_error();

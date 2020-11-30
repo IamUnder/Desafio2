@@ -18,7 +18,6 @@ and open the template in the editor.
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <!-- Material Design Bootstrap -->
-        <link rel="stylesheet" href="../css/mdb.min.css">
         <!-- Your custom styles (optional) -->
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/fondos.css">
@@ -41,13 +40,11 @@ and open the template in the editor.
         }
         ?>
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light background-green">
+        <nav class="navbar navbar-expand-lg navbar-light background-green py-0">
 
             <div class="container-fluid">
 
-                <a class="navbar-brand" href="#">
-                    <img src="../img/logo.png" class="vh-10" alt="mdb logo">
-                </a>
+                <img src="../img/logo.png" alt="Logo_mamas2.0" class="vh-10" />
 
                 <!-- Collapse button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
@@ -63,15 +60,15 @@ and open the template in the editor.
                         <?php
                         if ($user->getRol() == 2) {
                             ?>
-                            <li class="nav-item">
-                                <a href="../controlador.php?Estado=Profesor" class="btn btn-white btn-sm text-success">Cambiar rol</a>
+                            <li class="nav-item mr-1">
+                                <a href="../controlador.php?Estado=Profesor" class="btn white btn text-success bg-light btn-sm-sm">Cambiar rol</a>
                             </li>
                             <?php
                         }
                         ?>
 
                         <li class="nav-item">
-                            <a href="../controlador.php?Back=Back" class="btn btn-white btn-sm text-success">Cerrar sesion</a>
+                            <a href="../controlador.php?Back=Back" class="btn white btn text-success bg-light btn-sm-sm">Cerrar sesion</a>
                         </li>
                     </ul>
                     <!-- Links -->
@@ -85,7 +82,7 @@ and open the template in the editor.
         <!--/.Navbar--> 
 
 
-        <main class="container-fluid">
+        <main class="container-fluid vh-80">
             <div class="row">
                 <aside class="col-md-2 col-sm-2 border-green pl-0 pr-0">
                     <nav class="navbar navbar-expand-lg navbar-light my-2">
@@ -98,13 +95,16 @@ and open the template in the editor.
                         </button> 
 
                         <!-- Collapsible content -->
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
 
                             <!-- Links -->
                             <ul class="nav flex-column">
                                 <form action="../controlador.php" name="menu" method="POST">
                                     <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver examenes&nbsp;<i class="fas fa-file-signature"></i></button>
                                     </li>
                                     <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
@@ -122,7 +122,7 @@ and open the template in the editor.
 
                     </nav>
                 </aside>
-                <section class="col-md-10 col-sm-10 border-green">
+                <section class="col-md-10 col-sm-10 border-green vh-80 overflow-auto">
                     <div class="row">
                         <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
                             <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>
@@ -137,9 +137,9 @@ and open the template in the editor.
                                 <div class="card z-depth-0 border-success">
                                     <div class="card-header " id="headingOne">
                                         <h5 class="mb-0 text-right">
-                                            <button class="btn btn-link border-success text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                            <button class="border-success rounded text-decoration-none" data-toggle="collapse" data-target="#collapseOne"
                                                     aria-expanded="true" aria-controls="collapseOne">
-                                                <h3 class="text-decoration-none">Leyenda <i class="fas fa-angle-down rotate-icon"></i></h3>
+                                                <h3 class="text-success">Leyenda <i class="fas fa-angle-down rotate-icon"></i></h3>
                                             </button>
                                         </h5>
                                     </div>
@@ -183,7 +183,7 @@ and open the template in the editor.
                                                                 </li>
                                                                 <li>
                                                                     Desactivar examen:
-                                                                     <i class="fas fa-times green-text"></i>
+                                                                    <i class="fas fa-times green-text"></i>
                                                                 </li>
                                                                 <li>
                                                                     Editar:
@@ -260,20 +260,20 @@ and open the template in the editor.
                                                         <?php
                                                         if ($v->getEstado() == 0) {
                                                             ?>
-                                                            <button name="activar_examen" type="submit" class="btn-white border-0"><!-- Activar -->
+                                                            <button name="activar_examen" type="submit" class="btn border-0"><!-- Activar -->
                                                                 <i class="fas fa-check green-text"></i>
                                                             </button>
                                                             <?php
-                                                        } else if ($v->getEstado() == 1){
+                                                        } else if ($v->getEstado() == 1) {
                                                             ?>
-                                                            <button name="desactivar_examen" type="submit" class="btn-white border-0"><!-- Desactivar -->
+                                                            <button name="desactivar_examen" type="submit" class="btn border-0"><!-- Desactivar -->
                                                                 <i class="fas fa-times green-text"></i>
                                                             </button>
                                                             <?php
                                                         }
                                                         ?>
 
-                                                        <button name="editar_examen" type="submit" class="btn-white border-0"><!-- Editar -->
+                                                        <button name="editar_examen" type="submit" class="btn border-0"><!-- Editar -->
                                                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                                             </svg>
@@ -281,21 +281,21 @@ and open the template in the editor.
                                                         <?php
                                                         if ($v->getEstado() == 2) {
                                                             ?>
-                                                        <button name="ver_examen" type="submit" class="btn-white border-0"><!-- Ver Notas -->
+                                                            <button name="ver_examen" type="submit" class="btn border-0"><!-- Ver Notas -->
                                                                 <i class="fas fa-eye green-text"></i>
                                                             </button>
-                                                        <?php
+                                                            <?php
                                                         }
                                                         if ($v->getEstado() == 1) {
                                                             ?>
-                                                            <button name="corregir_examen" type="submit" class="btn-white border-0"><!-- Correguir -->
+                                                            <button name="corregir_examen" type="submit" class="btn border-0"><!-- Correguir -->
                                                                 <i class="fas fa-file-import green-text"></i>
                                                             </button>
                                                             <?php
                                                         }
                                                         ?>
 
-                                                        <button name="borrar_examen" type="submit" class="btn-white border-0"><!-- Borrar -->
+                                                        <button name="borrar_examen" type="submit" class="btn border-0"><!-- Borrar -->
                                                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="#dc3545" xmlns="http://www.w3.org/2000/svg">
                                                             <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
                                                             </svg>
@@ -316,13 +316,11 @@ and open the template in the editor.
         </main>
 
         <!-- Footer -->
-        <div class="container-fluid background-green">
+        <div class="container-fluid background-green vh-10 d-flex align-items-center justify-content-center">
 
             <!--Section: Content-->
-            <section class="py-5 text-center white-text">
-
-                <h3 class="">Made with <i class="fas fa-heart orange-text mx-1"></i> by Jorge y Alejandro</h3>
-
+            <section class="text-center white-text">
+                <h3 class="">Made with <i class="fas fa-heart text-warning mx-1"></i> by Jorge y Alejandro</h3>
             </section>
             <!--Section: Content-->
 

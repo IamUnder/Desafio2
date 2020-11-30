@@ -40,7 +40,7 @@ and open the template in the editor.
             <header class="row text-white background-green align-items-center">
                 <div class="col-md-12 col-sm-12">
                     <!--Navbar-->
-                    <nav class="navbar navbar-expand-lg navbar-light pt-0 pb-0">
+                    <nav class="navbar navbar-expand-lg navbar-light py-0">
 
 
                         <img src="../img/logo.png" alt="Logo_mamas2.0" class="vh-10" />
@@ -55,12 +55,12 @@ and open the template in the editor.
                         <div class="collapse navbar-collapse background-green" id="basicExampleNav">
 
                             <!-- Right -->
-                            <ul class="navbar-nav offset-10">
+                            <ul class="navbar-nav mr-auto offset-9 align-items-end text-right">
                                 <li class="nav-item mr-1">
-                                    <a href="../controlador.php?Estado=Profesor"><button class="btn white btn text-success bg-light btn-sm-sm" type="button">Cambiar Rol</button></a>
+                                    <a href="../controlador.php?Estado=Admin" class="white btn text-success bg-light btn-sm-sm">Cambiar rol</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../controlador.php?Back=Back"><button class="btn white btn text-success bg-light btn-sm-sm" type="button">Cerrar Sesion</button></a>
+                                    <a href="../controlador.php?Back=Back" class="white btn text-success bg-light btn-sm-sm">Cerrar sesion</a>
                                 </li>
                             </ul>
 
@@ -90,6 +90,9 @@ and open the template in the editor.
                             <ul class="nav flex-column">
                                 <form action="../controlador.php" name="menu" method="POST">
                                     <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
+                                    </li>
+                                    <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver examenes&nbsp;<i class="fas fa-file-signature"></i></button>
                                     </li>
                                     <li class="nav-item">
@@ -108,7 +111,7 @@ and open the template in the editor.
 
                     </nav>
                 </aside>
-                <section class="col-md-10 col-sm-10 border-green vh-80 w-100">
+                <section class="col-md-10 col-sm-10 border-green vh-80 overflow-auto w-100">
                     <div class="row">
                         <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
                             <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>

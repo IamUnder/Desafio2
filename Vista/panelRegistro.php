@@ -37,7 +37,7 @@
                 </div>
             </header>
 
-            <main class="row vh-80 d-flex align-items-center justify-content-center">
+            <main class="row vh-80 overflow-auto d-flex align-items-center justify-content-center">
                 <div class="col-md-4 col-sm-4">
                     <div class="text-center">
                         <h1>Registro de usuario</h1>
