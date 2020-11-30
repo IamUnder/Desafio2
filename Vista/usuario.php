@@ -103,7 +103,7 @@ and open the template in the editor.
                             <ul class="nav flex-column">
                                 <form action="../controladorAlumno.php" name="menu" method="POST">
                                     <li class="nav-item">
-                                        <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
                                     </li>
                                 </form>
                             </ul>

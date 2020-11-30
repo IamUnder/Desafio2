@@ -86,7 +86,7 @@ and open the template in the editor.
                             <!-- Right -->
                             <ul class="navbar-nav mr-auto offset-9 align-items-end text-right">
                                 <li class="nav-item mr-1">
-                                    <a href="../controlador.php?Estado=Admin" class="white btn text-success bg-light btn-sm-sm">Cambiar rol</a>
+                                    <a href="../controlador.php?Estado=Profesor" class="btn white btn text-success bg-light btn-sm-sm">Cambiar rol</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="../controlador.php?Back=Back" class="white btn text-success bg-light btn-sm-sm">Cerrar sesion</a>
