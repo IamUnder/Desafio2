@@ -7,30 +7,34 @@
  */
 class Pregunta {
 
-    private $idPregunta;
     private $tipo;
+    private $descripcion;
     private $respuesta1;
     private $respuesta2;
     private $respuesta3;
     private $respuesta4;
     private $respuestaCorrecta;
 
-    function __construct($idPregunta, $tipo, $respuesta1, $respuesta2, $respuesta3, $respuesta4, $respuestaCorrecta) {
-        $this->idPregunta = $idPregunta;
+    function __construct($tipo, $descripcion, $respuesta1, $respuesta2, $respuesta3, $respuesta4, $respuestaCorrecta) {
         $this->tipo = $tipo;
+        $this->descripcion = $descripcion;
         $this->respuesta1 = $respuesta1;
         $this->respuesta2 = $respuesta2;
         $this->respuesta3 = $respuesta3;
         $this->respuesta4 = $respuesta4;
         $this->respuestaCorrecta = $respuestaCorrecta;
     }
-    
-    function getIdPregunta() {
-        return $this->idPregunta;
-    }
 
     function getTipo() {
         return $this->tipo;
+    }
+
+    function setTipo($tipo): void {
+        $this->tipo = $tipo;
+    }
+
+    function getDescripcion() {
+        return $this->descripcion;
     }
 
     function getRespuesta1() {
@@ -53,12 +57,8 @@ class Pregunta {
         return $this->respuestaCorrecta;
     }
 
-    function setIdPregunta($idPregunta): void {
-        $this->idPregunta = $idPregunta;
-    }
-
-    function setTipo($tipo): void {
-        $this->tipo = $tipo;
+    function setDescripcion($descripcion): void {
+        $this->descripcion = $descripcion;
     }
 
     function setRespuesta1($respuesta1): void {
@@ -80,6 +80,5 @@ class Pregunta {
     function setRespuestaCorrecta($respuestaCorrecta): void {
         $this->respuestaCorrecta = $respuestaCorrecta;
     }
-
 
 }
