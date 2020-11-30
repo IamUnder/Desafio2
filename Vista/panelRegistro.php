@@ -54,26 +54,26 @@
                             <div class="col">
                                 <!-- Primer nombre -->
                                 <input type="text" id="nombre" name="registro_nombre" aria-describedby="nombreError" class="form-control" placeholder="Introduce el nombre" required>
-                                <small id="nombreError" class="form-text bg-danger" aria-live="polite"></small>
+                                <small id="nombreError" class="form-text" aria-live="polite"></small>
                             </div>
                             <div class="col">
                                 <!--<!-- Apellidos -->
                                 <input type="text" id="apellido" name="registro_apellido" aria-describedby="apellidoError" class="form-control" placeholder="Introduce tus apellidos" required>
-                                <small id="apellidoError" class="form-text bg-danger" aria-live="polite"></small>
+                                <small id="apellidoError" class="form-text" aria-live="polite"></small>
                             </div>
                         </div>
 
                         <!-- DNI -->
                         <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{8}[A-Z]">
-                        <small id="dniError" class="form-text bg-danger" aria-live="polite"></small>
+                        <small id="dniError" class="form-text" aria-live="polite"></small>
 
                         <!-- E-mail -->
                         <input type="email"  id="mail" name="registro_mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
-                        <small id="mailError" class="form-text bg-danger" aria-live="polite"></small>
+                        <small id="mailError" class="form-text" aria-live="polite"></small>
 
                         <!-- Contraseña -->
                         <input type="password" name="registro_pass" id="pass" class="form-control" placeholder="Introduce tu contraseña" aria-describedby="pass" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
-                        <small id="passError" class="form-text bg-danger" aria-live="polite"></small>
+                        <small id="passError" class="form-text" aria-live="polite"></small>
 
                         <!-- Botones registrar y volver -->
                         <div class="form-row mb-4">

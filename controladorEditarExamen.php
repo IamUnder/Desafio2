@@ -9,6 +9,7 @@
 session_start();
 
 require_once './MVC/Gestion.php';
+require_once './Clases/examenAlumno.php';
 require_once './Clases/User.php';
 //******************************************************************************
 //****************************** CRUD EXAMEN ***********************************
@@ -61,6 +62,16 @@ if (isset($_REQUEST['corregir_examen'])) {
     funcProfesor();
     
     header('Location: Vista/profesorPrincipal.php');
+}
+
+if (isset($_REQUEST['ver_examen'])) {
+    $id = $_REQUEST['id'];
+    
+    $_SESSION['alumnos'] = Gestion::getAlumnos();
+    $_SESSION['titulo'] = $_REQUEST['titulo'];
+    $_SESSION['notas'] = Gestion::getNotasProfesor($id);
+    
+    header('Location: Vista/profesorVerNotas.php');
 }
 
 //******************************************************************************

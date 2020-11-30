@@ -275,6 +275,13 @@ and open the template in the editor.
                                                             </svg>
                                                         </button>
                                                         <?php
+                                                        if ($v->getEstado() == 2) {
+                                                            ?>
+                                                        <button name="ver_examen" type="submit" class="btn-white border-0"><!-- Ver Notas -->
+                                                                <i class="fas fa-eye green-text"></i>
+                                                            </button>
+                                                        <?php
+                                                        }
                                                         if ($v->getEstado() == 1) {
                                                             ?>
                                                             <button name="corregir_examen" type="submit" class="btn-white border-0"><!-- Correguir -->

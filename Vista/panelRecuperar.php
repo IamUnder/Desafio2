@@ -20,7 +20,7 @@ and open the template in the editor.
 
         <title>Recuperar Contraseña</title>
     </head>
-    <body class="rosemary">
+    <body class="rosemary" onload="validacion()">
         <div class="container-fluid">
 
             <header class="row text-white background-green align-items-center">
@@ -47,8 +47,7 @@ and open the template in the editor.
                         $_SESSION['recuperarPass'] = $paso;
                     }
                     ?>
-
-                    <form class="text-center border border-light mt-2 jus" action="../controlador.php" method="POST" name="formulario">
+                    
                         <?php
                         if (isset($_SESSION['mensaje'])) {
                             echo $_SESSION['mensaje'];
@@ -57,36 +56,46 @@ and open the template in the editor.
                         if (isset($paso)) {
                             if ($paso == 1) {
                                 ?>
-                                <!-- DNI -->
-                                <input type="text" id="dni" name="recuperar_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{8}[A-Z]">
-
-                                <!-- E-mail -->
-                                <input type="email"  id="mail" name="recuperar_mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
-
-                                <!-- Botones registrar y volver -->
-                                <div class="form-row mb-4"> 
-                                    <div class="col">
-                                        <button name="form_recuperar_next" class="btn btn-outline-success my-4 btn-block" type="submit">Siguiente paso</button>
+                        <form class="text-center border border-light mt-2 jus" action="../controlador.php" method="POST" name="formulario" id="form1" novalidate>
+                                    <!-- DNI -->
+                                    <input type="text" id="dni" name="recuperar_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{8}[A-Z]">
+                                    <small id="dniError" class="form-text mb-4" aria-live="polite"></small>
+                                    <!-- E-mail -->
+                                    <input type="email"  id="mail" name="recuperar_mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
+                                    <small id="mailError" class="form-text mb-4" aria-live="polite"></small>
+                                    <!-- Botones registrar y volver -->
+                                    <div class="form-row mb-4"> 
+                                        <div class="col">
+                                            <button name="form_recuperar_next" class="btn btn-outline-success my-4 btn-block" type="submit">Siguiente paso</button>
+                                        </div>
+                                        <div class="col">
+                                            <a href="../index.php" class="btn btn-outline-danger my-4 btn-block" type="submit">Volver</a>
+                                        </div>
                                     </div>
+                                </form>
                                     <?php
                                 } else {
                                     ?>
+                        <form class="text-center border border-light mt-2 jus" action="../controlador.php" method="POST" name="formulario" id="form2" novalidate>
                                     <!-- Contraseña -->
-                                    <input type = "password" name = "recuperar_pass1" id = "pass" class = "form-control mb-4" placeholder = "Introduce la nueva contraseña" aria-describedby = "pass" required minlength = "8" maxlength = "10" pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                                    <input type = "password" name = "recuperar_pass1" id = "pass1" class = "form-control mb-4" placeholder = "Introduce la nueva contraseña" aria-describedby = "pass" required minlength = "8" maxlength = "10" pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                                    <small id="pass1Error" class="form-text mb-4" aria-live="polite"></small>
                                     <!-- Confirmar pass -->
                                     <input type = "password" name = "recuperar_pass2" id = "pass2" class = "form-control mb-4" placeholder = "Vuelve a introducir la contraseña" aria-describedby = "pass" required minlength = "8" maxlength = "10" pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                                    <small id="pass2Error" class="form-text mb-4" aria-live="polite"></small>
+                                    <small id="passError" class="form-text mb-4" aria-live="polite"></small>
                                     <div class="form-row mb-4"> 
                                         <div class="col">
                                             <button name="form_recuperar_end" class="btn btn-outline-success my-4 btn-block" type="submit">Confirmar cambios</button>
                                         </div>
+                                        <div class="col">
+                                        <a href="../index.php" class="btn btn-outline-danger my-4 btn-block" type="submit">Volver</a>
+                                    </div>
+                                        </div>
+                         </form>
                                         <?php
                                     }
                                     ?>
-                                    <div class="col">
-                                        <a href="../index.php" class="btn btn-outline-danger my-4 btn-block" type="submit">Volver</a>
-                                    </div>
-                                </div>
-                        </form>
                         <?php
                     }
                     ?>
@@ -98,5 +107,6 @@ and open the template in the editor.
                 <h3>Aplicación creada por Jorge y Alejandro</h3>
             </footer>
         </div>
+        <script src="../js/recuperarValidacion.js"></script>
     </body>
 </html>

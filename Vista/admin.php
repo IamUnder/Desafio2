@@ -85,6 +85,63 @@ and open the template in the editor.
                             <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-tools"></i></i></p>
                         </div>
                     </div>
+                    <!-- Formulario de registro -->
+            <div class="row my-5">
+                <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1">
+                    <div class="table-responsive">
+                        <h1 class="text-center">Agregar Usuario</h1>
+                        <table class="table border shadow">
+                            <tr class="background-light-green">
+                                <th>DNI</th>
+                                <th>Mail</th>
+                                <th>Password</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                            <form action="../controlador.php" id="registro" novalidate>
+                                <tr>
+                                    <td><!-- DNI -->
+                                        <input type="text" id="dni" name="registro_dni" value="" placeholder="DNI" class="form-control" required pattern="\d{8}[A-Z]">
+                                        <small id="dniError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Mail -->
+                                        <input type="email" id="mail" name="registro_mail" value="" placeholder="Mail" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$">
+                                        <small id="mailError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Password -->
+                                        <input type="password" id="pass" name="registro_pass" value="" placeholder="Password" class="form-control" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
+                                        <small id="passError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Nombre -->
+                                        <input type="text" id="nombre" name="registro_nombre" value="" placeholder="Nombre" class="form-control" required>
+                                        <small id="nombreError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Apellido -->
+                                        <input type="text" id="apellido" name="registro_apellido" value=""  placeholder="Apellido" class="form-control" required>
+                                        <small id="apellidoError" class="form-text" aria-live="polite"></small>
+                                    </td>
+                                    <td><!-- Rol -->
+                                        <select class="form-control" name="registro_rol">
+                                            <option value="0" >Alumno</option>
+                                            <option value="1" >Profesor</option>
+                                            <option value="2" >Administrador</option>
+                                        </select> 
+                                    </td>
+                                    <td><!-- Acciones -->
+                                        <button name="crud_registrar" type="submit" class="btn-white border-0">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </form>
+                        </table>
+                    </div>
+                </div>
+            </div>
                     <div class="table-responsive">
                         <h1 class="text-center">Lista de usuarios</h1>
                         <table class="table border shadow">
@@ -179,63 +236,6 @@ and open the template in the editor.
                                 <?php
                             }
                             ?>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <!-- Formulario de registro -->
-            <div class="row my-5">
-                <div class="col-lg-10 col-md-12 col-sm-12 offset-lg-1">
-                    <div class="table-responsive">
-                        <h1 class="text-center">Agregar Usuario</h1>
-                        <table class="table border shadow">
-                            <tr class="background-light-green">
-                                <th>DNI</th>
-                                <th>Mail</th>
-                                <th>Password</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Rol</th>
-                                <th>Acciones</th>
-                            </tr>
-                            <form action="../controlador.php" id="registro" novalidate>
-                                <tr>
-                                    <td><!-- DNI -->
-                                        <input type="text" id="dni" name="registro_dni" value="" placeholder="DNI" class="form-control" required pattern="\d{8}[A-Z]">
-                                        <small id="dniError" class="form-text" aria-live="polite"></small>
-                                    </td>
-                                    <td><!-- Mail -->
-                                        <input type="email" id="mail" name="registro_mail" value="" placeholder="Mail" class="form-control" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$">
-                                        <small id="mailError" class="form-text" aria-live="polite"></small>
-                                    </td>
-                                    <td><!-- Password -->
-                                        <input type="password" id="pass" name="registro_pass" value="" placeholder="Password" class="form-control" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
-                                        <small id="passError" class="form-text" aria-live="polite"></small>
-                                    </td>
-                                    <td><!-- Nombre -->
-                                        <input type="text" id="nombre" name="registro_nombre" value="" placeholder="Nombre" class="form-control" required>
-                                        <small id="nombreError" class="form-text" aria-live="polite"></small>
-                                    </td>
-                                    <td><!-- Apellido -->
-                                        <input type="text" id="apellido" name="registro_apellido" value=""  placeholder="Apellido" class="form-control" required>
-                                        <small id="apellidoError" class="form-text" aria-live="polite"></small>
-                                    </td>
-                                    <td><!-- Rol -->
-                                        <select class="form-control" name="registro_rol">
-                                            <option value="0" >Alumno</option>
-                                            <option value="1" >Profesor</option>
-                                            <option value="2" >Administrador</option>
-                                        </select> 
-                                    </td>
-                                    <td><!-- Acciones -->
-                                        <button name="crud_registrar" type="submit" class="btn-white border-0">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle-fill" fill="#03A655" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-11.5.5a.5.5 0 0 1 0-1h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5z"/>
-                                            </svg>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </form>
                         </table>
                     </div>
                 </div>

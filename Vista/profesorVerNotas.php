@@ -8,7 +8,7 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Panel de Alumno</title>
+        <title>Panel de Profesorado</title>
         <!-- MDB icon -->
         <link rel="icon" href="" type="../image/x-icon">
         <!-- Font Awesome -->
@@ -24,24 +24,25 @@ and open the template in the editor.
         <link rel="stylesheet" href="../css/fondos.css">
         <link rel="stylesheet" href="../css/tamanios.css">
         <link rel="stylesheet" href="../css/fuentes.css">
-        <script type="text/javascript" src="../js/script.js"></script>
     </head>
     <body class="rosemary">
-
         <?php
+        require_once '../Clases/Pregunta.php';
         require_once '../Clases/User.php';
         require_once '../MVC/Examen.php';
         require_once '../Clases/examenAlumno.php';
         session_start();
         $user = $_SESSION['user'];
-        $allExamen = $_SESSION['allExamen'];
         $notas = $_SESSION['notas'];
-        
-        foreach ($notas as $v) {
-            echo $v->getNota();
+        $alumnos = $_SESSION['alumnos'];
+        if (isset($_SESSION['allExamen'])) {
+            $allExamen = $_SESSION['allExamen'];
+            foreach ($allExamen as $v) {
+                echo $v->getTitulo();
+                echo $v->getFecha_fin() . '<br>';
+            }
         }
         ?>
-
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-light background-green">
 
@@ -86,11 +87,10 @@ and open the template in the editor.
         </nav>
         <!--/.Navbar--> 
 
-        <!-- Contenido -->
 
-        <div class="container-fluid">
+        <main class="container-fluid">
             <div class="row">
-                <aside class="col-md-2 col-sm-2 col-lg-2 border-green pl-0 pr-0">
+                <aside class="col-md-2 col-sm-2 border-green pl-0 pr-0">
                     <nav class="navbar navbar-expand-lg navbar-light my-2">
 
 
@@ -105,9 +105,18 @@ and open the template in the editor.
 
                             <!-- Links -->
                             <ul class="nav flex-column">
-                                <form action="../controladorAlumno.php" name="menu" method="POST">
+                                <form action="../controlador.php" name="menu" method="POST">
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesActivados" type="submit">Ver Examenes&nbsp;<i class="fas fa-user"></i></button>
+                                    </li>
                                     <li class="nav-item">
                                         <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddExamen" type="submit">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
                                     </li>
                                 </form>
                             </ul>
@@ -116,97 +125,62 @@ and open the template in the editor.
                             <!-- CTA -->
 
                         </div>
-                    </nav> 
+
+                    </nav>
                 </aside>
-                <section class="col-md-10 col-lg-10 border-green">
+                <section class="col-md-10 col-sm-10 border-green">
                     <div class="row">
                         <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
                             <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>
                         </div>
                     </div>
-                    <div class="row my-4">
-                        <div class="col-6 offset-1">
-                            
+                    <div class="row">
+                        <div class="col-lg-10 col-sm-12 offset-lg-1">
+                            <h1> <?= $_SESSION['titulo'] ?> </h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10 col-sm-12 offset-lg-1">
                             <div class="table-responsive">
                                 <table class="table border shadow">
                                     <tr class="background-light-green">
-                                        <th>Titulo</th>
-                                        <th>Descripcion</th>
-                                        <th>Fecha Fin</th>
-                                        <th>Acciones</th>
+                                        <th>DNI</th> 
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Nota</th>
                                     </tr>
                                     <?php
-                                    foreach ($allExamen as $v) {
-                                        if ($v->getEstado() == 1) {
-                                            ?>
-                                    <form action="../controladorAlumno.php">   
+                                    foreach ($notas as $v) {
+                                        for ($i = 0; $i <= count($alumnos)-1; $i++){
+                                            if ($v->getId_Alumno() == $alumnos[$i]->getDni()) {
+                                                ?>
                                     <tr>
                                         <td>
-                                            <input type="hidden" name="id" value="<?= $v->getId() ?>" class="form-control-plaintext">
-                                            <input type="text" name="titulo" value="<?= $v->getTitulo() ?>" class="form-control-plaintext">
+                                            <input type="text" name="dni" value="<?= $alumnos[$i]->getDni() ?>" class="form-control-plaintext">
                                         </td>
                                         <td>
-                                            <input type="text" name="descripcion" value="<?= $v->getDescripcion() ?>" class="form-control-plaintext">
+                                            <input type="text" name="nombre" value="<?= $alumnos[$i]->getNombre() ?>" class="form-control-plaintext">
                                         </td>
                                         <td>
-                                            <input type="text" name="fecha_inicio" value="<?= $v->getFecha_Inicio() ?>" class="form-control-plaintext">
+                                            <input type="text" name="titulo" value="<?= $alumnos[$i]->getApellido() ?>" class="form-control-plaintext">
                                         </td>
                                         <td>
-                                            <button name="realizar_examen" type="submit" class="btn-white border-0"><!-- Activar -->
-                                                <i class="fas fa-arrow-right green-text"></i>
-                                            </button>
+                                            <input type="text" name="titulo" value="<?= $v->getNota() ?>" class="form-control-plaintext">
                                         </td>
-                                        
                                     </tr>
-                                    </form>
                                     <?php
+                                            }
+                                            
                                         }
                                     }
                                     ?>
                                 </table>
                             </div>
                         </div>
-                        <div class="col-3 offset-1">
-                            <table class="table border shadow">
-                                <tr class="background-light-green">
-                                    <th>Titulo Examen</th>
-                                    <th>Nota</th>
-                                </tr>
-                                <?php
-                                
-                                foreach ($notas as $v) {
-
-                                   for($i = 0; $i <= count($allExamen)-1; $i++) {
-                                       
-                                       if ($v->getId_Examen() == $allExamen[$i]->getId()) {
-                                           
-                                           ?>
-                                
-                                <tr>
-                                    <td><?= $allExamen[$i]->getTitulo() ?></td>
-                                    <td>
-                                        <button  type="button" class="btn-white border-0" onclick="verNota(<?= $v->getNota() ?>)"><!-- Activar -->
-                                            <i class="far fa-eye green-text"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                
-                                           <?php
-                                       }
-                                   }
-                                    
-                                }
-                                
-                                ?>
-                            </table>
-                        </div>
                     </div>
                 </section>
             </div>
-        </div>
-
-
-        <!-- !Contenido -->
+        </main>
 
         <!-- Footer -->
         <div class="container-fluid background-green">
@@ -232,6 +206,5 @@ and open the template in the editor.
         <script type="text/javascript" src="../js/mdb.min.js"></script>
         <!-- Your custom scripts (optional) -->
         <script type="text/javascript" src="../js/registroValidacion_1.js"></script>
-        
     </body>
 </html>
