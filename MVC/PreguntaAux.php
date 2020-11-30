@@ -57,4 +57,7 @@ class PreguntaAux {
         $this->tipo = $tipo;
     }
 
+    function __toString() {
+        return 'La pregunta es: '. $this->pregunta . ' y el tipo es ' . $this->tipo;
+    }
 }

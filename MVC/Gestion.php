@@ -506,7 +506,17 @@ class Gestion {
                 $idPregunta = $row['idPregunta'];
                 $idExamen = $row['idExamen'];
                 $descripcion = $row['pregunta'];
-                $pregunta = new PreguntaAux($idPregunta, $idExamen, $descripcion);
+                $consulta2 = 'SELECT * FROM respuestasCorrectas WHERE idPregunta=?';
+                $stmt2 = self::$conexion->prepare($consulta2);
+                $stmt2->bind_param('i',$val2);
+                $val2 = $idPregunta;
+                $stmt2->execute();
+                if ($resultado2 = $stmt2->get_result()) {
+                    while ($row = $resultado2->fetch_assoc()){
+                        $tipo = $row['tipo'];
+                    }
+                }
+                $pregunta = new PreguntaAux($idPregunta, $idExamen, $descripcion, $tipo);
                 $preguntasExamen[] = $pregunta;
             }
         }
@@ -579,5 +589,57 @@ class Gestion {
         self::cerrarConex();
         return $notas;
         
+    }
+    
+    public static function addRespuesta($id_Examen, $id_Alumno, $id_Pregunta, $respuesta) {
+        
+        self::abrirConex();
+        
+        $consulta = 'INSERT INTO respuestasAlumnos VALUES (?,?,?,?)';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('isis',$val1,$val2,$val3,$val4);
+        $val1 = $id_Examen;
+        $val2 = $id_Alumno;
+        $val3 = $id_Pregunta;
+        $val4 = $respuesta;
+        $stmt->execute();
+        
+        self::cerrarConex();
+        
+    }
+    
+    public static function isExamen($id_Examen,$id_Alumno) {
+        
+        self::abrirConex();
+        $r = false;
+        
+        $consulta = 'SELECT * FROM respuestasAlumnos WHERE id_Examen=? AND id_Alumno=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('is',$val1,$val2);
+        $val1 = $id_Examen;
+        $val2 = $id_Alumno;
+        $stmt->execute();
+        if ($resultado = $stmt->get_result()) {
+            while ($row = $resultado->fetch_assoc()) {
+                $r = true;
+            }
+        }
+        
+        self::cerrarConex();
+        return r;
+    }
+    
+    public static function deleteRespuestas($id_Examen,$id_Alumno){
+        
+        self::abrirConex();
+        
+        $consulta = 'DELETE FROM respuestasAlumnos WHERE id_Examen=? AND id_Alumno=?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('is',$val1,$val2);
+        $val1 = $id_Examen;
+        $val2 = $id_Alumno;
+        $stmt->execute();
+        
+        self::cerrarConex();
     }
 }

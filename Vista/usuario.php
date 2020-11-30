@@ -37,9 +37,9 @@ and open the template in the editor.
         $allExamen = $_SESSION['allExamen'];
         $notas = $_SESSION['notas'];
         
-        foreach ($notas as $v) {
-            echo $v->getNota();
-        }
+//        foreach ($notas as $v) {
+//            echo $v->getNota();
+//        }
         ?>
 
         <!--Navbar-->
