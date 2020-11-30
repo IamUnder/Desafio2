@@ -39,18 +39,18 @@ and open the template in the editor.
         $preguntasExamen = $_SESSION['preguntasExamen'];
 
         foreach ($respuestasExamen as $v) {
-            echo $v->getTipo() . '<br>';
+//            echo $v->getTipo() . '<br>';
         }
 
-        echo '-----------------------------------' . '<br>';
+//        echo '-----------------------------------' . '<br>';
 
         foreach ($preguntasExamen as $k => $v) {
-            echo 'La pregunta es: ' . $v->getPregunta() . ' y la respuesta correcta es: ' . $respuestasExamen[$k]->getRespuestaCorrecta() . ' y el tipo es: ' . $respuestasExamen[$k]->getTipo() . '<br>';
+//            echo 'La pregunta es: ' . $v->getPregunta() . ' y la respuesta correcta es: ' . $respuestasExamen[$k]->getRespuestaCorrecta() . ' y el tipo es: ' . $respuestasExamen[$k]->getTipo() . '<br>';
         }
         ?>
 
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light background-green py-0 vh-10">
+        <nav class="navbar navbar-expand-lg navbar-light background-green py-0">
 
             <div class="container-fluid">
 
@@ -67,7 +67,7 @@ and open the template in the editor.
                     <!-- Links -->
                     <ul class="navbar-nav mr-auto offset-9 align-items-end text-right">
                         <li class="nav-item">
-                            <a href="../controlador.php?Back=Back" class="btn btn-white btn-sm text-success">Cerrar sesion</a>
+                            <a href="../controlador.php?Back=Back" class="white btn text-success bg-light btn-sm-sm">Cerrar sesion</a>
                         </li>
                     </ul>
                     <!-- Links -->
@@ -80,7 +80,7 @@ and open the template in the editor.
         </nav>
         <!--/.Navbar--> 
 
-        <div class="container-fluid">
+        <div class="container-fluid vh-80 overflow-auto">
             <div class="row">
                 <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
                     <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>
@@ -93,7 +93,7 @@ and open the template in the editor.
                             <h1> <?= $examen->getTitulo() ?> </h1>
                         </div>
                     </div>
-                    <form action="../controladorAlumno.php">
+                    <form action="../controladorAlumno.php" method="POST">
                         <?php
                         foreach ($preguntasExamen as $k => $v) {
 //                        echo 'La pregunta es: ' . $v->getPregunta() . ' y la respuesta correcta es: ' . $respuestasExamen[$k]->getRespuestaCorrecta() . '<br>';
@@ -190,13 +190,11 @@ and open the template in the editor.
         </div>
 
         <!-- Footer -->
-        <div class="container-fluid background-green vh-10">
+        <div class="container-fluid background-green vh-10 d-flex align-items-center justify-content-center">
 
             <!--Section: Content-->
-            <section class="py-5 text-center white-text">
-
-                <h3 class="">Made with <i class="fas fa-heart orange-text mx-1"></i> by Jorge y Alejandro</h3>
-
+            <section class="text-center white-text">
+                <h3 class="">Made with <i class="fas fa-heart text-warning mx-1"></i> by Jorge y Alejandro</h3>
             </section>
             <!--Section: Content-->
 

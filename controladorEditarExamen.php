@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -17,19 +17,19 @@ require_once './Clases/RespuestasAlumno.php';
 //******************************************************************************
 if (isset($_REQUEST['activar_examen'])) {
     $id = $_REQUEST['id'];
-    
+
     Gestion::examenOn($id);
     funcProfesor();
-    
+
     header('Location: Vista/profesorPrincipal.php');
 }
 
 if (isset($_REQUEST['desactivar_examen'])) {
     $id = $_REQUEST['id'];
-    
+
     Gestion::examenOff($id);
     funcProfesor();
-    
+
     header('Location: Vista/profesorPrincipal.php');
 }
 
@@ -39,25 +39,26 @@ if (isset($_REQUEST['editar_examen'])) {
     $fecha_inicio = $_REQUEST['fecha_inicio'];
     $fecha_fin = $_REQUEST['fecha_fin'];
     $descripcion = $_REQUEST['descripcion'];
-    
-    Gestion::editExamen($id,$titulo,$fecha_inicio,$fecha_fin,$descripcion);
+
+    Gestion::editExamen($id, $titulo, $fecha_inicio, $fecha_fin, $descripcion);
     funcProfesor();
-    
+
     header('Location: Vista/profesorPrincipal.php');
 }
 
 if (isset($_REQUEST['borrar_examen'])) {
     $id = $_REQUEST['id'];
-    
+
+    Gestion::reabrirPreguntas($id);
     Gestion::deleteExamen($id);
     funcProfesor();
-    
+
     header('Location: Vista/profesorPrincipal.php');
 }
 
 if (isset($_REQUEST['corregir_examen'])) {
     $id = $_REQUEST['id'];
-    
+
     // Falta funcionalidad
     $dnis = Gestion::getDNI($id);
     foreach ($dnis as $v) {
@@ -65,7 +66,7 @@ if (isset($_REQUEST['corregir_examen'])) {
         $contador2 = 0;
         $respuestasAlumno = Gestion::getRespuestasAlumno($v);
         foreach ($respuestasAlumno as $x) {
-            echo $x. '<br>';
+            echo $x . '<br>';
             $respCorrecta = Gestion::getCorrecta($x->getId_Pregunta());
             echo 'La respuesta correcta es: ' . $respCorrecta . '<br>';
             if (trim($x->getRespuesta()) == trim($respCorrecta)) {
@@ -74,24 +75,24 @@ if (isset($_REQUEST['corregir_examen'])) {
             $contador2++;
         }
         $aux = $respuestasAlumno[0];
-        $nota = $contador.'/'.$contador2;
-        echo 'La nota del alumno es: ' . $nota.'<br>';
+        $nota = $contador . '/' . $contador2;
+        echo 'La nota del alumno es: ' . $nota . '<br>';
         Gestion::setNota($aux->getId_Examen(), $aux->getId_Alumno(), $nota);
     }
-    
+
     Gestion::checkExamen($id);
     funcProfesor();
-    
+
     header('Location: Vista/profesorPrincipal.php');
 }
 
 if (isset($_REQUEST['ver_examen'])) {
     $id = $_REQUEST['id'];
-    
+
     $_SESSION['alumnos'] = Gestion::getAlumnos();
     $_SESSION['titulo'] = $_REQUEST['titulo'];
     $_SESSION['notas'] = Gestion::getNotasProfesor($id);
-    
+
     header('Location: Vista/profesorVerNotas.php');
 }
 
@@ -104,7 +105,7 @@ if (isset($_REQUEST['editarPerfil'])) {
 //    $pass = $_REQUEST['pass'];
     if ($_REQUEST['pass'] != null) {
         $pass = password_hash($_REQUEST['pass'], PASSWORD_DEFAULT);
-    }else{
+    } else {
         $pass = null;
     }
     $nombre = $_REQUEST['nombre'];
@@ -112,20 +113,19 @@ if (isset($_REQUEST['editarPerfil'])) {
     $rol = $_REQUEST['rol'];
 
     Gestion::editUser($dni, $mail, $pass, $nombre, $apellido, $rol);
-    
+
     $login = Gestion::getUser($mail, $pass);
     $_SESSION['user'] = $login;
     header('Location: Vista/profesorPerfil.php');
-    
+
     echo $dni . $mail . $pass . $nombre . $apellido . $rol;
 }
-
 
 //******************************************************************************
 //****************************** Funciones *************************************
 //******************************************************************************
 
-function funcProfesor(){
+function funcProfesor() {
     $allExamen = Gestion::getAllExamen();
     $_SESSION['allExamen'] = $allExamen;
 }

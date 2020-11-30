@@ -72,7 +72,7 @@ class Gestion {
         self::cerrarConex();
         return $res;
     }
-    
+
     public static function getAlumnos() {
 
         self::abrirConex();
@@ -400,6 +400,18 @@ class Gestion {
         self::cerrarConex();
     }
 
+    public static function reabrirPreguntas($id) {
+        self::abrirConex();
+
+        $consulta = 'UPDATE preguntas SET idExamen = -1 WHERE idExamen =?';
+        $stmt = self::$conexion->prepare($consulta);
+        $stmt->bind_param('s', $val1);
+        $val1 = $id;
+        $stmt->execute();
+
+        self::cerrarConex();
+    }
+
     public static function checkExamen($id) {
         self::abrirConex();
 
@@ -472,25 +484,24 @@ class Gestion {
         }
     }
 
-    
     public static function getExamen($id) {
         self::abrirConex();
 
         $consulta = 'SELECT * FROM examen WHERE id=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('i',$val1);
+        $stmt->bind_param('i', $val1);
         $val1 = $id;
         $stmt->execute();
 
         if ($resultado = $stmt->get_result()) {
             while ($row = $resultado->fetch_assoc()) {
-                $r = new Examen($row['id'], $row['id_Profesor'] , $row['fecha_Inicio'], $row['fecha_Fin'], $row['estado'], $row['titulo'], $row['descripcion']);
+                $r = new Examen($row['id'], $row['id_Profesor'], $row['fecha_Inicio'], $row['fecha_Fin'], $row['estado'], $row['titulo'], $row['descripcion']);
             }
         }
         self::cerrarConex();
         return $r;
     }
-    
+
     public static function getPreguntasExamen($id) {
         $preguntasExamen = [];
 
@@ -498,9 +509,9 @@ class Gestion {
 
         $consulta = "SELECT * FROM preguntas WHERE idExamen=?";
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('i',$val1);
+        $stmt->bind_param('i', $val1);
         $val1 = $id;
-        $stmt->execute(); 
+        $stmt->execute();
         if ($resultado = $stmt->get_result()) {
             while ($row = $resultado->fetch_assoc()) {
                 $idPregunta = $row['idPregunta'];
@@ -508,11 +519,11 @@ class Gestion {
                 $descripcion = $row['pregunta'];
                 $consulta2 = 'SELECT * FROM respuestasCorrectas WHERE idPregunta=?';
                 $stmt2 = self::$conexion->prepare($consulta2);
-                $stmt2->bind_param('i',$val2);
+                $stmt2->bind_param('i', $val2);
                 $val2 = $idPregunta;
                 $stmt2->execute();
                 if ($resultado2 = $stmt2->get_result()) {
-                    while ($row = $resultado2->fetch_assoc()){
+                    while ($row = $resultado2->fetch_assoc()) {
                         $tipo = $row['tipo'];
                     }
                 }
@@ -524,14 +535,14 @@ class Gestion {
         self::cerrarConex();
         return $preguntasExamen;
     }
-    
+
     public static function getRespuestas($id2) {
-        
+
         self::abrirConex();
-        
+
         $consulta = 'SELECT * FROM respuestasCorrectas WHERE idPregunta=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('i',$val1);
+        $stmt->bind_param('i', $val1);
         $val1 = $id2;
         $stmt->execute();
         if ($resultado = $stmt->get_result()) {
@@ -539,21 +550,20 @@ class Gestion {
                 $r = new Pregunta($row['idPregunta'], $row['tipo'], $row['respuesta1'], $row['respuesta2'], $row['respuesta3'], $row['respuesta4'], $row['respuestaCorrecta']);
             }
         }
-        
+
         self::cerrarConex();
         return $r;
-        
     }
-    
+
     public static function getNotas($dni) {
-        
+
         self::abrirConex();
-        
+
         $notas = [];
-        
+
         $consulta = 'SELECT * FROM examenAlumno WHERE id_Alumno=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('s',$val1);
+        $stmt->bind_param('s', $val1);
         $val1 = $dni;
         $stmt->execute();
         if ($resultado = $stmt->get_result()) {
@@ -562,21 +572,20 @@ class Gestion {
                 $notas[] = $r;
             }
         }
-        
+
         self::cerrarConex();
         return $notas;
-        
     }
-    
+
     public static function getNotasProfesor($id) {
-        
+
         self::abrirConex();
-        
+
         $notas = [];
-        
+
         $consulta = 'SELECT * FROM examenAlumno WHERE id_Examen=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('s',$val1);
+        $stmt->bind_param('s', $val1);
         $val1 = $id;
         $stmt->execute();
         if ($resultado = $stmt->get_result()) {
@@ -585,37 +594,36 @@ class Gestion {
                 $notas[] = $r;
             }
         }
-        
+
         self::cerrarConex();
         return $notas;
-        
     }
-    
+
     public static function addRespuesta($id_Examen, $id_Alumno, $id_Pregunta, $respuesta) {
-        
         self::abrirConex();
-        
+
         $consulta = 'INSERT INTO respuestasAlumnos VALUES (?,?,?,?)';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('isis',$val1,$val2,$val3,$val4);
+        $stmt->bind_param('isis', $val1, $val2, $val3, $val4);
         $val1 = $id_Examen;
         $val2 = $id_Alumno;
         $val3 = $id_Pregunta;
         $val4 = $respuesta;
         $stmt->execute();
-        
+
+
+
         self::cerrarConex();
-        
     }
-    
-    public static function isExamen($id_Examen,$id_Alumno) {
-        
+
+    public static function isExamen($id_Examen, $id_Alumno) {
+
         self::abrirConex();
         $r = false;
-        
+
         $consulta = 'SELECT * FROM respuestasAlumnos WHERE id_Examen=? AND id_Alumno=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('is',$val1,$val2);
+        $stmt->bind_param('is', $val1, $val2);
         $val1 = $id_Examen;
         $val2 = $id_Alumno;
         $stmt->execute();
@@ -624,35 +632,34 @@ class Gestion {
                 $r = true;
             }
         }
-        
+
         self::cerrarConex();
         return r;
     }
-    
-    public static function deleteRespuestas($id_Examen,$id_Alumno){
-        
+
+    public static function deleteRespuestas($id_Examen, $id_Alumno) {
+
         self::abrirConex();
-        
+
         $consulta = 'DELETE FROM respuestasAlumnos WHERE id_Examen=? AND id_Alumno=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('is',$val1,$val2);
+        $stmt->bind_param('is', $val1, $val2);
         $val1 = $id_Examen;
         $val2 = $id_Alumno;
         $stmt->execute();
-        
+
         self::cerrarConex();
-        
     }
-    
+
     public static function getDNI($id) {
-        
+
         self::abrirConex();
-        
+
         $r = [];
-        
+
         $consulta = 'SELECT DISTINCT id_Alumno from respuestasAlumnos WHERE id_Examen=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('i',$val1);
+        $stmt->bind_param('i', $val1);
         $val1 = $id;
         $stmt->execute();
         if ($resultado = $stmt->get_result()) {
@@ -660,21 +667,20 @@ class Gestion {
                 $r[] = $row['id_Alumno'];
             }
         }
-        
+
         self::cerrarConex();
         return $r;
-        
     }
-    
+
     public static function getRespuestasAlumno($dni) {
-        
+
         self::abrirConex();
-        
+
         $r = [];
-        
+
         $consulta = 'SELECT * FROM respuestasAlumnos WHERE id_Alumno=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('s',$val1);
+        $stmt->bind_param('s', $val1);
         $val1 = $dni;
         $stmt->execute();
         if ($resultado = $stmt->get_result()) {
@@ -683,44 +689,43 @@ class Gestion {
                 $r[] = $aux;
             }
         }
-        
+
         self::cerrarConex();
         return $r;
     }
-    
+
     public static function getCorrecta($id) {
-        
+
         self::abrirConex();
-        
+
         $consulta = 'SELECT respuestaCorrecta FROM respuestasCorrectas WHERE idPregunta=?';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('i',$val1);
+        $stmt->bind_param('i', $val1);
         $val1 = $id;
         $stmt->execute();
         if ($resultado = $stmt->get_result()) {
-            while ($row = $resultado->fetch_assoc()){
+            while ($row = $resultado->fetch_assoc()) {
                 $r = $row['respuestaCorrecta'];
             }
         }
-        
+
         self::cerrarConex();
         return $r;
-        
     }
-    
+
     public static function setNota($id_Examen, $id_Alumno, $nota) {
-        
+
         self::abrirConex();
-        
+
         $consulta = 'INSERT INTO examenAlumno VALUE (?,?,?)';
         $stmt = self::$conexion->prepare($consulta);
-        $stmt->bind_param('iss',$val1,$val2,$val3);
+        $stmt->bind_param('iss', $val1, $val2, $val3);
         $val1 = $id_Examen;
         $val2 = $id_Alumno;
         $val3 = $nota;
         $stmt->execute();
-        
+
         self::cerrarConex();
-        
     }
+
 }

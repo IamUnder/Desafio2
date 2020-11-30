@@ -18,7 +18,6 @@ and open the template in the editor.
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <!-- Material Design Bootstrap -->
-        <link rel="stylesheet" href="../css/mdb.min.css">
         <!-- Your custom styles (optional) -->
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/fondos.css">
@@ -44,14 +43,11 @@ and open the template in the editor.
         }
         ?>
         <!--Navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light background-green">
+        <nav class="navbar navbar-expand-lg navbar-light background-green py-0 ">
 
             <div class="container-fluid">
 
-                <a class="navbar-brand" href="#">
-                    <img src="../img/logo.png" class="vh-10" alt="mdb logo">
-                </a>
-
+                <img src="../img/logo.png" alt="Logo_mamas2.0" class="vh-10" />
                 <!-- Collapse button -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
                         aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,15 +62,15 @@ and open the template in the editor.
                         <?php
                         if ($user->getRol() == 2) {
                             ?>
-                            <li class="nav-item">
-                                <a href="../controlador.php?Estado=Profesor" class="btn btn-white btn-sm text-success">Cambiar rol</a>
+                            <li class="nav-item mr-1">
+                                <a href="../controlador.php?Estado=Profesor" class="white btn text-success bg-light btn-sm-sm">Cambiar rol</a>
                             </li>
                             <?php
                         }
                         ?>
 
                         <li class="nav-item">
-                            <a href="../controlador.php?Back=Back" class="btn btn-white btn-sm text-success">Cerrar sesion</a>
+                            <a href="../controlador.php?Back=Back" class="white btn text-success bg-light btn-sm-sm">Cerrar sesion</a>
                         </li>
                     </ul>
                     <!-- Links -->
@@ -128,7 +124,7 @@ and open the template in the editor.
 
                     </nav>
                 </aside>
-                <section class="col-md-10 col-sm-10 border-green">
+                <section class="col-md-10 col-sm-10 border-green vh-80 overflow-auto">
                     <div class="row">
                         <div class="col-lg-10  col-md-12 text-right my-3 offset-lg-1">
                             <p>Bienvenido: <?= $user->getNombre() ?> <i class="fas fa-user"></i></p>
@@ -151,26 +147,25 @@ and open the template in the editor.
                                     </tr>
                                     <?php
                                     foreach ($notas as $v) {
-                                        for ($i = 0; $i <= count($alumnos)-1; $i++){
+                                        for ($i = 0; $i <= count($alumnos) - 1; $i++) {
                                             if ($v->getId_Alumno() == $alumnos[$i]->getDni()) {
                                                 ?>
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="dni" value="<?= $alumnos[$i]->getDni() ?>" class="form-control-plaintext">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="nombre" value="<?= $alumnos[$i]->getNombre() ?>" class="form-control-plaintext">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="titulo" value="<?= $alumnos[$i]->getApellido() ?>" class="form-control-plaintext">
-                                        </td>
-                                        <td>
-                                            <input type="text" name="titulo" value="<?= $v->getNota() ?>" class="form-control-plaintext">
-                                        </td>
-                                    </tr>
-                                    <?php
+                                                <tr>
+                                                    <td>
+                                                        <input type="text" name="dni" value="<?= $alumnos[$i]->getDni() ?>" class="form-control-plaintext">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="nombre" value="<?= $alumnos[$i]->getNombre() ?>" class="form-control-plaintext">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="titulo" value="<?= $alumnos[$i]->getApellido() ?>" class="form-control-plaintext">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="titulo" value="<?= $v->getNota() ?>" class="form-control-plaintext">
+                                                    </td>
+                                                </tr>
+                                                <?php
                                             }
-                                            
                                         }
                                     }
                                     ?>
@@ -183,13 +178,11 @@ and open the template in the editor.
         </main>
 
         <!-- Footer -->
-        <div class="container-fluid background-green">
+        <div class="container-fluid background-green vh-10 d-flex align-items-center justify-content-center">
 
             <!--Section: Content-->
-            <section class="py-5 text-center white-text">
-
-                <h3 class="">Made with <i class="fas fa-heart orange-text mx-1"></i> by Jorge y Alejandro</h3>
-
+            <section class="text-center white-text">
+                <h3 class="">Made with <i class="fas fa-heart text-warning mx-1"></i> by Jorge y Alejandro</h3>
             </section>
             <!--Section: Content-->
 
