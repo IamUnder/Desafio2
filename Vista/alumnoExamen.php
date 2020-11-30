@@ -102,13 +102,13 @@ and open the template in the editor.
                     
                     foreach ($preguntasExamen as $k => $v) {
 //                        echo 'La pregunta es: ' . $v->getPregunta() . ' y la respuesta correcta es: ' . $respuestasExamen[$k]->getRespuestaCorrecta() . '<br>';
-                            switch ($respuestasExamen[$k]->getTipo()) {
+                            switch ($v->getTipo()) {
                                 case 'texto':
                                     ?>
                                 <div class="row my-3">
                                     <div class="col-lg-10 offset-1 border shadow p-2">
                                         <h1>Pregunta: <?= $v->getPregunta() ?> </h1>
-                                        <h2>Tipo: <?= $respuestasExamen[$k]->getTipo() ?></h2>
+                                        <h2>Tipo: <?= $v->getTipo() ?></h2>
                                         <textarea name="respuesta[]" rows="5" class="form-control"></textarea>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@ and open the template in the editor.
                                 <div class="row my-3">
                                     <div class="col-lg-10 offset-1 border shadow p-2">
                                         <h1>Pregunta: <?= $v->getPregunta() ?> </h1>
-                                        <h2>Tipo: <?= $respuestasExamen[$k]->getTipo() ?></h2>
+                                        <h2>Tipo: <?= $v->getTipo() ?></h2>
                                         <input type="number" name="respuesta[]" class="form-control" placeholder="Respuesta">
                                     </div>
                                 </div>
@@ -130,18 +130,19 @@ and open the template in the editor.
                                 <div class="row my-3">
                                     <div class="col-lg-10 offset-1 border shadow p-2">
                                         <h1>Pregunta: <?= $v->getPregunta() ?> </h1>
-                                        <h2>Tipo: <?= $respuestasExamen[$k]->getTipo() ?></h2>
+                                        <h2>Tipo: <?= $v->getTipo() ?></h2>
                                         <!--<input type="number" name="respuesta[]" class="form-control" placeholder="Respuesta">-->
                                         <div class="text-center">
-                                            <input type="radio" class="mr-2" id="resp_opc_a" name="respuesta[]" value=" <?= $respuestasExamen[$k]->getRespuesta1() ?> ">
+                                            <input type="hidden" name="respuesta[]" value="">
+                                            <input type="radio" class="mr-2" id="resp_opc_a" name="respuesta<?= $k ?>[]" value=" <?= $respuestasExamen[$k]->getRespuesta1() ?> ">
                                             <input type="text" name="op" class="" readonly value=" <?= $respuestasExamen[$k]->getRespuesta1() ?> ">
-                                            <input type="radio" class="ml-2" id="resp_opc_b" name="respuesta[]" value=" <?= $respuestasExamen[$k]->getRespuesta2() ?> ">
+                                            <input type="radio" class="ml-2" id="resp_opc_b" name="respuesta<?= $k ?>[]" value=" <?= $respuestasExamen[$k]->getRespuesta2() ?> ">
                                             <input type="text" name="op" class="" readonly value=" <?= $respuestasExamen[$k]->getRespuesta2() ?> ">
                                         </div>
                                         <div class="text-center my-2">
-                                            <input type="radio" class="mr-2" id="resp_opc_c" name="respuesta[]" value="<?= $respuestasExamen[$k]->getRespuesta3() ?>">
+                                            <input type="radio" class="mr-2" id="resp_opc_c" name="respuesta<?= $k ?>[]" value="<?= $respuestasExamen[$k]->getRespuesta3() ?>">
                                             <input type="text" name="op" class="" readonly value=" <?= $respuestasExamen[$k]->getRespuesta3() ?> ">
-                                            <input type="radio" class="ml-2" id="resp_opc_d" name="respuesta[]" value=" <?= $respuestasExamen[$k]->getRespuesta4() ?> ">
+                                            <input type="radio" class="ml-2" id="resp_opc_d" name="respuesta<?= $k ?>[]" value=" <?= $respuestasExamen[$k]->getRespuesta4() ?> ">
                                             <input type="text" name="op" class="" readonly value=" <?= $respuestasExamen[$k]->getRespuesta4() ?> ">
                                         </div>
                                     </div>
@@ -153,15 +154,15 @@ and open the template in the editor.
                                 <div class="row my-3">
                                     <div class="col-lg-10 offset-1 border shadow p-2">
                                         <h1>Pregunta: <?= $v->getPregunta() ?> </h1>
-                                        <h2>Tipo: <?= $respuestasExamen[$k]->getTipo() ?></h2>
+                                        <h2>Tipo: <?= $v->getTipo() ?></h2>
                                         <!--<input type="number" name="respuesta[]" class="form-control" placeholder="Respuesta">-->
                                         <div class="text-center">
-                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta1() ?>" name="respuesta[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta1() ?></label>
-                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta2() ?>" name="respuesta[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta2() ?></label>
+                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta1() ?>" name="respuesta<?= $k ?>[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta1() ?></label>
+                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta2() ?>" name="respuesta<?= $k ?>[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta2() ?></label>
                                         </div>
                                         <div class="text-center my-2">
-                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta3() ?>" name="respuesta[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta3() ?></label>
-                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta4() ?>" name="respuesta[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta4() ?></label>
+                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta3() ?>" name="respuesta<?= $k ?>[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta3() ?></label>
+                                            <input type="checkbox" id="cbox2" value="<?= $respuestasExamen[$k]->getRespuesta4() ?>" name="respuesta<?= $k ?>[]"> <label for="cbox2"><?= $respuestasExamen[$k]->getRespuesta4() ?></label>
                                         </div>
                                     </div>
                                 </div>

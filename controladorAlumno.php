@@ -20,6 +20,7 @@ if (isset($_REQUEST['realizar_examen'])) {
     
     $examen = Gestion::getExamen($id);
     $preguntasExamen = Gestion::getPreguntasExamen($id);
+   
     $respuestasExamen = [];
     
     echo $examen->getTitulo();
@@ -49,16 +50,77 @@ if (isset($_REQUEST['realizar_examen'])) {
 
 if (isset($_REQUEST['send_examen'])) {
     
-    $respuesta = $_REQUEST['respuesta'];
+    $user = $_SESSION['user'];
+    $examen = $_SESSION['examen'];
+    $respuestasExamen = $_SESSION['respuestasExamen'];
+    $preguntasExamen = $_SESSION['preguntasExamen'];
     
-    foreach ($respuesta as $v) {
+    // Variables locales para el examen
+    $id_Examen = $examen->getId();
+    $id_Alumno = $user->getDni();
+    
+    echo 'El id del examen es: ' . $id_Examen . ' y el dni del alumno es: ' . $id_Alumno . '<br>';
+    
+    $respuestas = $_REQUEST['respuesta'];
+    
+    foreach ($respuestas as $k => $v) {
         if ($v == null) {
-            echo 'null <br>';
+            echo 'La respuesta: ' . $k . ' vale null' . $v . '<br>';
         }else{
-            echo $v.'<br>';
+            echo 'La respuesta: ' . $k . ' vale ' . $v . '<br>';
+        }
+    }
+    
+    if (Gestion::isExamen($id_Examen, $id_Alumno)) {
+        Gestion::deleteRespuestas($id_Examen, $id_Alumno);
+    }
+    
+    foreach ($preguntasExamen as $k => $v) {
+        $id_Pregunta = $v->getIdPregunta();
+        switch ($v->getTipo()) {
+            case 'texto':
+                echo $k . ': ' . $v->getPregunta() . ' la respuesta es ' . $respuestas[$k] . '<br>';
+                //Introducir base de datos
+                Gestion::addRespuesta($id_Examen, $id_Alumno, $id_Pregunta, $respuestas[$k]);
+                break;
+            case 'numerico':
+                echo $k . ': ' . $v->getPregunta() . ' la respuesta es ' . $respuestas[$k] . '<br>';
+                // Introducir base de datos
+                Gestion::addRespuesta($id_Examen, $id_Alumno, $id_Pregunta, $respuestas[$k]);
+                break;
+            case 'unaOpcion':
+                $resCorrecta = '';
+                $respuestaUna = $_REQUEST['respuesta'.$k];
+                echo $k . ': ' . $v->getPregunta() . ' la respuesta es ';
+                foreach ($respuestaUna as $w) {
+                    echo $w . ' ';
+                    $resCorrecta = $w;
+                }
+                //Introducir base de datos
+                Gestion::addRespuesta($id_Examen, $id_Alumno, $id_Pregunta, $resCorrecta);
+                echo '<br>';
+                break;
+            case 'variasOpciones':
+                $resCorrecta = '';
+                $respuestaVarias = $_REQUEST['respuesta'.$k];
+                echo $k . ': ' . $v->getPregunta() . ' la respuesta es ';
+                foreach ($respuestaVarias as $w) {
+                    $resCorrecta = $resCorrecta . $w . '###';
+                    echo $w . ' ';
+                }
+                echo '<br>';
+                // Introducir base de datos
+                Gestion::addRespuesta($id_Examen, $id_Alumno, $id_Pregunta, $resCorrecta);
+                break;
+
+            default:
+                echo 'Hay un error <br>';
+                break;
         }
         
+        header('Location: Vista/usuario.php');
     }
+    
 }
 
 // EDITAR SUS DATOS
