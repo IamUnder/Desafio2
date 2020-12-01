@@ -86,33 +86,35 @@ and open the template in the editor.
 
         <div class="container-fluid">
             <div class="row">
-                <aside class="col-md-2 col-sm-2 col-lg-2 border-green pl-0 pr-0">
-                    <nav class="navbar navbar-expand-lg navbar-light my-2">
+                <aside class="col-md-2 col-sm-2 border-green pl-0 pr-0">
+                    <nav class="navbar navbar-expand-lg navbar-light py-0">
 
+                        <div class="container-fluid">
 
-                        <!-- Collapse button -->
-                        <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button> 
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav1"
+                                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
 
-                        <!-- Collapsible content -->
-                        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+                            <!-- Collapsible content -->
+                            <div class="collapse navbar-collapse" id="basicExampleNav1">
 
-                            <!-- Links -->
-                            <ul class="nav flex-column">
-                                <form action="../controladorAlumno.php" name="menu" method="POST">
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
-                                    </li>
-                                </form>
-                            </ul>
-                            <!-- Links -->
+                                <!-- Links -->
+                                <ul class="nav flex-column">
+                                    <form action="../controladorAlumno.php" name="menu" method="POST">
+                                        <li class="nav-item">
+                                            <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-file-medical"></i></button>
+                                        </li>
+                                    </form>
+                                </ul>
+                                <!-- Links -->
 
-                            <!-- CTA -->
+                            </div>
+                            <!-- Collapsible content -->
 
                         </div>
-                    </nav> 
+
+                    </nav>
                 </aside>
                 <section class="col-md-10 col-lg-10 border-green vh-80 overflow-auto">
                     <div class="row">

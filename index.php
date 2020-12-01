@@ -93,7 +93,7 @@ and open the template in the editor.
 
                                     <!-- Boton de envio -->
                                     <div class="text-center">
-                                        <button type="submit" name="LogIn" class="btn btn-outline-green btn-rounded my-4 waves-effect">LogIn</button>
+                                        <button type="submit" name="LogIn" class="btn btn-outline-green btn-rounded my-4 waves-effect rounded">LogIn</button>
                                     </div>
 
                                 </form>
