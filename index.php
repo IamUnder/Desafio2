@@ -34,7 +34,13 @@ and open the template in the editor.
             });
         </script>
     </head>
-    <body onload="vLogin()">
+    <body onload="vLogin()" class="verde">
+        <?php
+        session_start();
+        if (isset($_SESSION['recuperarPass'])) {
+            unset($_SESSION['recuperarPass']);
+        }
+        ?>
         <div class="container-fluid justify-content-center">
             <div class="row">
                 <div class="mx-auto">
@@ -60,21 +66,19 @@ and open the template in the editor.
 
                                     <h3 class="font-weight-bold my-4 pb-2 text-center dark-grey-text">Accede al entorno educativo</h3>
                                     <?php
-                                        session_start();
-                                        if (isset($_SESSION['mensaje'])) {
-                                           echo $_SESSION['mensaje'];
-                                           $_SESSION['mensaje'] = null;
-                                        }
-                                    
+                                    if (isset($_SESSION['mensaje'])) {
+                                        echo $_SESSION['mensaje'];
+                                        $_SESSION['mensaje'] = null;
+                                    }
                                     ?>
                                     <!-- Mail -->
                                     <input type="email" name="mail" id="defaultSubscriptionFormEmail" class="form-control" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$">
                                     <small id="emailError" class="form-text mb-4" aria-live="polite"></small>
-                                    
+
                                     <!-- Pass -->
                                     <input type="password" name="pass" id="defaultSubscriptionFormPassword" class="form-control" placeholder="Password" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
                                     <small id="passError" class="form-text" aria-live="polite"></small>
-                                    
+
                                     <!-- Redireciones -->
                                     <small id="passwordHelpBlock" class="form-text text-right blue-text">
                                         <a href="Vista/panelRecuperar.php">Recuperar contraseña</a>
@@ -82,14 +86,14 @@ and open the template in the editor.
                                     <small id="passwordHelpBlock" class="form-text text-right blue-text">
                                         Sin cuenta? <a href="Vista/panelRegistro.php">Registrate</a>
                                     </small>
-                                    
+
                                     <!-- Captcha -->
                                     <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-                                    
-                                    
+
+
                                     <!-- Boton de envio -->
                                     <div class="text-center">
-                                        <button type="submit" name="LogIn" class="btn btn-outline-green btn-rounded my-4 waves-effect">LogIn</button>
+                                        <button type="submit" name="LogIn" class="btn btn-outline-green btn-rounded my-4 waves-effect rounded">LogIn</button>
                                     </div>
 
                                 </form>

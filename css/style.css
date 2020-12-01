@@ -1,3 +1,12 @@
-body{
+.verde{
     background-color: #03A655;
+}
+
+.borde{
+    border: 2px solid black;
+    border-radius: 2px;
+}
+
+.background-light-green{
+    background-color: #57fbaa;
 }

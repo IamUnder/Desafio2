@@ -5,6 +5,7 @@
  */
 
 function vLogin() {
+    
     const formulario = document.getElementsByTagName('form')[0];
     
     const email = document.getElementById('defaultSubscriptionFormEmail');
@@ -12,6 +13,8 @@ function vLogin() {
 
     const pass = document.getElementById('defaultSubscriptionFormPassword');
     const passError = document.getElementById('passError');
+
+    console.log(email);
 
     // EventListener email
     email.addEventListener('input', function (e) {
@@ -72,4 +75,8 @@ function vLogin() {
             passError.textContent = '8-10 caracteres, debe tener un número, una letra mayuscula y una minuscula.';
         }
     }
+}
+
+function vCrud() {
+    console.log('Estamos en la validacion del CRUD');
 }

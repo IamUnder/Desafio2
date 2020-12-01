@@ -20,9 +20,9 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <link rel="stylesheet" href="../CSS/fuentes.css">
-        <link rel="stylesheet" href="../CSS/fondos.css">
-        <link rel="stylesheet" href="../CSS/tamanios.css">
+        <link rel="stylesheet" href="../css/fuentes.css">
+        <link rel="stylesheet" href="../css/fondos.css">
+        <link rel="stylesheet" href="../css/tamanios.css">
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
                 </div>
             </header>
 
-            <main class="row vh-80 d-flex align-items-center justify-content-center">
+            <main class="row vh-80 overflow-auto d-flex align-items-center justify-content-center">
                 <div class="col-md-4 col-sm-4">
                     <div class="text-center">
                         <h1>Registro de usuario</h1>
@@ -54,26 +54,26 @@
                             <div class="col">
                                 <!-- Primer nombre -->
                                 <input type="text" id="nombre" name="registro_nombre" aria-describedby="nombreError" class="form-control" placeholder="Introduce el nombre" required>
-                                <small id="nombreError" class="form-text bg-danger" aria-live="polite"></small>
+                                <small id="nombreError" class="form-text" aria-live="polite"></small>
                             </div>
                             <div class="col">
                                 <!--<!-- Apellidos -->
                                 <input type="text" id="apellido" name="registro_apellido" aria-describedby="apellidoError" class="form-control" placeholder="Introduce tus apellidos" required>
-                                <small id="apellidoError" class="form-text bg-danger" aria-live="polite"></small>
+                                <small id="apellidoError" class="form-text" aria-live="polite"></small>
                             </div>
                         </div>
 
                         <!-- DNI -->
-                        <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{9}[A-Z]">
-                        <small id="dniError" class="form-text bg-danger" aria-live="polite"></small>
+                        <input type="text" id="dni" name="registro_dni" aria-describedby="dniError" class="form-control mb-4" placeholder="Introduce tu DNI" required pattern="\d{8}[A-Z]">
+                        <small id="dniError" class="form-text" aria-live="polite"></small>
 
                         <!-- E-mail -->
                         <input type="email"  id="mail" name="registro_mail" class="form-control mb-4" placeholder="Introduce tu E-mail" required>
-                        <small id="mailError" class="form-text bg-danger" aria-live="polite"></small>
+                        <small id="mailError" class="form-text" aria-live="polite"></small>
 
                         <!-- Contraseña -->
                         <input type="password" name="registro_pass" id="pass" class="form-control" placeholder="Introduce tu contraseña" aria-describedby="pass" required minlength="8" maxlength="10" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}">
-                        <small id="passError" class="form-text bg-danger" aria-live="polite"></small>
+                        <small id="passError" class="form-text" aria-live="polite"></small>
 
                         <!-- Botones registrar y volver -->
                         <div class="form-row mb-4">

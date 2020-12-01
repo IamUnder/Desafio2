@@ -85,11 +85,11 @@ function validacion() {
             event.preventDefault();
         }
         if (!apellido.validity.valid) {
-            mostrarapellidoError();
+            mostrarApellidoError();
             event.preventDefault();
         }
         if (!mail.validity.valid) {
-            mostrarmailError();
+            mostrarMailError();
             event.preventDefault();
         }
         if (!pass.validity.valid) {
@@ -109,8 +109,6 @@ function mostrarDniError() {
         // Si no sigue el patrón
         dniError.textContent = 'El DNI no coincide con lo esperado 00000000X';
     }
-    // Establece el estilo apropiado
-    dniError.className = 'bg-danger text-light';
 }
 
 // Función para mostrar los errores del nombre
@@ -122,9 +120,7 @@ function mostrarNombreError() {
         // Si el campo no contiene un nombre
         nombreError.textContent = 'Debe intoducir un nombre obligatoriamente';
     }
-    // Establece el estilo apropiado
-    nombreError.className = 'bg-danger text-light';
-}
+  }
 
 // Función para mostrar los errores del apellido
 function mostrarApellidoError() {
@@ -135,8 +131,6 @@ function mostrarApellidoError() {
         // Si el campo no contiene un nombre
         apellidoError.textContent = 'Debe intoducir los apellidos obligatoriamente';
     }
-    // Establece el estilo apropiado
-    apellidoError.className = 'bg-danger text-light';
 }
 
 // Función para mostrar los errores del email
@@ -145,20 +139,15 @@ function mostrarMailError() {
         // Si el campo está vacío
         mailError.textContent = 'Debe introducir una dirección de correo electrónico.';
     }
-
-    // Establece el estilo apropiado
-    mailError.className = 'bg-danger text-light';
 }
 
 // Función para mostrar los errores del email
 function mostrarPassError() {
     if (pass.validity.valueMissing) {
         // Si el campo está vacío
-        pass.textContent = 'Debe introducir una contraseña.';
+        passError.textContent = 'Debe introducir una contraseña.';
     } else if (pass.validity.tooShort) {
         // Si los datos son demasiado cortos
         passError.textContent = 'La contraseña debe contener entre 8 -10 crácteres, una mayúscula y un dígito';
     }
-    // Establece el estilo apropiado
-    passError.className = 'bg-danger text-light';
 }
