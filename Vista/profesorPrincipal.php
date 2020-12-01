@@ -179,11 +179,11 @@ and open the template in the editor.
                                                             <ul>
                                                                 <li>
                                                                     Activar examen:
-                                                                    <i class="fas fa-check green-text"></i>
+                                                                    <i class="fas fa-check text-success"></i>
                                                                 </li>
                                                                 <li>
                                                                     Desactivar examen:
-                                                                    <i class="fas fa-times green-text"></i>
+                                                                    <i class="fas fa-times text-success"></i>
                                                                 </li>
                                                                 <li>
                                                                     Editar:
@@ -193,11 +193,11 @@ and open the template in the editor.
                                                                 </li>
                                                                 <li>
                                                                     Corregir:
-                                                                    <i class="fas fa-file-import green-text"></i>
+                                                                    <i class="fas fa-file-import text-success"></i>
                                                                 </li>
                                                                 <li>
                                                                     Ver notas:
-                                                                    <i class="fas fa-eye green-text"></i>
+                                                                    <i class="fas fa-eye text-success"></i>
                                                                 </li>
                                                                 <li>
                                                                     Borrar:
@@ -261,13 +261,13 @@ and open the template in the editor.
                                                         if ($v->getEstado() == 0) {
                                                             ?>
                                                             <button name="activar_examen" type="submit" class="btn border-0"><!-- Activar -->
-                                                                <i class="fas fa-check green-text"></i>
+                                                                <i class="fas fa-check text-success"></i>
                                                             </button>
                                                             <?php
                                                         } else if ($v->getEstado() == 1) {
                                                             ?>
                                                             <button name="desactivar_examen" type="submit" class="btn border-0"><!-- Desactivar -->
-                                                                <i class="fas fa-times green-text"></i>
+                                                                <i class="fas fa-times text-success"></i>
                                                             </button>
                                                             <?php
                                                         }
@@ -282,14 +282,14 @@ and open the template in the editor.
                                                         if ($v->getEstado() == 2) {
                                                             ?>
                                                             <button name="ver_examen" type="submit" class="btn border-0"><!-- Ver Notas -->
-                                                                <i class="fas fa-eye green-text"></i>
+                                                                <i class="fas fa-eye text-success"></i>
                                                             </button>
                                                             <?php
                                                         }
                                                         if ($v->getEstado() == 1) {
                                                             ?>
                                                             <button name="corregir_examen" type="submit" class="btn border-0"><!-- Correguir -->
-                                                                <i class="fas fa-file-import green-text"></i>
+                                                                <i class="fas fa-file-import text-success"></i>
                                                             </button>
                                                             <?php
                                                         }
