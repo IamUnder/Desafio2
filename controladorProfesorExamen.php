@@ -33,6 +33,10 @@ if (isset($_REQUEST['crearExamen'])) {
         }
         //Recogemos las preguntas sin asignar de la BBDD
         $preguntasDisponibles = Gestion::getPreguntas();
+        unset($_SESSION['preguntasDisponiblesTexto']);
+        unset($_SESSION['preguntasDisponiblesNumerico']);
+        unset($_SESSION['preguntasDisponiblesUnaOpcion']);
+        unset($_SESSION['preguntasDisponiblesVariasOpciones']);
         $tipoTexto = [];
         $tipoNumerico = [];
         $tipoUnaOpcion = [];
@@ -64,14 +68,6 @@ if (isset($_REQUEST['crearExamen'])) {
                     break;
             }
         }
-
-        if (sizeof($preguntasDisponibles) <= 0) {
-            unset($_SESSION['preguntasDisponiblesTexto']);
-            unset($_SESSION['preguntasDisponiblesNumerico']);
-            unset($_SESSION['preguntasDisponiblesUnaOpcion']);
-            unset($_SESSION['preguntasDisponiblesVariasOpciones']);
-        }
-
         $_SESSION['preguntasDisponibles'] = $preguntasDisponibles;
         header('Location: Vista/profesorAddExamen.php');
     }
