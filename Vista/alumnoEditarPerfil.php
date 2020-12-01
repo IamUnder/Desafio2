@@ -76,30 +76,33 @@ and open the template in the editor.
         <main class="container-fluid">
             <div class="row">
                 <aside class="col-md-2 col-sm-2 border-green pl-0 pr-0">
-                    <nav class="navbar navbar-expand-lg navbar-light my-2">
+                    <nav class="navbar navbar-expand-lg navbar-light py-0">
 
-                        <!-- Collapse button -->
-                        <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button> 
+                        <div class="container-fluid">
 
-                        <!-- Collapsible content -->
-                        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav1"
+                                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
 
-                            <!-- Links -->
-                            <ul class="nav flex-column">
-                                <form action="../controladorAlumno.php" name="menu" method="POST">
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaPrincipal" type="submit">Vista principal&nbsp;<i class="fas fa-file-medical"></i></button>
-                                    </li>
-                                </form>
-                            </ul>
-                            <!-- Links -->
+                            <!-- Collapsible content -->
+                            <div class="collapse navbar-collapse" id="basicExampleNav1">
 
-                            <!-- CTA -->
+                                <!-- Links -->
+                                <ul class="nav flex-column">
+                                    <form action="../controladorAlumno.php" name="menu" method="POST">
+                                        <li class="nav-item">
+                                            <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaPrincipal" type="submit">Vista principal&nbsp;<i class="fas fa-file-medical"></i></button>
+                                        </li>
+                                    </form>
+                                </ul>
+                                <!-- Links -->
+
+                            </div>
+                            <!-- Collapsible content -->
 
                         </div>
+
                     </nav>
                 </aside>
                 <section class="col-md-10 col-sm-10 border-green vh-80 overflow-auto">

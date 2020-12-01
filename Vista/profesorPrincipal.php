@@ -82,41 +82,44 @@ and open the template in the editor.
         <!--/.Navbar--> 
 
 
-        <main class="container-fluid vh-80">
+        <main class="container-fluid vh-80 overflow-auto">
             <div class="row">
                 <aside class="col-md-2 col-sm-2 border-green pl-0 pr-0">
-                    <nav class="navbar navbar-expand-lg navbar-light my-2">
 
 
-                        <!-- Collapse button -->
-                        <button class="navbar-toggler float-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button> 
+                    <nav class="navbar navbar-expand-lg navbar-light py-0">
 
-                        <!-- Collapsible content -->
-                        <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+                        <div class="container-fluid">
 
-                            <!-- Links -->
-                            <ul class="nav flex-column">
-                                <form action="../controlador.php" name="menu" method="POST">
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver examenes&nbsp;<i class="fas fa-file-signature"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
-                                    </li>
-                                    <li class="nav-item">
-                                        <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddExamen" type="submit">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
-                                    </li>
-                                </form>
-                            </ul>
-                            <!-- Links -->
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav1"
+                                    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
 
-                            <!-- CTA -->
+                            <!-- Collapsible content -->
+                            <div class="collapse navbar-collapse" id="basicExampleNav1">
+
+                                <!-- Links -->
+                                <ul class="nav flex-column">
+                                    <form action="../controlador.php" name="menu" method="POST">
+                                        <li class="nav-item">
+                                            <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaEditProfile" type="submit">Editar Perfil&nbsp;<i class="fas fa-user"></i></button>
+                                        </li>
+                                        <li class="nav-item">
+                                            <button class="active btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaExamenesRealizados" type="submit">Ver examenes&nbsp;<i class="fas fa-file-signature"></i></button>
+                                        </li>
+                                        <li class="nav-item">
+                                            <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddPreguntas" type="submit">Añadir preguntas&nbsp;<i class="fas fa-plus-circle"></i></button>
+                                        </li>
+                                        <li class="nav-item">
+                                            <button class="btn btn-outline-success w-100 mt-1 border-green rounded" name="vistaAddExamen" type="submit">Crear examen&nbsp;<i class="fas fa-file-medical"></i></button>
+                                        </li>
+                                    </form>
+                                </ul>
+                                <!-- Links -->
+
+                            </div>
+                            <!-- Collapsible content -->
 
                         </div>
 
@@ -179,11 +182,11 @@ and open the template in the editor.
                                                             <ul>
                                                                 <li>
                                                                     Activar examen:
-                                                                    <i class="fas fa-check green-text"></i>
+                                                                    <i class="fas fa-check text-success"></i>
                                                                 </li>
                                                                 <li>
                                                                     Desactivar examen:
-                                                                    <i class="fas fa-times green-text"></i>
+                                                                    <i class="fas fa-times text-success"></i>
                                                                 </li>
                                                                 <li>
                                                                     Editar:
@@ -193,11 +196,11 @@ and open the template in the editor.
                                                                 </li>
                                                                 <li>
                                                                     Corregir:
-                                                                    <i class="fas fa-file-import green-text"></i>
+                                                                    <i class="fas fa-file-import text-success"></i>
                                                                 </li>
                                                                 <li>
                                                                     Ver notas:
-                                                                    <i class="fas fa-eye green-text"></i>
+                                                                    <i class="fas fa-eye text-success"></i>
                                                                 </li>
                                                                 <li>
                                                                     Borrar:
@@ -261,13 +264,13 @@ and open the template in the editor.
                                                         if ($v->getEstado() == 0) {
                                                             ?>
                                                             <button name="activar_examen" type="submit" class="btn border-0"><!-- Activar -->
-                                                                <i class="fas fa-check green-text"></i>
+                                                                <i class="fas fa-check text-success"></i>
                                                             </button>
                                                             <?php
                                                         } else if ($v->getEstado() == 1) {
                                                             ?>
                                                             <button name="desactivar_examen" type="submit" class="btn border-0"><!-- Desactivar -->
-                                                                <i class="fas fa-times green-text"></i>
+                                                                <i class="fas fa-times text-success"></i>
                                                             </button>
                                                             <?php
                                                         }
@@ -282,14 +285,14 @@ and open the template in the editor.
                                                         if ($v->getEstado() == 2) {
                                                             ?>
                                                             <button name="ver_examen" type="submit" class="btn border-0"><!-- Ver Notas -->
-                                                                <i class="fas fa-eye green-text"></i>
+                                                                <i class="fas fa-eye text-success"></i>
                                                             </button>
                                                             <?php
                                                         }
                                                         if ($v->getEstado() == 1) {
                                                             ?>
                                                             <button name="corregir_examen" type="submit" class="btn border-0"><!-- Correguir -->
-                                                                <i class="fas fa-file-import green-text"></i>
+                                                                <i class="fas fa-file-import text-success"></i>
                                                             </button>
                                                             <?php
                                                         }
